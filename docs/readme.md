@@ -4,6 +4,10 @@
 
 [Split Deployed on Heroku](https://brian-split-app.herokuapp.com/)
 
+## Trello Link
+
+[Trello Link](https://trello.com/b/umf13kxN/split-app)
+
 ## Minimum Viable Product
 
 Split will be a web application clone of Splitwise using Ruby on Rails and React/Redux.
@@ -24,11 +28,11 @@ Split will be a web application clone of Splitwise using Ruby on Rails and React
 * [Sample State][sample-state]
 
 
-[wireframes]: docs/wireframes
-[components]: docs/component_hierarchy.md
-[sample-state]: docs/sample_state.md
-[api-endpoints]: docs/api_endpoints.md
-[schema]: docs/schema.md
+[wireframes]: /wireframes
+[components]: /component_hierarchy.md
+[sample-state]: /sample_state.md
+[api-endpoints]: /api_endpoints.md
+[schema]: /schema.md
 
 
 ## Implementation Timeline
