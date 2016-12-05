@@ -29,7 +29,7 @@
   },
 
   transactions: {
-    borrowUsers: {
+    oweUsers: {
       "1": {
             username: "Nick",
             email: "nick@postmates.com",
@@ -46,7 +46,7 @@
        pojo with a bunch of pojos in it?
   -->
 
-    loanUsers: {
+    owedUsers: {
       "1": {
             username: "Dega",
             email: "dega@gmail.com",
