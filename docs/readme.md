@@ -1,5 +1,9 @@
 # Split
 
+## Heroku Link
+
+[Split Deployed on Heroku](https://brian-split-app.herokuapp.com/)
+
 ## Minimum Viable Product
 
 Split will be a web application clone of Splitwise using Ruby on Rails and React/Redux.
