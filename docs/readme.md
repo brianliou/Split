@@ -29,10 +29,10 @@ Split will be a web application clone of Splitwise using Ruby on Rails and React
 
 
 [wireframes]: /docs/wireframes
-[components]: /component_hierarchy.md
-[sample-state]: /sample_state.md
-[api-endpoints]: /api_endpoints.md
-[schema]: /schema.md
+[components]: /docs/component_hierarchy.md
+[sample-state]: /docs/sample_state.md
+[api-endpoints]: /docs/api_endpoints.md
+[schema]: /docs/schema.md
 
 
 ## Implementation Timeline
