@@ -1,13 +1,13 @@
 import React from 'react';
 import { Link } from 'react-router';
+import SessionForm from '../session_form/session_form.jsx';
 
 class Homepage extends React.Component {
 
   render() {
+
     return (
       <div>
-        <h2>homepage</h2>
-
         <header className="logo">
           <h1>split</h1>
 
@@ -24,7 +24,8 @@ class Homepage extends React.Component {
           <p>Use Split to share expenses and other bills with friends.</p>
         </div>
 
-        {this.props.form}
+        <SessionForm />
+
       </div>
     );
   }
