@@ -36,7 +36,7 @@ class SessionForm extends React.Component {
       formLink = <Link to="/">Sign Up</Link>;
 
       content = (
-        <div>
+        <fieldset className="login-form-fieldset">
           <h2>{formHeader}</h2>
           <form onSubmit= { this.handleSubmit }>
             <label>Username
@@ -66,7 +66,7 @@ class SessionForm extends React.Component {
           <div className="errors">ERRORS: {this.props.errors} </div>
 
           {formLink}
-        </div>
+        </fieldset>
 
       );
 
@@ -74,7 +74,7 @@ class SessionForm extends React.Component {
       formHeader = 'Sign Up';
       formLink = <Link to="/login">Log In</Link>;
       content = (
-        <fieldset class="login-form-fieldset">
+        <fieldset className="login-form-fieldset">
           <form onSubmit= { this.handleSubmit } className="login-form">
             <label>Username
               <input

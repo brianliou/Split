@@ -1,5 +1,6 @@
 
 import React from 'react';
+import { Link } from 'react-router';
 
 const App = ({ children }) => {
   return (
@@ -10,7 +11,7 @@ const App = ({ children }) => {
         <nav className="nav">
           <ul>
             <li>Home</li>
-            <li>Login</li>
+            <Link to="/login">Log In</Link>
           </ul>
         </nav>
       </header>

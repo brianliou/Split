@@ -9,7 +9,8 @@
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "webpack": "webpack -w"
+    "webpack": "webpack -w",
+    "postinstall": "./node_modules/.bin/webpack"
   },
   "repository": {
     "type": "git",
@@ -20,6 +21,11 @@
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/brianliou/Split/issues"
+  },
+
+  "engines" : {
+    "node": "6.7.0",
+    "npm":"3.10.7"
   },
   "homepage": "https://github.com/brianliou/Split#readme",
   "dependencies": {
