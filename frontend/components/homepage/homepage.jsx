@@ -8,6 +8,7 @@ class Homepage extends React.Component {
 
     return (
       <div>
+        <div className></div>
         <header className="logo">
           <h1>split</h1>
 

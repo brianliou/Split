@@ -2,7 +2,7 @@ html, body, header, nav, h1, a, ul, li,
 strong, main, section, img, div, h2, p,
 form, fieldset, label, input, textarea,
 button, article, footer, small {
-  margin: 0;
+  /*margin: 0;
   padding: 0;
   border: 0;
   outline: 0;
@@ -12,5 +12,5 @@ button, article, footer, small {
   text-decoration: inherit;
   vertical-align: inherit;
   color: inherit;
-  background: transparent;
+  background: transparent;*/
 }
