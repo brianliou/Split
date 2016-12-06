@@ -4,7 +4,6 @@ import { Link } from 'react-router';
 class Homepage extends React.Component {
 
   render() {
-    debugger
     return (
       <div>
         <h2>homepage</h2>
