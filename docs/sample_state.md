@@ -23,13 +23,13 @@
   }
 
   dashboard: {
-    borrowAmount: 55.55,
-    loanAmount: 78.88,
+    youOweAmount: 55.55,
+    youAreOwedAmount: 78.88,
     balance: 23.33
   },
 
   transactions: {
-    oweUsers: {
+    youOweUsers: {
       "1": {
             username: "Nick",
             email: "nick@postmates.com",
@@ -46,7 +46,7 @@
        pojo with a bunch of pojos in it?
   -->
 
-    owedUsers: {
+    youAreOwedUsers: {
       "1": {
             username: "Dega",
             email: "dega@gmail.com",

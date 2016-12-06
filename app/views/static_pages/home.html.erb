@@ -1,1 +1,12 @@
-<h1> Hello World </h1>
+
+<script type="text/javascript">
+  <% if logged_in? %>
+    window.currentUser = <%= render(
+      "api/users/user.json.jbuilder",
+      user: current_user
+    ).html_safe %>
+  <% end %>
+</script>
+
+
+<div id='root'></div>

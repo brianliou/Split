@@ -1,30 +1,35 @@
 # Component Hierarchy
 
-## AuthFormContainer
-### AuthForm
+## Homepage Component
+### AuthFormContainer
+#### AuthForm
 
 
-## DashboardContainer
+### DashboardContainer
 
-### State and dispatch
-#### state.borrow_amount
-#### state.loan_amount
-#### state.balance
-#### state.dispatch(fetchBorrowAmount)
-#### state.dispatch(fetchLoanAmount)
+#### State and dispatch
+##### state.borrow_amount
+##### state.loan_amount
+##### state.balance
+##### state.dispatch(fetchBorrowAmount)
+##### state.dispatch(fetchLoanAmount)
 
 ### Dashboard Component
 
-## TransactionContainer
+## YouOweContainer
 
 ### State and dispatch
-#### state.borrow_users
-#### state.loan_users
-#### state.dispatch(fetchBorrowUsers)
-#### state.dispatch(fetchLoanUsers)
+#### state.youOweAmount
+#### state.dispatch(youOweUsers)
 
-### Borrow Component
-### Loan Component
+### youOwe Component
+
+## YouAreOwedContainer
+### State and dispatch
+#### state.youAreOwedAmount
+#### state.dispatch(youAreOwedUsers)
+
+### YouAreOwed Component
 
 ## FriendContainer
 
