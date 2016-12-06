@@ -63,7 +63,7 @@ class SessionForm extends React.Component {
 
           </form>
 
-          <h3>ERRORS: {this.props.errors} </h3>
+          <div className="errors">ERRORS: {this.props.errors} </div>
 
           {formLink}
         </div>
@@ -74,9 +74,8 @@ class SessionForm extends React.Component {
       formHeader = 'Sign Up';
       formLink = <Link to="/login">Log In</Link>;
       content = (
-        <div>
-          <h2>{formHeader}</h2>
-          <form onSubmit= { this.handleSubmit }>
+        <fieldset class="login-form-fieldset">
+          <form onSubmit= { this.handleSubmit } className="login-form">
             <label>Username
               <input
                 type="text"
@@ -87,14 +86,16 @@ class SessionForm extends React.Component {
             </label>
             <br/>
 
-          <label>Email
-            <input
-              type="text"
-              value={this.state.email}
-              placeholder="Type Email Here"
-              onChange= {this.update('email')}
-            />
-          </label>
+            <label>Email
+              <input
+                type="text"
+                value={this.state.email}
+                placeholder="Type Email Here"
+                onChange= {this.update('email')}
+              />
+            </label>
+
+            <br/>
 
             <label>Password
               <input
@@ -110,10 +111,10 @@ class SessionForm extends React.Component {
 
           </form>
 
-          <h3>ERRORS: {this.props.errors} </h3>
+          <div className="errors">ERRORS: {this.props.errors} </div>
 
           {formLink}
-        </div>
+        </fieldset>
 
       );
     }
