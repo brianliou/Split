@@ -8,14 +8,14 @@ class Homepage extends React.Component {
 
     return (
       <div>
-        <header className="header">
-          <div className="header-nav group">
-            <h1 class="header-logo">SPLIT</h1>
+        <header className="header group">
+          <div className="header-nav">
+            <h1 className="header-logo">SPLIT</h1>
 
-            <ul className="header-list group">
+            <ul className="header-list">
               <li className="nav-button"><Link to="/login">Log In</Link></li>
               <li>or</li>
-              <li className="nav-button"><Link to="/">Home</Link></li>
+              <li className="nav-button-signup"><Link to="/">Home</Link></li>
             </ul>
           </div>
         </header>
