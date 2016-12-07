@@ -5,6 +5,7 @@ import {login, signUp } from '../../actions/session_actions.js';
 import { connect } from 'react-redux';
 
 const mapStateToProps = state => {
+  debugger
   return {
     loggedIn: Boolean(state.session.currentUser),
     errors: state.session.errors
