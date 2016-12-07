@@ -33,6 +33,11 @@
 
 }
 
+.login-page-button:hover {
+  background-color: rgb(67,191,158);
+  cursor: pointer;
+}
+
 .login-form-background {
   background-color: rgb(87, 198, 168);
   position: fixed;
