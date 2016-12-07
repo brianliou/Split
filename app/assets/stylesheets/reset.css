@@ -1,5 +1,5 @@
 html, body, header, nav, h1, a, ul, li,
-strong, main, section, img, div, h2, p,
+main, section, img, div, h2, p,
 form, fieldset, label, input, textarea,
 button, article, footer, small {
   margin: 0;
@@ -13,11 +13,15 @@ button, article, footer, small {
   vertical-align: inherit;
   color: inherit;
   background: transparent;
-  display: default;
 }
 
 .group {
   content: "";
   display: block;
   clear: both;
+}
+
+strong {
+  font-weight: 700;
+
 }

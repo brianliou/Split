@@ -1,15 +1,18 @@
 
+
 .header {
   background-color: rgb(87, 198, 168);
   color: white;
   float: left;
   width: 100%;
+  box-shadow: 0 2px 0 #4EB398;
+  font-family: "Helvetica Nueue", serif;
 }
 
 
 .header-logo {
   color: white;
-  font-family: "Times New Roman", serif;
+  font-family: "Times", serif;
   letter-spacing: 15px;
   font-size: 32px;
   float: left;
@@ -25,7 +28,7 @@
 
 .header-nav {
   margin: 0 auto;
-  width: 1000px;
+  width: 75%;
 }
 
 .header-list {
@@ -71,4 +74,54 @@
   padding-left: 10px;
   padding-top: 4px;
   padding-right: 12px;
+}
+
+.main-content {
+  width: 75%;
+  border: 1px solid black;
+  margin: 0 auto;
+  font-family: "Helvetica Neue", serif;
+  color: rgb(68,68,68);
+}
+
+.headline {
+  text-align: center;
+  display: block;
+  margin: 0 auto;
+}
+
+.top-line-headline {
+  margin: 0 auto;
+}
+
+.money-icon {
+  background-image: url('money_icon');
+  display: inline-block;
+  width: 100px;
+  height: 100px;
+  background-size: cover;
+  margin-right: 25px;
+  vertical-align: middle;
+}
+.top-line-headline h1 {
+  font-size: 60px;
+  font-weight: 500;
+  display: inline-block;
+  padding-top: 10px;
+  vertical-align: middle;
+}
+
+.headline p {
+  font-size: 20px;
+  clear: both;
+  padding-top: 15px;
+}
+
+
+.splitwise-img {
+}
+
+.signup-form {
+  float: left;
+  clear: both;
 }

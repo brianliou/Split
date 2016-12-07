@@ -7,7 +7,7 @@ class Homepage extends React.Component {
   render() {
 
     return (
-      <div>
+      <div className="homepage-container">
         <header className="header group">
           <div className="header-nav">
             <h1 className="header-logo">SPLIT</h1>
@@ -19,13 +19,21 @@ class Homepage extends React.Component {
             </ul>
           </div>
         </header>
+        <section className="main-content group">
+          <div className="headline">
+            <div className="top-line-headline">
+              <div className="money-icon"></div>
+              <h1>Split expenses with friends.</h1>
+              <p><strong>Share</strong> bills and IOUs. <strong>Make sure</strong> everyone gets paid back. <strong>Totally free</strong> for web, iPhone, and Android.</p>
+            </div>
+          </div>
 
-        <div className="headline">
-          <h1>Split</h1>
-          <p>Use Split to share expenses and other bills with friends.</p>
-        </div>
+          <div className="splitwise-img"></div>
 
-        <SessionForm />
+          <div className="signup-form">
+            <SessionForm />
+          </div>
+        </section>
 
       </div>
     );
