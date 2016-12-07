@@ -1,9 +1,36 @@
+# == Schema Information
+#
+# Table name: users
+#
+#  id              :integer          not null, primary key
+#  username        :string           not null
+#  email           :string           not null
+#  password_digest :string           not null
+#  session_token   :string           not null
+#  created_at      :datetime
+#  updated_at      :datetime
+#
+
 class User < ActiveRecord::Base
 
   validates :username, :session_token, :password_digest, :email, presence: true
   validates :password, length: { minimum: 6 }, allow_nil: true
 
   after_initialize :ensure_session_token
+
+  has_many(
+    :friendships,
+    :class_name => 'Friendship',
+    :foreign_key => :user_id,
+    :primary_key => :id
+  )
+
+  has_many(
+    :friends,
+    :through => :friendships,
+    :source => :friend
+  )
+
 
   attr_reader :password
 

@@ -9,12 +9,14 @@ email           | string    | not null, indexed, unique
 password_digest | string    | not null
 session_token   | string    | not null, indexed, unique
 
-## UserRelationship
+## Friendships
 column name    | data type | details
 ---------------|-----------|--------------
 id             | integer   | not null, primary key
-user_id        | integer   | not null, foreign key (references users), indexed
-friend_id      | integer   | not null, foreign key (references users), indexed
+user1_id       | integer   | not null, foreign key (references users), indexed
+user2_id       | integer   | not null, foreign key (references users), indexed
+
+##
 
 
 ## BillSplits
