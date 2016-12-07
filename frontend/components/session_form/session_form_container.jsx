@@ -12,7 +12,6 @@ const mapStateToProps = state => {
 
 };
 
-// ownProps comes from the component being wrapped.
 
 const mapDispatchToProps = (dispatch, ownProps) => {
   const formType = ownProps.location.pathname === '/login' ? 'login' : 'signup';

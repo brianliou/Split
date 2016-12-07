@@ -31,38 +31,45 @@ class SessionForm extends React.Component {
     let formHeader;
     let formLink;
     let content;
+    const loginErrors = this.props.errors.map((el, idx) => {
+      return (
+        <li key={`${idx}`}>{el}</li>
+      );
+
+    });
     if(this.props.formType === 'login') {
-      formHeader = 'Log In';
+      formHeader = 'Login';
       content = (
-        <fieldset className="login-form-fieldset">
-          <h2>{formHeader}</h2>
-          <form onSubmit= { this.handleSubmit }>
-            <label>Username
-              <input
-                type="text"
-                value= {this.state.username}
-                placeholder="Type Username Here"
-                onChange= {this.update('username')}
-              />
-            </label>
-            <br/>
+        <div className="login-form-background">
+          <fieldset className="login-form-page">
+            <form onSubmit= { this.handleSubmit }>
+              <label>
+                <input
+                  type="text"
+                  value= {this.state.username}
+                  placeholder="Username"
+                  onChange= {this.update('username')}
+                />
+              </label>
+              <br/>
 
-            <label>Password
-              <input
-                type="password"
-                placeholder="Type Password Here"
-                value={this.state.password}
-                onChange={this.update('password')}
-              />
-            </label>
+              <label>
+                <input
+                  type="password"
+                  placeholder="Password"
+                  value={this.state.password}
+                  onChange={this.update('password')}
+                />
+              </label>
 
-            <br/>
-            <input type="submit" value={formHeader}></input>
+              <br/>
+              <input type="submit" className="login-page-button" value={formHeader}></input>
 
-          </form>
+            </form>
 
-          <div className="form-errors">{this.props.errors} </div>
-        </fieldset>
+            <ul className="form-errors">{loginErrors} </ul>
+          </fieldset>
+        </div>
 
       );
 
@@ -106,7 +113,7 @@ class SessionForm extends React.Component {
 
           </form>
 
-          <div className="form-errors">{this.props.errors}</div>
+          <ul className="form-errors">{loginErrors}</ul>
         </fieldset>
 
       );

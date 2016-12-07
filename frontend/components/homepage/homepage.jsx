@@ -1,11 +1,10 @@
 import React from 'react';
 import { Link } from 'react-router';
-import SessionForm from '../session_form/session_form.jsx';
+import SessionFormContainer from '../session_form/session_form_container.jsx';
 
 class Homepage extends React.Component {
 
   render() {
-
     return (
       <div className="homepage-container">
         <header className="header group">
@@ -33,7 +32,7 @@ class Homepage extends React.Component {
             <div className="splitwise-img"></div>
 
             <div className="signup-form">
-              <SessionForm />
+              <SessionFormContainer {...this.props} />
             </div>
           </div>
 

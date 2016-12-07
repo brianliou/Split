@@ -186,11 +186,24 @@
   margin-top: 5px;
   box-shadow: 0 3px 0 rgb(231, 89, 49);
 
+
 }
 
 .homepage-signup:hover {
   background-color: rgb(255, 79, 35);
   cursor: pointer;
+}
 
+.form-errors {
+  color: rgb(154, 10, 21);
+  list-style: none;
 
+}
+
+.form-errors li {
+  border: 1px solid rgb(211,178,178);
+  background: rgb(252,222,222);
+  border-radius: 5px;
+  margin-bottom: 15px;
+  padding: 3px;
 }
