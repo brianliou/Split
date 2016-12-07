@@ -1,4 +1,7 @@
 
+.main-content {
+  position: relative;
+}
 
 .header {
   background-color: rgb(87, 198, 168);
@@ -78,10 +81,10 @@
 
 .main-content {
   width: 75%;
-  border: 1px solid black;
   margin: 0 auto;
   font-family: "Helvetica Neue", serif;
   color: rgb(68,68,68);
+  padding-top: 20px;
 }
 
 .headline {
@@ -117,11 +120,77 @@
   padding-top: 15px;
 }
 
+.img-background {
+  background-image: url('homepage_background.jpg');
+  z-index: -1;
+  background-size: cover;
+  position: absolute;
+  min-width: 100%;
+  min-height: 100%;
+  margin-top: 40px;
+}
+
+.image-form {
+  width: 100%;
+  margin: 0 auto;
+  padding-top: 150px;
+  text-align: center;
+}
 
 .splitwise-img {
+  background-image: url('splitwise.png');
+  width: 250px;
+  height: 400px;
+  background-size: contain;
+  background-repeat: no-repeat;
+  display: inline-block;
+  background-position: center center;
+  vertical-align: middle;
+  margin-right: 50px;
 }
 
 .signup-form {
-  float: left;
-  clear: both;
+  display: inline-block;
+  vertical-align: middle;
+
+}
+
+.login-form-fieldset {
+  padding: 20px;
+}
+
+.login-form-fieldset input {
+  padding: 10px 10px;
+  background: white;
+  border: 1px solid black;
+  border-radius: 5px;
+  margin-bottom: 25px;
+  width: 300px;
+  text-align: left;
+  font-size: 18px;
+  font-family: "Helvetica Nueue", serif;
+  box-shadow: 0 1px 0 black;
+}
+
+.login-form-fieldset .homepage-signup {
+  font-family: "Helvetica Nueue", serif;
+  background-color: rgb(255, 99, 55);
+  border: 1px solid rgb(231, 89, 49);
+  box-shadow: 0 3px 0 rgb(231, 89, 49);
+  padding: 7px 12px;
+  border-radius: 5px;
+  color: white;
+  text-align: center;
+  font-weight: 500;
+  font-size: 22px;
+  margin-top: 5px;
+  box-shadow: 0 3px 0 rgb(231, 89, 49);
+
+}
+
+.homepage-signup:hover {
+  background-color: rgb(255, 79, 35);
+  cursor: pointer;
+
+
 }

@@ -27,13 +27,15 @@ class Homepage extends React.Component {
               <p><strong>Share</strong> bills and IOUs. <strong>Make sure</strong> everyone gets paid back. <strong>Totally free</strong> for web, iPhone, and Android.</p>
             </div>
           </div>
-
-          <div className="splitwise-img"></div>
-
-          <div className="signup-form">
-            <SessionForm />
-          </div>
         </section>
+          <div className="img-background"></div>
+          <div className="image-form group">
+            <div className="splitwise-img"></div>
+
+            <div className="signup-form">
+              <SessionForm />
+            </div>
+          </div>
 
       </div>
     );
