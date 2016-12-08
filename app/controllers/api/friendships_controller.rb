@@ -31,6 +31,8 @@ class Api::FriendshipsController < ApplicationController
 
   def destroy
 
+    # To do if time
+
   end
 
   private
