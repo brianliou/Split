@@ -5,14 +5,19 @@ class Api::FriendsController < ApplicationController
     @friend = User.find_by(email: friend_email)
     @friendship = Friendship.new(user_id:current_user.id, friend_id: @friend.id)
 
-    debugger
-
     if @friendship.save
       render :show
     else
       render json: ['Invalid user, user does not exist'], status: 401
     end
 
+  end
+
+  def index
+
+  end
+
+  def show
 
   end
 
