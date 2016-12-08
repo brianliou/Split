@@ -1,6 +1,6 @@
 import SessionForm from './session_form.jsx';
 
-import {login, signUp } from '../../actions/session_actions.js';
+import {login, signUp, clearErrors } from '../../actions/session_actions.js';
 
 import { connect } from 'react-redux';
 
@@ -18,12 +18,14 @@ const mapDispatchToProps = (dispatch, ownProps) => {
   if(formType === 'login') {
     return {
       processForm: (user) => dispatch(login(user)),
-      formType: formType
+      formType: formType,
+      clearErrors: () => dispatch(clearErrors())
     };
   } else {
     return {
-      processForm: (user) =>dispatch(signUp(user)),
-      formType: formType
+      processForm: (user) => dispatch(signUp(user)),
+      formType: formType,
+      clearErrors: () => dispatch(clearErrors())
     };
   }
 };
