@@ -1,13 +1,31 @@
 class Api::FriendsController < ApplicationController
 
   def create
+    friend_email = friends_params[:email]
+    @friend = User.find_by(email: friend_email)
+    @friendship = Friendship.new(user_id:current_user.id, friend_id: @friend.id)
 
-    # In params will be user email that you are adding
-    # You will then find that user_id for that user and then create
-    # a new friendship and then save that friendship
+    debugger
+
+    if @friendship.save
+      render :show
+    else
+      render json: ['Invalid user, user does not exist'], status: 401
+    end
+
 
   end
 
+
+  def destroy
+
+  end
+
+  private
+
+  def friends_params
+    params.require(:friends).permit(:username, :email)
+  end
 
 
 end
