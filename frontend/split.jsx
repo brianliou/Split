@@ -3,6 +3,10 @@ import ReactDOM from 'react-dom';
 import configureStore from './store/store.js';
 import Root from './components/root.jsx';
 
+import {receiveFriend, addFriend } from './actions/friendship_actions.js';
+
+window.receiveFriend = receiveFriend;
+window.addFriend = addFriend;
 
 document.addEventListener("DOMContentLoaded", () => {
   let store;
@@ -13,5 +17,6 @@ document.addEventListener("DOMContentLoaded", () => {
   } else {
     store = configureStore();
   }
+  window.store = store;
   ReactDOM.render(<Root store={store} />, root);
 });

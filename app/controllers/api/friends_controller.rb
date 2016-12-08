@@ -5,6 +5,13 @@ class Api::FriendsController < ApplicationController
     @friend = User.find_by(email: friend_email)
     @friendship = Friendship.new(user_id:current_user.id, friend_id: @friend.id)
 
+    # JSON response needs to include user_id
+
+    # Add different errors
+    ## If you are trying to friend yourself
+    ## If you are trying to friend a user that doesn't exist
+    ## If you are trying to refriend someone you're already friends with
+
     if @friendship.save
       render :show
     else
@@ -29,7 +36,7 @@ class Api::FriendsController < ApplicationController
   private
 
   def friends_params
-    params.require(:friends).permit(:username, :email)
+    params.require(:user).permit(:username, :email)
   end
 
 

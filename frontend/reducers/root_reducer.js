@@ -1,8 +1,10 @@
 import { combineReducers } from 'redux';
 import sessionReducer from './session_reducer.js';
+import friendshipReducer from './friendship_reducer.js';
 
 const rootReducer = combineReducers({
-  session: sessionReducer
+  session: sessionReducer,
+  friends: friendshipReducer
 });
 
 export default rootReducer;
