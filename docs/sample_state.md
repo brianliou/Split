@@ -42,10 +42,6 @@
           },
     },
 
-  <!-- I'm not sure whether I need to add the keys "1", "2" or can I just return a
-       pojo with a bunch of pojos in it?
-  -->
-
     youAreOwedUsers: {
       "1": {
             username: "Dega",

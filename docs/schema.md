@@ -16,9 +16,6 @@ id             | integer   | not null, primary key
 user1_id       | integer   | not null, foreign key (references users), indexed
 user2_id       | integer   | not null, foreign key (references users), indexed
 
-##
-
-
 ## BillSplits
 
 column name     | data type | details
@@ -27,7 +24,7 @@ id              | integer   | not null, primary key
 bill_id         | integer   | not null, foreign key (references Bills), indexed
 author_id       | integer   | not null, foreign key (references Users), indexed
 recipient_id    | integer   | not null, foreign key (references Users), indexed
-paid            | boolean   | default value of false
+recipient_paid? | boolean   | default value of false
 
 ## Bills
 
