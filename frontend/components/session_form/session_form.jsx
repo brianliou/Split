@@ -65,6 +65,8 @@ class SessionForm extends React.Component {
               <br/>
               <input type="submit" className="login-page-button" value={formHeader}></input>
 
+              <div className="sign-up-login"><Link to="/">Sign Up</Link></div>
+
             </form>
 
             <ul className="form-errors">{loginErrors} </ul>

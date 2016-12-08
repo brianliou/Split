@@ -1,8 +1,20 @@
 import React from 'react';
 import { Link } from 'react-router';
 import SessionFormContainer from '../session_form/session_form_container.jsx';
+import { signUp } from './../../actions/session_actions.js';
 
 class Homepage extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.handleGuestLogin = this.handleGuestLogin.bind(this);
+  }
+
+  handleGuestLogin(e) {
+    e.preventDefault();
+    const user = {username:"Guest", email: "guest@guest.com", password: "password"};
+    store.dispatch(signUp(user)).then(() => this.props.router.push('/dashboard'));
+  }
 
   render() {
     return (
@@ -14,7 +26,7 @@ class Homepage extends React.Component {
             <ul className="header-list">
               <li className="nav-button"><Link to="/login">Log In</Link></li>
               <li>or</li>
-              <li className="nav-button-signup"><Link to="/">Home</Link></li>
+              <li className="nav-button-signup" onClick={this.handleGuestLogin}>Demo</li>
             </ul>
           </div>
         </header>

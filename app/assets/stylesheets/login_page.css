@@ -3,7 +3,7 @@
   position: absolute;
   top: 50%;
   left: 50%;
-  transform: translate(-50%, -70%);
+  transform: translate(-50%, -60%);
   background:white;
   color: black;
   padding: 60px;
@@ -43,4 +43,15 @@
   position: fixed;
   width: 100%;
   height: 100%;
+}
+
+.sign-up-login {
+  text-align: center;
+  margin-top: 20px;
+  text-transform: uppercase;
+  padding: 5px;
+}
+
+.sign-up-login:hover {
+  color: rgb(67,191,158);
 }
