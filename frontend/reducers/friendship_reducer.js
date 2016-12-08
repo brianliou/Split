@@ -23,14 +23,17 @@ const friendshipReducer = (state = initialState, action) => {
   let newState = merge({}, state);
   Object.freeze(state);
   switch(action.type) {
+
     case RECEIVE_FRIEND:
-      newState = {
-        [action.friend.id]:action.friend,
-        errors: []
-      };
-      return newState;
+      return merge(newState, {[action.friend.id]:action.friend});
+
     case RECEIVE_ALL_FRIENDS:
-      return merge(newState, action.friends);
+      let keys = Object.keys(action.friends);
+      keys.forEach((key) => {
+        newState[action.friends[key].id] = action.friends[key];
+      });
+      return newState;
+      
     case RECEIVE_ERRORS:
       newState = {
         errors: action.errors

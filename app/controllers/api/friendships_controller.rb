@@ -1,11 +1,9 @@
-class Api::FriendsController < ApplicationController
+class Api::FriendshipsController < ApplicationController
 
   def create
     friend_email = friends_params[:email]
     @friend = User.find_by(email: friend_email)
     @friendship = Friendship.new(user_id:current_user.id, friend_id: @friend.id)
-
-    # JSON response needs to include user_id
 
     # Add different errors
     ## If you are trying to friend yourself
@@ -21,7 +19,9 @@ class Api::FriendsController < ApplicationController
   end
 
   def index
-
+    user = User.find(current_user.id)
+    @friends = user.friends
+    render :index
   end
 
   def show
