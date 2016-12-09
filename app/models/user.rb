@@ -32,29 +32,30 @@ class User < ActiveRecord::Base
   )
 
   has_many(
-    :authors,
+    :authored_billsplits,
     :class_name => 'Billsplit',
     :foreign_key => :author_id,
     :primary_key => :id
   )
 
   has_many(
-    :recipients,
+    :received_billsplits,
     :class_name => 'Billsplit',
     :foreign_key => :recipient_id,
     :primary_key => :id
   )
 
+
   has_many(
-    :bills_created,
-    :through => :authors,
-    :source => :author
+    :bills_authored,
+    :through => :authored_billsplits,
+    :source => :bill
   )
 
   has_many(
-    :bills_owed,
-    :through => :recipients,
-    :source => :recipient
+    :bills_received,
+    :through => :received_billsplits,
+    :source => :bill
   )
 
 

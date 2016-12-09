@@ -20,6 +20,6 @@ class Api::BillsController < ApplicationController
 
 
 
-
+  # LOGIC FOR BILL SPLIT CALCULATIONS GO INTO THE BILLS MODEL
 
 end

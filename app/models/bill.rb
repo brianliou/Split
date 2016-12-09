@@ -11,6 +11,9 @@
 #  updated_at  :datetime
 #
 
+
+# author_id 
+
 class Bill < ActiveRecord::Base
 
   validates :amount, :description, :bill_date, presence: true
