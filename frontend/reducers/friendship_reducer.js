@@ -40,13 +40,11 @@ const friendshipReducer = (state = initialState, action) => {
       });
       tempState = merge({}, { users: newState });
 
-      debugger
-      // if i created a key users and value newState it would work
       return tempState;
 
     case RECEIVE_ERRORS:
 
-      tempState = merge({}, {["users"]:newState}, {errors:action.errors});
+      tempState = merge({}, {users:newState}, {errors:action.errors});
 
       return tempState;
     default:

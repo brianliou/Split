@@ -66,8 +66,8 @@ class Friends extends React.Component {
         <h1>Friends Component</h1>
         <button onClick={this.openModal}>Open Modal Add Friend</button>
 
-        <Modal isOpen={this.state.open} contentLabel="Modal">
-          <h1>Inside of my modal</h1>
+        <Modal isOpen={this.state.open} contentLabel="Modal" className="friend-modal group" overlayClassName="modal-overlay">
+          <h1>Add a Friend <div onClick={this.closeModal}>x</div></h1>
           <fieldset className="add-friend-form">
             <form onSubmit={this.handleSubmit}>
               <input
@@ -103,14 +103,11 @@ class Friends extends React.Component {
       return <li key={idx}>{user.username}</li>;
     });
 
-    debugger
-
     return (
       <div>
         {formContent}
         <ul>
           {listContent}
-          <p>WHERE IS THIS CONTENT</p>
         </ul>
       </div>
     );
