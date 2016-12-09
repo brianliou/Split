@@ -31,12 +31,14 @@ class User < ActiveRecord::Base
     :source => :friend
   )
 
+
   has_many(
-    :authored_billsplits,
-    :class_name => 'Billsplit',
+    :bills,
+    :class_name => 'Bill',
     :foreign_key => :author_id,
     :primary_key => :id
   )
+
 
   has_many(
     :received_billsplits,
@@ -45,12 +47,6 @@ class User < ActiveRecord::Base
     :primary_key => :id
   )
 
-
-  has_many(
-    :bills_authored,
-    :through => :authored_billsplits,
-    :source => :bill
-  )
 
   has_many(
     :bills_received,

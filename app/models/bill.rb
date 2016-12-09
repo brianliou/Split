@@ -12,7 +12,7 @@
 #
 
 
-# author_id 
+# Need to add author_id to the bill
 
 class Bill < ActiveRecord::Base
 
@@ -22,6 +22,13 @@ class Bill < ActiveRecord::Base
     :bill_splits,
     :class_name => 'Billsplit',
     :foreign_key => :bill_id,
+    :primary_key => :id
+  )
+
+  belongs_to(
+    :bill_author,
+    :class_name => 'User',
+    :foreign_key => :author_id,
     :primary_key => :id
   )
 
