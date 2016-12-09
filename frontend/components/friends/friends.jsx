@@ -2,7 +2,7 @@
 import React from 'react';
 import Modal from 'react-modal';
 
-class FriendsForm extends React.Component {
+class Friends extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -18,6 +18,10 @@ class FriendsForm extends React.Component {
 
   componentWillMount() {
     Modal.setAppElement('body');
+ }
+
+ componentDidMount() {
+   this.props.fetchFriends();
  }
 
   openModal() {
@@ -50,9 +54,11 @@ class FriendsForm extends React.Component {
   }
 
 
+
+
   render() {
-    let content;
-    content = (
+    let formContent;
+    formContent = (
       <div>
         <h1>Friends Component</h1>
         <button onClick={this.openModal}>Open Modal Add Friend</button>
@@ -89,12 +95,23 @@ class FriendsForm extends React.Component {
       </div>
     );
 
+    const listContent = this.props.friends.map((user, idx) => {
+      return <li key={idx}>{user.username}</li>;
+    });
+
+    debugger
+
+
+
     return (
       <div>
-        {content}
+        {formContent}
+        <ul>
+          {listContent}
+        </ul>
       </div>
     );
   }
 }
 
-export default FriendsForm;
+export default Friends;
