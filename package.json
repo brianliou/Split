@@ -22,10 +22,9 @@
   "bugs": {
     "url": "https://github.com/brianliou/Split/issues"
   },
-
-  "engines" : {
+  "engines": {
     "node": "6.7.0",
-    "npm":"3.10.7"
+    "npm": "3.10.7"
   },
   "homepage": "https://github.com/brianliou/Split#readme",
   "dependencies": {
@@ -35,6 +34,7 @@
     "babel-preset-react": "^6.16.0",
     "react": "^15.4.1",
     "react-dom": "^15.4.1",
+    "react-modal": "^1.6.1",
     "react-redux": "^4.4.6",
     "react-router": "^3.0.0",
     "redux": "^3.6.0",
