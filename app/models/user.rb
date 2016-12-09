@@ -31,6 +31,32 @@ class User < ActiveRecord::Base
     :source => :friend
   )
 
+  has_many(
+    :authors,
+    :class_name => 'Billsplit',
+    :foreign_key => :author_id,
+    :primary_key => :id
+  )
+
+  has_many(
+    :recipients,
+    :class_name => 'Billsplit',
+    :foreign_key => :recipient_id,
+    :primary_key => :id
+  )
+
+  has_many(
+    :bills_created,
+    :through => :authors,
+    :source => :author
+  )
+
+  has_many(
+    :bills_owed,
+    :through => :recipients,
+    :source => :recipient
+  )
+
 
   attr_reader :password
 

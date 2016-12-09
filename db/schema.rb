@@ -11,10 +11,32 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161207213448) do
+ActiveRecord::Schema.define(version: 20161209202153) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "bills", force: :cascade do |t|
+    t.float    "amount",                      null: false
+    t.string   "description",                 null: false
+    t.date     "bill_date",                   null: false
+    t.boolean  "paid",        default: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "billsplits", force: :cascade do |t|
+    t.integer  "bill_id",                        null: false
+    t.integer  "author_id",                      null: false
+    t.integer  "recipient_id",                   null: false
+    t.boolean  "recipient_paid", default: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "billsplits", ["author_id"], name: "index_billsplits_on_author_id", using: :btree
+  add_index "billsplits", ["bill_id"], name: "index_billsplits_on_bill_id", using: :btree
+  add_index "billsplits", ["recipient_id"], name: "index_billsplits_on_recipient_id", using: :btree
 
   create_table "friendships", force: :cascade do |t|
     t.integer  "user_id",    null: false

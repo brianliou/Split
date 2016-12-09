@@ -31,7 +31,7 @@ recipient_paid? | boolean   | default value of false
 column name     | data type | details
 ----------------|-----------|-----------------------
 id              | integer   | not null, primary key
-amount          | integer   | not null
+amount          | float     | not null
 description     | string    | not null
 date            | date      | not null
 paid            | boolean   | default value of false
