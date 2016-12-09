@@ -12,6 +12,10 @@ class Api::UsersController < ApplicationController
 
   end
 
+  def add_friend
+
+  end
+
   private
 
   def user_params

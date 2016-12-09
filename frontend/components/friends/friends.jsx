@@ -46,13 +46,16 @@ class Friends extends React.Component {
   handleSubmit(e) {
     e.preventDefault();
     const user = {username: this.state.username, email: this.state.email};
-    this.props.processForm(user).then(() => {
-      this.closeModal();
-      this.clearState();
-    });
-
+    this.props.processFriendForm(user).then(
+      () => {
+        // Put like a friend added box or something?
+        this.closeModal();
+      }, err => {
+        // this.closeModal();
+        this.clearState();
+      }
+    );
   }
-
 
 
 
@@ -62,6 +65,7 @@ class Friends extends React.Component {
       <div>
         <h1>Friends Component</h1>
         <button onClick={this.openModal}>Open Modal Add Friend</button>
+
         <Modal isOpen={this.state.open} contentLabel="Modal">
           <h1>Inside of my modal</h1>
           <fieldset className="add-friend-form">
@@ -98,8 +102,6 @@ class Friends extends React.Component {
     const listContent = this.props.friends.map((user, idx) => {
       return <li key={idx}>{user.username}</li>;
     });
-
-    debugger
 
 
 

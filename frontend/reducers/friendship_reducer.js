@@ -33,12 +33,13 @@ const friendshipReducer = (state = initialState, action) => {
         newState[action.friends[key].id] = action.friends[key];
       });
       return newState;
-      
+
     case RECEIVE_ERRORS:
-      newState = {
-        errors: action.errors
-      };
-      return newState;
+
+      let tempState;
+      tempState = merge({}, {["users"]:newState}, {["errors"]:action.errors});
+
+      return tempState;
     default:
       return state;
   }

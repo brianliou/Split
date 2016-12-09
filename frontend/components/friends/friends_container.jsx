@@ -5,13 +5,14 @@ import { selectAllFriends } from '../../reducers/selectors.js';
 
 const mapStateToProps = state => {
   return {
-    friends: selectAllFriends(state.friends)
+    friends: selectAllFriends(state.friends.users),
+    errors: state.friends.errors
   };
 };
 
 const mapDispatchToProps = dispatch => {
   return {
-    processForm: (user) => dispatch(addFriend(user)),
+    processFriendForm: (user) => dispatch(addFriend(user)),
     fetchFriends: () => dispatch(getFriends()),
   };
 };
