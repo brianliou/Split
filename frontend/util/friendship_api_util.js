@@ -1,6 +1,7 @@
 
 
 export const getFriends = () => {
+  debugger
   return $.ajax({
     url: '/api/users/showfriends',
     method: 'GET'

@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { selectAllFriends } from '../../reducers/selectors.js';
 
 const mapStateToProps = state => {
+  debugger
   return {
     friends: selectAllFriends(state.friends.users),
     errors: state.friends.errors

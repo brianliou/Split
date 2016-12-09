@@ -1,7 +1,7 @@
 import { RECEIVE_FRIEND, RECEIVE_ALL_FRIENDS, RECEIVE_ERRORS } from '../actions/friendship_actions.js';
 import merge from 'lodash/merge';
 
-const initialState = {
+// const initialState = {
   // 2: {
   //   id: 2,
   //   username: "Brian",
@@ -17,10 +17,16 @@ const initialState = {
   //   username: "Matt",
   //   email: "matt@matt.com"
   // }
+// };
+
+const initialState = {
+  users: {},
+  errors: {}
 };
 
 const friendshipReducer = (state = initialState, action) => {
   let newState = merge({}, state);
+  let tempState;
   Object.freeze(state);
   switch(action.type) {
 
@@ -32,12 +38,15 @@ const friendshipReducer = (state = initialState, action) => {
       keys.forEach((key) => {
         newState[action.friends[key].id] = action.friends[key];
       });
-      return newState;
+      tempState = merge({}, { users: newState });
+
+      debugger
+      // if i created a key users and value newState it would work
+      return tempState;
 
     case RECEIVE_ERRORS:
 
-      let tempState;
-      tempState = merge({}, {["users"]:newState}, {["errors"]:action.errors});
+      tempState = merge({}, {["users"]:newState}, {errors:action.errors});
 
       return tempState;
     default:

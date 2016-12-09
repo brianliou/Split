@@ -103,13 +103,14 @@ class Friends extends React.Component {
       return <li key={idx}>{user.username}</li>;
     });
 
-
+    debugger
 
     return (
       <div>
         {formContent}
         <ul>
           {listContent}
+          <p>WHERE IS THIS CONTENT</p>
         </ul>
       </div>
     );
