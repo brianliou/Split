@@ -33,18 +33,26 @@ class Bill < ActiveRecord::Base
     :primary_key => :id
   )
 
-  user = User.find(current_user.id)
-
-  def you_owe
+  def self.you_owe(user.id)
+    user = User.find(current_user.id)
 
     # Find all of the bill_ids from billsplits where recipient_id == user.id and recipient_paid == false
 
-    # Then 
+    # Then with those bills find all of the author_ids, amount, and split where paid == false
+
+    # Then create a hash { User.find(author_id).username: amount } and increment by amount
+
+    # Generate Json array from ruby hash http://stackoverflow.com/questions/18900391/generate-an-json-array-from-a-hash-in-jbuilder
 
     # look through billsplits where current_user.id is equal to recipient_id
     # nested array of each person you owe money to (the total amount if multiple bills) and within that the amount owed if recipient_paid? is false
     # put amount_calculator() in the bills model?
     # [ [author_username, amount], [author_username, amount] ]
+
+
+    ################################
+    ########### START HERE ######### ## Go back and relearn activerecord querying
+    ################################ ## https://github.com/appacademy/curriculum/blob/master/sql/readings/joins.md
 
 
 

@@ -4,4 +4,10 @@ class Api::BillsController < ApplicationController
 
   end
 
+  def index
+
+    Bill.you_owe(current_user.id)
+
+  end
+
 end
