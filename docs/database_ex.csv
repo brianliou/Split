@@ -1,0 +1,19 @@
+USERS,,,BILLS,,,,,,BILLSPLITS,,,
+ID,Name,,ID,Author_id,Amt,Split,Paid,,ID,Bill_id,recipient_id,recipient_paid
+1,Brian,,1,1,30,2,FALSE,,1,1,2,FALSE
+2,Matt,,2,1,30,3,FALSE,,2,2,3,FALSE
+3,Sam,,3,2,33.33,3,FALSE,,3,2,4,FALSE
+4,Drew,,4,2,44.44,4,FALSE,,4,3,3,FALSE
+,,,5,1,21,3,TRUE,,5,3,4,FALSE
+,,,6,2,30,3,FALSE,,6,4,1,FALSE
+,,,,,,,,,7,4,3,FALSE
+,,,,,,,,,8,4,4,FALSE
+,,,,,,,,,9,5,2,TRUE
+,,,,,,,,,10,5,3,TRUE
+,,,,,,,,,11,6,2,TRUE
+,,,All of the bills sam has received by who he owes and total bill amount,,,,,,12,6,3,FALSE
+,,,,,,,,,,,,
+,,,author_id,Amount,Split,,,,,,,
+,,,1,30,3,,,,,,,
+,,,2,33.33,3,,,,,,,
+,,,2,44.44,4,,,,,,,

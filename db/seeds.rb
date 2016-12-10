@@ -44,21 +44,36 @@ bill_three = Bill.create(author_id: matt.id, split: 3, amount:33.33, description
 # Matt and Brian and Sam and Drew
 bill_four = Bill.create(author_id: matt.id, split: 4, amount:44.44, description: "Breakfast", bill_date: '2016-12-01')
 
+# Brian and Matt and Sam PAID
+bill_five = Bill.create(author_id: brian.id, paid: true, split: 3, amount:21.00, description: "Breakfast", bill_date: '2016-12-01')
+
+# Matt and Brian and Sam PARTIAL-PAID
+bill_six = Bill.create(author_id: matt.id, paid: false, split: 3, amount:30.00, description: "Breakfast", bill_date: '2016-12-01')
+
+
 
 Billsplit.destroy_all
 
 # Brian and Matt
-billsplit_one = Billsplit.create(bill_id: bill_one.id, recipient_id: matt.id)
+bs_1 = Billsplit.create(bill_id: bill_one.id, recipient_id: matt.id)
 
 # Brian and Sam and Drew
-billsplit_two = Billsplit.create(bill_id: bill_two.id, recipient_id: sam.id)
-billsplit_three = Billsplit.create(bill_id: bill_two.id, recipient_id: drew.id)
+bs_2 = Billsplit.create(bill_id: bill_two.id, recipient_id: sam.id)
+bs_3 = Billsplit.create(bill_id: bill_two.id, recipient_id: drew.id)
 
 # Matt and Sam and Drew
-billsplit_four = Billsplit.create(bill_id: bill_three.id, recipient_id: sam.id)
-billsplit_five = Billsplit.create(bill_id: bill_three.id, recipient_id: drew.id)
+bs_4 = Billsplit.create(bill_id: bill_three.id, recipient_id: sam.id)
+bs_5 = Billsplit.create(bill_id: bill_three.id, recipient_id: drew.id)
 
 # Matt and Brian and Sam and Drew
-billsplit_six = Billsplit.create(bill_id: bill_four.id, recipient_id: brian.id)
-billsplit_seven = Billsplit.create(bill_id: bill_four.id, recipient_id: sam.id)
-billsplit_eight = Billsplit.create(bill_id: bill_four.id, recipient_id: drew.id)
+bs_6 = Billsplit.create(bill_id: bill_four.id, recipient_id: brian.id)
+bs_7 = Billsplit.create(bill_id: bill_four.id, recipient_id: sam.id)
+bs_8 = Billsplit.create(bill_id: bill_four.id, recipient_id: drew.id)
+
+# Brian and Matt and Sam PAID
+bs_9 = Billsplit.create(bill_id: bill_five.id, paid: true, recipient_id: matt.id)
+bs_10 = Billsplit.create(bill_id: bill_five.id, paid: true, recipient_id: sam.id)
+
+# Matt and Brian and Sam PARTIAL-PAID
+bs_11 = Billsplit.create(bill_id: bill_six.id, paid: true, recipient_id: matt.id)
+bs_11 = Billsplit.create(bill_id: bill_six.id, paid: false, recipient_id: sam.id)

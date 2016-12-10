@@ -33,8 +33,13 @@ class Bill < ActiveRecord::Base
     :primary_key => :id
   )
 
-  def self.you_owe(user.id)
+  def self.you_owe(user_id)
     user = User.find(current_user.id)
+
+    # All of the bills a user has received by who he owes (author_id), total bill amount, and split
+
+    Bill.select(:author_id, :amount, :split).joins(:bill_splits).joins(:bill_author).where('recipient_id = ?', user.id).where('recipient_paid = false').where('paid = false').includes(:bill_author)
+
 
     # Find all of the bill_ids from billsplits where recipient_id == user.id and recipient_paid == false
 
