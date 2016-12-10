@@ -71,9 +71,9 @@ bs_7 = Billsplit.create(bill_id: bill_four.id, recipient_id: sam.id)
 bs_8 = Billsplit.create(bill_id: bill_four.id, recipient_id: drew.id)
 
 # Brian and Matt and Sam PAID
-bs_9 = Billsplit.create(bill_id: bill_five.id, paid: true, recipient_id: matt.id)
-bs_10 = Billsplit.create(bill_id: bill_five.id, paid: true, recipient_id: sam.id)
+bs_9 = Billsplit.create(bill_id: bill_five.id, recipient_paid: true, recipient_id: matt.id)
+bs_10 = Billsplit.create(bill_id: bill_five.id, recipient_paid: true, recipient_id: sam.id)
 
 # Matt and Brian and Sam PARTIAL-PAID
-bs_11 = Billsplit.create(bill_id: bill_six.id, paid: true, recipient_id: matt.id)
-bs_11 = Billsplit.create(bill_id: bill_six.id, paid: false, recipient_id: sam.id)
+bs_11 = Billsplit.create(bill_id: bill_six.id, recipient_paid: true, recipient_id: matt.id)
+bs_11 = Billsplit.create(bill_id: bill_six.id, recipient_paid: false, recipient_id: sam.id)

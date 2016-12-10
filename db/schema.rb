@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161209214717) do
+ActiveRecord::Schema.define(version: 20161209202153) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -20,12 +20,14 @@ ActiveRecord::Schema.define(version: 20161209214717) do
     t.float    "amount",                      null: false
     t.string   "description",                 null: false
     t.date     "bill_date",                   null: false
+    t.integer  "author_id",                   null: false
+    t.integer  "split",                       null: false
     t.boolean  "paid",        default: false
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "author_id",                   null: false
-    t.integer  "split",                       null: false
   end
+
+  add_index "bills", ["author_id"], name: "index_bills_on_author_id", using: :btree
 
   create_table "billsplits", force: :cascade do |t|
     t.integer  "bill_id",                        null: false

@@ -37,29 +37,21 @@ class Bill < ActiveRecord::Base
     user = User.find(current_user.id)
 
     # All of the bills a user has received by who he owes (author_id), total bill amount, and split
+    you_owe_list = {}
 
-    Bill.select(:author_id, :amount, :split).joins(:bill_splits).joins(:bill_author).where('recipient_id = ?', user.id).where('recipient_paid = false').where('paid = false').includes(:bill_author)
+    bills = Bill.select(:author_id, :amount, :split).joins(:bill_splits).joins(:bill_author).where('recipient_id = ?', user_id).where('recipient_paid = false').where('paid = false').includes(:bill_author)
 
+    bills.each do |bill|
+      amount = bill.amount / bill.split
+      if you_owe_list.has_key? bill.bill_author.username
+        temp_amount = you_owe_list[bill.bill_author.username]
+        you_owe_list[bill.bill_author.username] = temp_amount + amount
+      else
+        you_owe_list[bill.bill_author.username] = amount
+      end
+    end
 
-    # Find all of the bill_ids from billsplits where recipient_id == user.id and recipient_paid == false
-
-    # Then with those bills find all of the author_ids, amount, and split where paid == false
-
-    # Then create a hash { User.find(author_id).username: amount } and increment by amount
-
-    # Generate Json array from ruby hash http://stackoverflow.com/questions/18900391/generate-an-json-array-from-a-hash-in-jbuilder
-
-    # look through billsplits where current_user.id is equal to recipient_id
-    # nested array of each person you owe money to (the total amount if multiple bills) and within that the amount owed if recipient_paid? is false
-    # put amount_calculator() in the bills model?
-    # [ [author_username, amount], [author_username, amount] ]
-
-
-    ################################
-    ########### START HERE ######### ## Go back and relearn activerecord querying
-    ################################ ## https://github.com/appacademy/curriculum/blob/master/sql/readings/joins.md
-
-
+    you_owe_list
 
   end
 
