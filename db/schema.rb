@@ -24,6 +24,7 @@ ActiveRecord::Schema.define(version: 20161209214717) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "author_id",                   null: false
+    t.integer  "split",                       null: false
   end
 
   create_table "billsplits", force: :cascade do |t|

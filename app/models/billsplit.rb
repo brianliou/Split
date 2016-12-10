@@ -4,7 +4,6 @@
 #
 #  id             :integer          not null, primary key
 #  bill_id        :integer          not null
-#  author_id      :integer          not null
 #  recipient_id   :integer          not null
 #  recipient_paid :boolean          default(FALSE)
 #  created_at     :datetime
@@ -13,7 +12,7 @@
 
 class Billsplit < ActiveRecord::Base
 
-  validates :bill_id, :author_id, :recipient_id, presence: true
+  validates :bill_id, :recipient_id, presence: true
 
   belongs_to(
     :recipient,
