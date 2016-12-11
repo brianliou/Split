@@ -1,6 +1,9 @@
 class Api::BillsController < ApplicationController
 
   def create
+    debugger
+
+    $.ajax({url:'/api/bills', method:'POST', data: {bills: {amount: 30, recipients: { })
     # also will create billsplits for each recipient_id
 
 
@@ -23,7 +26,7 @@ class Api::BillsController < ApplicationController
   private
 
   def bill_params
-    params.require(:bills).permit(:amount, :description, :bill_date)
+    params.require(:bills).permit(:amount, :recipients, :description, :bill_date)
   end
 
 end
