@@ -2,6 +2,14 @@ class Api::BillsController < ApplicationController
 
   def create
 
+    # Ajax request for bill pay form
+    # $.ajax({url:'/api/bills', method:'POST', data: {bills:
+    #   { amount: 30,
+    #     recipients: [13, 14],
+    #     description: "Dinner",
+    #     bill_date: "2016-12-01"
+    #   }}})
+
     split = bill_params[:amount].to_f / bill_params[:recipients].length
 
     @bill = Bill.new(amount: bill_params[:amount].to_i,
@@ -20,68 +28,111 @@ class Api::BillsController < ApplicationController
       render json: @bill.errors.full_messages, status: 422
     end
 
-    # Ajax request for bill pay form
-    # $.ajax({url:'/api/bills', method:'POST', data: {bills:
-    #   { amount: 30,
-    #     recipients: [13, 14],
-    #     description: "Dinner",
-    #     bill_date: "2016-12-01"
-    #   }}})
-
 
   end
 
   def index
 
-    you_owe_list = Bill.you_owe(current_user.id)
-    you_are_owed_list = Bill.you_are_owed(current_user.id)
+    user = User.find(current_user.id)
+    you_owe_list = user.you_owe(user.id)
+    you_are_owed_list = user.you_are_owed(user.id)
+
     @bills = {"owe": you_owe_list, "owed": you_are_owed_list }
 
     render json: @bills.to_json
 
   end
 
+
+
   def update
-    debugger
 
     # Ajax request for settle up form
-    # $.ajax({url:'/api/bills/1', method:'PUT', data: {bills:
-    #   { amount: 30,
-    #     settleFrom: 1,
+    # $.ajax({url:'/api/bills', method:'PUT', data: {bills:
+    #   { amount: 50.00,
+    #     settleFrom: 4,
     #     settleTo: 2
     #   }}})
 
+    # AJAX example returns this array for new_billsplit_info - [[5, true, 0], [8, true, 0], ["new", false, 27.78]]
 
-    # new_billsplit_info = Bill.settle_up(user_id, recipient_id, amount)
-    # new_billsplit_info = Bill.settle_up(2, 4, 50)
-    new_billsplit_info = Bill.settle_up(bill_params[:settleFrom], bill_params[:settleTo], bill_params[:amount])
-    # [[5, true, 0], [8, true, 0], ["new", false, 27.78]]
+
+    ############### NEED TO EDIT PARAMS SO THAT IT WORKS WITH CURRENT USER #######
+    new_billsplit_info = current_user.settle_up(bill_params[:settleFrom].to_i, bill_params[:settleTo].to_i, bill_params[:amount].to_f)
 
     debugger
+    # Helper method to find all of the paid ones
+    paid_and_other_list = find_paid_splits(new_billsplit_info)
 
-    new_billsplit_info.each do |info|
-      if info[0].is_a? Integer
-        billsplit = Billsplit.find(info[0])
-        billsplit.update(recipient_paid: info[1], split_amount: info[2])
-      elsif info[0].is_a? String
-        debugger
-        new_bill = Bill.create(amount: info[2],
-                              description:"Overpayment",
-                              bill_date: Time.now.strftime("%Y/%m/%d").gsub(/\//,'-'),
-                              author_id: bill_params[:settleTo],
-                              split: 2
-                              )
-        Billsplit.create(bill_id: new_bill.id, recipient_id: bill_params[:settleFrom], split_amount: info[2])
-        debugger
+    paid_billsplit_ids = paid_and_other_list[0].collect { |idx| idx[0] }
+
+    if paid_billsplit_ids.length > 0
+      Billsplit.where(id: paid_billsplit_ids).update_all(recipient_paid: true, split_amount: 0)
+    end
+
+    if paid_and_other_list[1].length > 0
+      uneven_payment(paid_and_other_list[1])
+    end
+
+    # Updating paid column for bills after billsplits have been updated
+    bill_paid_info = current_user.bill_paid
+    debugger
+
+    Bill.where(id: bill_paid_info).update_all(paid: true)
+
+    render json: ["COMPLETE"]
+
+  end
+
+  ###########
+  # Find_paid_splits is a helper method in my controller to split the billsplit array
+  # into two separate groups
+  # 1) Billsplits where the update needs to be setting paid to true and amount to 0
+  # 2) Billsplits where the update needs to be an overpayment OR underpayment (paid stays false and amount decreases)
+  #
+  # Ex) For a billsplit array like this: [[5, true, 0], [8, true, 0], ["new", false, 27.78]]
+  #     returns [[[5, true, 0], [8, true, 0]], ["new", false, 27.78]]
+  ###########
+  def find_paid_splits(array)
+    # [[5, true, 0], [8, true, 0], ["new", false, 27.78]]
+    paid_splits = []
+    new_array = []
+    dup_array = array.dup
+    array.each_with_index do |split, idx|
+      if split[2] == 0
+        paid_splits.push(split)
+        dup_array.shift
       end
     end
 
-        # Create a new bill
-        # Create a new billsplit
-    #
-    # Bill.settle_up(current_user.id, bill_params[:settle], 40) returns a nested array
+    new_array.push(paid_splits)
+    new_array.push(dup_array.shift)
 
-    # Billsplit.find()
+    new_array
+
+  end
+
+  ###########
+  # Uneven_payment is a helper method for when the billsplit is an overpayment or underpayment
+  # the billsplit either needs to be edited as
+  # 1) Overpayment - Create new bill in the opposite direciton and new billsplit
+  # 2) Underpayment - Edit billsplit to be a lowered split_amount
+  ###########
+  def uneven_payment(billsplit)
+
+    if billsplit[0].is_a? Integer
+
+      Billsplit.find(billsplit[0]).update(recipient_paid: billsplit[1], split_amount: billsplit[2])
+    elsif billsplit[0].is_a? String
+
+      new_bill = Bill.create(amount: billsplit[2],
+                            description:"Overpayment",
+                            bill_date: Time.now.strftime("%Y/%m/%d").gsub(/\//,'-'),
+                            author_id: bill_params[:settleTo],
+                            split: 2
+                            )
+      Billsplit.create(bill_id: new_bill.id, recipient_id: bill_params[:settleFrom], split_amount: billsplit[2])
+    end
 
   end
 
