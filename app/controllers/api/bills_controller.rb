@@ -1,10 +1,30 @@
 class Api::BillsController < ApplicationController
 
   def create
-    debugger
 
-    $.ajax({url:'/api/bills', method:'POST', data: {bills: {amount: 30, recipients: { })
-    # also will create billsplits for each recipient_id
+    @bill = Bill.new(amount: bill_params[:amount].to_i,
+                     description: bill_params[:description],
+                     bill_date: bill_params[:bill_date],
+                     author_id: current_user.id,
+                     split: bill_params[:recipients].length,
+                    )
+    if @bill.save
+      # Create billsplits for each recipient_id
+      bill_params[:recipients].each do |id|
+        Billsplit.create(bill_id: @bill.id, recipient_id: id.to_i)
+      end
+      render json: ["Bill and bill splits created"]
+    else
+      render json: @bill.errors.full_messages, status: 422
+    end
+
+    # Ajax request for bill pay form
+    # $.ajax({url:'/api/bills', method:'POST', data: {bills:
+    #   { amount: 30,
+    #     recipients: [13, 14],
+    #     description: "Dinner",
+    #     bill_date: "2016-12-01"
+    #   }}})
 
 
   end
@@ -19,6 +39,10 @@ class Api::BillsController < ApplicationController
 
   end
 
+  def update
+
+  end
+
   def destroy
 
   end
@@ -26,7 +50,7 @@ class Api::BillsController < ApplicationController
   private
 
   def bill_params
-    params.require(:bills).permit(:amount, :recipients, :description, :bill_date)
+    params.require(:bills).permit(:amount, {:recipients => []}, :description, :bill_date)
   end
 
 end

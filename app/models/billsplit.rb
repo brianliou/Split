@@ -21,6 +21,12 @@ class Billsplit < ActiveRecord::Base
     :primary_key => :id
   )
 
+  has_one(
+    :bill_author,
+    :through => :bill,
+    :source => :bill_author
+  )
+
   belongs_to(
     :bill,
     :class_name => 'Bill',
