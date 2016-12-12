@@ -46,7 +46,55 @@ class Bill < ActiveRecord::Base
   # is great than you_owe list amount you need to then edit you are owed list
 
   def self.settle_up(current_user_id, recipient_id, amount)
+
+    billsplits = Billsplit.joins(:bill).where('author_id = ?', current_user_id).where('recipient_id = ?', recipient_id).where('recipient_paid = false')
+
+    bill_settle_list = []
+
+    # Drew is paying Matt 50
+    billsplits.each do |split|
+      temp_bill = []
+      amount -= split.split_amount
+      if amount > 0
+        temp_bill.push(split.id)
+        temp_bill.push(true)
+        temp_bill.push(0)
+        bill_settle_list.push(temp_bill)
+
+      elsif amount < 0  # drew pays 10
+        temp_bill.push(split.id)
+        temp_bill.push(false)
+        temp_bill.push(-amount.round(2))
+        bill_settle_list.push(temp_bill)
+        break
+
+      else
+        temp_bill.push(split.id)
+        temp_bill.push(true)
+        temp_bill.push(0)
+        bill_settle_list.push(temp_bill)
+        break
+
+      end
+    end
+
+    if amount > 0
+      temp_bill = []
+      temp_bill.push("new")
+      temp_bill.push(false)
+      temp_bill.push(amount.round(2))
+      bill_settle_list.push(temp_bill)
+    end
+    debugger
+
+    bill_settle_list
+
+
+    # I want all of the billsplits where author_id
     # needs to return content that will let me edit billsplits and bills
+    # .update_attributes(paid or amount)
+    # [billsplit_id, paid, amount]
+
 
 
     # all of the billsplits where the bill id has an author_id of recipient_id, if that amount
@@ -69,7 +117,7 @@ class Bill < ActiveRecord::Base
   def self.you_owe(user_id)
 
     you_owe_list = {}
-    billsplits = Billsplit.joins(:bill).includes(:bill_author).where('recipient_id = ?', 3).where('recipient_paid = false').where('paid = false')
+    billsplits = Billsplit.joins(:bill).includes(:bill_author).where('recipient_id = ?', user_id).where('recipient_paid = false').where('paid = false')
     billsplits.each do |bill|
       if you_owe_list.has_key? bill.bill_author.username
         temp_amount = you_owe_list[bill.bill_author.username]
@@ -131,11 +179,6 @@ class Bill < ActiveRecord::Base
     you_are_owed_list
 
   end
-
-
-
-
-
 
 
 
