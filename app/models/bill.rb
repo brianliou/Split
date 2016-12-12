@@ -39,19 +39,22 @@ class Bill < ActiveRecord::Base
     :source => :recipient
   )
 
-  ## Class method that finds all of the users and amount the current user owes
+  ###########
+  # Settle_up method finds all billsplits between settle_from user and settle_to user
+  # then the method creates a 2D array where the inner arrays have length 3
+  # inner array indices correspond to the following:
+  # 0: billsplit_id OR "new" which corresponds to an overpayment
+  # 1: recipient_paid
+  # 2: amount (will be 0 if paid is true)
+  #
+  # Ex) For Drew paying Matt 50 [[5, true, 0], [8, true, 0], ["new", false, 27.78]]
+  ###########
+  def self.settle_up(settle_from, settle_to, amount)
 
-  # If settle up is you paying user
-  # Decrease  user/amount in you_owe_list by amount user has settled up, if that amount
-  # is great than you_owe list amount you need to then edit you are owed list
-
-  def self.settle_up(current_user_id, recipient_id, amount)
-
-    billsplits = Billsplit.joins(:bill).where('author_id = ?', current_user_id).where('recipient_id = ?', recipient_id).where('recipient_paid = false')
+    billsplits = Billsplit.joins(:bill).where('author_id = ?', settle_to).where('recipient_id = ?', settle_from).where('recipient_paid = false')
 
     bill_settle_list = []
 
-    # Drew is paying Matt 50
     billsplits.each do |split|
       temp_bill = []
       amount -= split.split_amount
@@ -61,23 +64,25 @@ class Bill < ActiveRecord::Base
         temp_bill.push(0)
         bill_settle_list.push(temp_bill)
 
-      elsif amount < 0  # drew pays 10
+      elsif amount < 0  # if settle up amount is less than a single billsplit amount
         temp_bill.push(split.id)
         temp_bill.push(false)
-        temp_bill.push(-amount.round(2))
+        temp_bill.push(-amount.round(2)) # settle_from user now still owes settle_to user by negative amount
         bill_settle_list.push(temp_bill)
-        break
+        break # Do not continue going through billsplits
 
       else
         temp_bill.push(split.id)
         temp_bill.push(true)
         temp_bill.push(0)
         bill_settle_list.push(temp_bill)
-        break
+        break # Do not continue going through billsplits
 
       end
     end
 
+    # If after going through all of the billsplits amount > 0, then an overpayment has been made
+    # and a new bill/billsplit needs to be created in the opposite direction.
     if amount > 0
       temp_bill = []
       temp_bill.push("new")
@@ -85,35 +90,41 @@ class Bill < ActiveRecord::Base
       temp_bill.push(amount.round(2))
       bill_settle_list.push(temp_bill)
     end
-    debugger
 
     bill_settle_list
 
-
-    # I want all of the billsplits where author_id
-    # needs to return content that will let me edit billsplits and bills
-    # .update_attributes(paid or amount)
-    # [billsplit_id, paid, amount]
-
-
-
-    # all of the billsplits where the bill id has an author_id of recipient_id, if that amount
-    # is greater than > 0, set the billsplit paid to true and go on to the next billsplit
-
-    # a bill is paid, when all recipient_paid is true
-
-
-
   end
 
-  # Method that changes the paid column to true if all recipient_paid is true
-  # for that bill id
-
-  # Returns array of ids to update, called after settle_up has been called
+  ###########
+  # Bill_paid method updates paid column for Bills. Returns an array
+  # of bill_ids that need the paid column to be true
+  ###########
   def self.bill_paid()
+    bill_ids_to_update = []
+    bills = Bill.includes(:bill_splits)
+
+    bill_paid = true
+    bills.each do |bill|
+      bill.bill_splits.each do |split|
+        bill_paid = bill_paid && split.recipient_paid
+      end
+
+      if bill_paid
+        bill_ids_to_update.push(bill.id)
+      end
+
+      # Reset bill_paid back to true for when you go through first billsplit that has a false recipient_paid
+      bill_paid = true
+    end
+
+    bill_ids_to_update
 
   end
 
+  ###########
+  # You_owe method creates a hash of user: amount where user is who the user_id
+  # owes money and amount is the total amount from all bills
+  ###########
   def self.you_owe(user_id)
 
     you_owe_list = {}
@@ -130,34 +141,10 @@ class Bill < ActiveRecord::Base
     you_owe_list
   end
 
-
-
-
-
-
-
-
-    ############## OLD VERSION WITH OUT SPLIT_AMOUNT on Billsplit table ################
-
-    # All of the bills a user has received by who he owes (author_id), total bill amount, and split
-  #   you_owe_list = {}
-  #
-  #   bills = Bill.select(:author_id, :amount, :split).joins(:bill_splits).joins(:bill_author).where('recipient_id = ?', 3).where('recipient_paid = false').where('paid = false').includes(:bill_author)
-  #   bills_two = Bill.joins(:bill_splits).joins(:bill_author).where('recipient_id = ?', 3).where('recipient_paid = false').where('paid = false').includes(:bill_author)
-  #
-  #   bills.each do |bill|
-  #     amount = bill.amount / bill.split
-  #     if you_owe_list.has_key? bill.bill_author.username
-  #       temp_amount = you_owe_list[bill.bill_author.username]
-  #       you_owe_list[bill.bill_author.username] = temp_amount + amount
-  #     else
-  #       you_owe_list[bill.bill_author.username] = amount
-  #     end
-  #   end
-  #   you_owe_list
-  #
-  # end
-
+  ###########
+  # You_are_owed method creates a hash of user: amount where user is who owes
+  # user_id money and amount is the total amount from all bills
+  ###########
   def self.you_are_owed(user_id)
 
     you_are_owed_list = {}
@@ -179,36 +166,6 @@ class Bill < ActiveRecord::Base
     you_are_owed_list
 
   end
-
-
-
-
-
-    ############## OLD VERSION WITH OUT SPLIT_AMOUNT on Billsplit table ################
-
-
-  #   you_are_owed_list = {}
-  #   # all the recipient_ids are people that owe you money
-  #   bills = Bill.joins(:bill_splits).joins(:bill_author).where('author_id = ?', user_id).where('recipient_paid = false').where('paid = false').includes(:bill_recipients)
-  #
-  #   #billsplit = Billsplit.joins(:bill).where('author_id = ?', user_id).where('recipient_paid = false').where('paid = false').includes(:recipient)
-  #
-  #   bills.uniq.each do |bill|
-  #     bill.bill_recipients.each do |user|
-  #       amount = bill.amount / bill.split
-  #       if you_are_owed_list.has_key? user.username
-  #         temp_amount = you_are_owed_list[user.username]
-  #         you_are_owed_list[user.username] = temp_amount + amount
-  #       else
-  #         you_are_owed_list[user.username] = amount
-  #       end
-  #     end
-  #   end
-  #
-  #   you_are_owed_list
-  #
-  #
-  # end
 
 
 end

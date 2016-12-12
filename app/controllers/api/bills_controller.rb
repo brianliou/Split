@@ -46,15 +46,15 @@ class Api::BillsController < ApplicationController
 
     # Ajax request for settle up form
     # $.ajax({url:'/api/bills/1', method:'PUT', data: {bills:
-    #   { amount: 30,
-    #     settleFrom: 1,
+    #   { amount: 30.00,
+    #     settleFrom: 4,
     #     settleTo: 2
     #   }}})
 
 
     # new_billsplit_info = Bill.settle_up(user_id, recipient_id, amount)
     # new_billsplit_info = Bill.settle_up(2, 4, 50)
-    new_billsplit_info = Bill.settle_up(bill_params[:settleFrom], bill_params[:settleTo], bill_params[:amount])
+    new_billsplit_info = Bill.settle_up(bill_params[:settleFrom].to_i, bill_params[:settleTo].to_i, bill_params[:amount].to_f)
     # [[5, true, 0], [8, true, 0], ["new", false, 27.78]]
 
     debugger
@@ -63,6 +63,9 @@ class Api::BillsController < ApplicationController
       if info[0].is_a? Integer
         billsplit = Billsplit.find(info[0])
         billsplit.update(recipient_paid: info[1], split_amount: info[2])
+
+        ## QUESTION should I try to use update_all to update billsplits by group?
+        ## Billsplit.where('id = ?', [new_billsplit_info[0][0], new_billsplit_info[1][0], etc.])
       elsif info[0].is_a? String
         debugger
         new_bill = Bill.create(amount: info[2],
@@ -75,6 +78,10 @@ class Api::BillsController < ApplicationController
         debugger
       end
     end
+
+    bill_paid_info = Bill.bill_paid
+
+    Bill.find(bill_paid_info).update_all(paid: true)
 
         # Create a new bill
         # Create a new billsplit
