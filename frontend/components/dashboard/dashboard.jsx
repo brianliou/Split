@@ -1,4 +1,6 @@
 import React from 'react';
+import FriendsContainer from '../friends/friends_container.jsx';
+
 
 class Dashboard extends React.Component {
 
@@ -18,6 +20,7 @@ class Dashboard extends React.Component {
       <div>
         <p>Dashboard page</p>
         <button onClick={this.handleClick}>Log Out</button>
+        <FriendsContainer />
       </div>
     );
   }
