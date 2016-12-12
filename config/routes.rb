@@ -5,8 +5,9 @@ Rails.application.routes.draw do
   namespace :api, defaults: {format: :json} do
     resources :users, only: [:create] do
       collection do
-        post 'addfriend'
-        get 'showfriends'
+        post 'addFriend'
+        get 'showFriends'
+        get 'searchFriends'
       end
     end
     resource :session, only: [:create, :destroy]

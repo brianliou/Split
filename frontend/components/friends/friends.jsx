@@ -14,6 +14,7 @@ class Friends extends React.Component {
     this.handleSubmit = this.handleSubmit.bind(this);
     this.openModal = this.openModal.bind(this);
     this.closeModal = this.closeModal.bind(this);
+    this.handleInput = this.handleInput.bind(this);
   }
 
   componentWillMount() {
@@ -57,6 +58,19 @@ class Friends extends React.Component {
     );
   }
 
+  handleInput(e) {
+    e.preventDefault();
+    debugger
+    if (this.state.username === "") {
+      return;
+    }
+    this.props.searchFriends(this.state.username).then(users => { console.log("success");});
+
+
+      //create a list of users
+      // GO to the receiveFriends dispatcha ction that would then go through reducer and then mapstatetoprops
+
+  }
 
 
   render() {
@@ -75,6 +89,7 @@ class Friends extends React.Component {
                 value={this.state.username}
                 placeholder="Username"
                 onChange = {this.update('username')}
+                onInput = {this.handleInput}
               />
 
             <br/>

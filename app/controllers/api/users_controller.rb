@@ -12,7 +12,7 @@ class Api::UsersController < ApplicationController
 
   end
 
-  def addfriend
+  def addFriend
     friend_email = user_params[:email]
     @friend = User.find_by(email: friend_email)
 
@@ -32,10 +32,24 @@ class Api::UsersController < ApplicationController
 
   end
 
-  def showfriends
+  def showFriends
     user = User.find(current_user.id)
     @friends = user.friends
     render :friends
+  end
+
+  def searchFriends
+
+    if params[:query].present?
+      @friends = User.where('username ~ ? OR username ~ ?', params[:query].upcase, params[:query].downcase)
+      debugger
+    else
+      @friends = User.none
+    end
+
+    render :friends
+
+
   end
 
   private
