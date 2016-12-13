@@ -77,6 +77,7 @@ class BillForm extends React.Component {
     e.preventDefault();
     const username = e.currentTarget.textContent.replace(/\s/g, '');
     this.setState({username: username });
+    // This will call setState on recipients
     this.props.clearSearch();
 
   }
@@ -87,7 +88,7 @@ class BillForm extends React.Component {
   render() {
 
     const searchList = this.props.search.map((el, idx) => {
-          return <li key={idx} onClick={this.chooseUser}> {el.username} </li>;
+          return <li key={idx} onClick={this.chooseUser} onKeyPress={this.chooseUser}> {el.username} </li>;
         });
 
     let formContent;
@@ -100,12 +101,18 @@ class BillForm extends React.Component {
           <h1>Create a bill <div onClick={this.closeModal}>x</div></h1>
           <fieldset className="add-friend-form">
             <form onSubmit={this.handleSubmit}>
-              <input
-                type="text"
-                value={this.state.username}
-                placeholder="Enter People"
-                onChange = {this.updateAndQuery('username')}
-              />
+
+              <ul>
+                {searchList}
+                <li>
+                  <input
+                    type="text"
+                    value={this.state.username}
+                    placeholder="Enter People"
+                    onChange = {this.updateAndQuery('username')}
+                    />
+                </li>
+              </ul>
 
               <input
                 type="text"
