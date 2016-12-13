@@ -45,13 +45,57 @@ class Dashboard extends React.Component {
               <li>{this.props.currentUser.username}</li>
             </ul>
         </header>
+        <div class="dashboard-center-container">
 
-        <button onClick={this.openFriendModal}>Open Modal Add Friend</button>
-        <button onClick={this.openBillModal}>Open Modall Create Bill</button>
+          <div class="dashboard-left">
+            <FriendsContainer closeModal={this.closeFriendModal} isModalOpen={this.state.friendModalOpen}/>
+
+          </div>
+
+          <div class="dashboard-center">
+
+            <section className="dashboard">
+              <section className="dashboard-top">
+
+                <h1>Dashboard</h1>
+
+                <button onClick={this.openFriendModal}>Open Modal Add Friend</button>
+                <button onClick={this.openBillModal}>Open Modal Create Bill</button>
+                <button>Settle Up</button>
+
+              </section>
+
+              <div className="dashboard-line"></div>
+
+              <section className="dashboard-bottom">
+                <div className="dashboard-balance">
+
+                </div>
+
+                <div className="dashboard-you-owe">
+
+                </div>
+
+                <div className="dashboard-you-are-owed">
+
+                </div>
+              </section>
+            </section>
+
+          </div>
+
+          <div class="dashboard-right">
+
+          </div>
 
 
-        <FriendsContainer closeModal={this.closeFriendModal} isModalOpen={this.state.friendModalOpen}/>
-        <BillFormContainer closeModal={this.closeBillModal} isModalOpen={this.state.billModalOpen} />
+
+
+          <div>
+
+            <BillFormContainer closeModal={this.closeBillModal} isModalOpen={this.state.billModalOpen} />
+          </div>
+        </div>
       </div>
     );
   }
