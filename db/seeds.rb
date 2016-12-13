@@ -31,6 +31,11 @@ brian_matt = Friendship.create(user_id: brian.id, friend_id: matt.id)
 brian_sam = Friendship.create(user_id: brian.id, friend_id: sam.id)
 brian_drew = Friendship.create(user_id: brian.id, friend_id: drew.id)
 brian_guy = Friendship.create(user_id: brian.id, friend_id: guy.id)
+brian_brady = Friendship.create(user_id: brian.id, friend_id: brady.id)
+brian_brad = Friendship.create(user_id: brian.id, friend_id: brad.id)
+brian_brosef = Friendship.create(user_id: brian.id, friend_id: brosef.id)
+
+
 
 
 Bill.destroy_all

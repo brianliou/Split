@@ -9,7 +9,6 @@ class Api::BillsController < ApplicationController
     #     description: "Dinner",
     #     bill_date: "2016-12-01"
     #   }}})
-    debugger
     split = bill_params[:amount].to_f / bill_params[:recipients].length
 
     @bill = Bill.new(amount: bill_params[:amount].to_i,

@@ -7,7 +7,8 @@ class BillForm extends React.Component {
 
     this.state = {
       open: false,
-      recipients: [], //array of recipient_ids
+      recipients: [], //array of recipient names
+      // recipient_ids: [],
       description: "",
       amount: "",
       date:"",
@@ -61,7 +62,10 @@ class BillForm extends React.Component {
   // Adding a friend submit
   handleSubmit(e) {
     e.preventDefault();
-    const bill = {recipients: this.state.recipients, description: this.state.description, amount: this.state.amount, date: this.state.date};
+    const recipientIds = this.findRecipientIds(this.state.recipients);
+
+    debugger
+    const bill = {recipients: recipientIds, description: this.state.description, amount: this.state.amount, date: this.state.date};
     this.props.processBillForm(bill).then(
       () => {
         // Put like a friend added box or something?
@@ -73,23 +77,86 @@ class BillForm extends React.Component {
     );
   }
 
+  findRecipientIds(recipients) {
+    // ["brian", "brad", "brosef"]
+    const friends = store.getState().friends.users;
+    const idArray = [];
+
+    debugger
+    recipients.forEach((username) => {
+      for(var user_key in friends) {
+        let user = friends[user_key];
+        if(user.username === username) {
+          idArray.push(user.id);
+        }
+      }
+
+    });
+
+    debugger
+    return idArray;
+
+  }
+
+
+  // var testObj = {
+  //   test: 'testValue',
+  //   test1: 'testValue1',
+  //   test2: {
+  //       test2a: 'testValue',
+  //       test2b: 'testValue1'
+  //   }
+  // }
+
+// function searchObj (obj, query) {
+//
+//     for (var key in obj) {
+//         var value = obj[key];
+//
+//         if (typeof value === 'object') {
+//             searchObj(value, query);
+//         }
+//
+//         if (value === query) {
+//             console.log('property=' + key + ' value=' + value);
+//         }
+//
+//     }
+//
+// }
+
   chooseUser(e) {
+
+    const newRecipients = this.state.recipients.slice();
     e.preventDefault();
     const username = e.currentTarget.textContent.replace(/\s/g, '');
-    this.setState({username: username });
-    // This will call setState on recipients
+    newRecipients.push(username);
+    this.setState({recipients: newRecipients });
+    this.setState({username:""});
+
     this.props.clearSearch();
 
   }
 
+  // keyPress(e) {
+  //   debugger
+  // }
+
+  // TO DO IF TIME: allow for selection of users from searchlist with keypress and enter
 
 
 
   render() {
 
     const searchList = this.props.search.map((el, idx) => {
-          return <li key={idx} onClick={this.chooseUser} onKeyPress={this.chooseUser}> {el.username} </li>;
-        });
+      if (!this.state.recipients.includes(el.username)) {
+          return <li key={idx} onClick={this.chooseUser}> {el.username} </li>;
+        }
+      });
+
+    const selectedUsers = this.state.recipients.map((el, idx) => {
+      return <li key={idx}>{el}</li>;
+    });
 
     let formContent;
     formContent = (
@@ -104,6 +171,7 @@ class BillForm extends React.Component {
 
               <ul>
                 {searchList}
+                {selectedUsers}
                 <li>
                   <input
                     type="text"
