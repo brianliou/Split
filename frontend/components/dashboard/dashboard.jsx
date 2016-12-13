@@ -1,6 +1,6 @@
 import React from 'react';
 import FriendsContainer from '../friends/friends_container.jsx';
-
+import BillFormContainer from '../bill/bill_form_container.jsx';
 
 class Dashboard extends React.Component {
 
@@ -21,6 +21,7 @@ class Dashboard extends React.Component {
         <p>Dashboard page</p>
         <button onClick={this.handleClick}>Log Out</button>
         <FriendsContainer />
+        <BillFormContainer />
       </div>
     );
   }

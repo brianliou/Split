@@ -1,23 +1,6 @@
 import { RECEIVE_FRIEND, RECEIVE_ALL_FRIENDS, RECEIVE_ERRORS, RECEIVE_SEARCHED_FRIENDS, CLEAR_SEARCH } from '../actions/friendship_actions.js';
 import merge from 'lodash/merge';
 
-// const initialState = {
-  // 2: {
-  //   id: 2,
-  //   username: "Brian",
-  //   email: "brian@brian.com"
-  // },
-  // 3: {
-  //   id: 3,
-  //   username: "Nick",
-  //   email: "nick@nick.com"
-  // },
-  // 4: {
-  //   id:4,
-  //   username: "Matt",
-  //   email: "matt@matt.com"
-  // }
-// };
 
 const initialState = {
   users: {},
@@ -72,7 +55,7 @@ const friendshipReducer = (state = initialState, action) => {
 
       return tempState;
     default:
-      return state;
+      return newState;
   }
 };
 

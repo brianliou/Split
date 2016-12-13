@@ -22,11 +22,11 @@ class Friends extends React.Component {
 
   componentWillMount() {
     Modal.setAppElement('body');
- }
+  }
 
- componentDidMount() {
+  componentDidMount() {
    this.props.fetchFriends();
- }
+  }
 
   openModal() {
     this.setState({open: true});
