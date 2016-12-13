@@ -15,6 +15,7 @@ class Friends extends React.Component {
     this.openModal = this.openModal.bind(this);
     this.closeModal = this.closeModal.bind(this);
     this.handleInput = this.handleInput.bind(this);
+    this.chooseUser = this.chooseUser.bind(this);
   }
 
   componentWillMount() {
@@ -59,8 +60,8 @@ class Friends extends React.Component {
   }
 
   handleInput(e) {
+    this.update('username');
     e.preventDefault();
-    debugger
     if (this.state.username === "") {
       return;
     }
@@ -72,8 +73,21 @@ class Friends extends React.Component {
 
   }
 
+  chooseUser(e) {
+    e.preventDefault();
+    const username = e.currentTarget.textContent.replace(/\s/g, '');
+    this.setState({username: username });
+    this.props.clearSearch();
+
+  }
+
 
   render() {
+
+    const searchList = this.props.search.map((el, idx) => {
+          return <li key={idx} onClick={this.chooseUser}> {el.username} </li>;
+        });
+
     let formContent;
     formContent = (
       <div>
@@ -93,6 +107,10 @@ class Friends extends React.Component {
               />
 
             <br/>
+
+            <ul>
+              {searchList}
+            </ul>
 
             <input
               type="text"

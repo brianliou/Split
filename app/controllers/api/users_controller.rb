@@ -42,7 +42,6 @@ class Api::UsersController < ApplicationController
 
     if params[:query].present?
       @friends = User.where('username ~ ? OR username ~ ?', params[:query].upcase, params[:query].downcase)
-      debugger
     else
       @friends = User.none
     end

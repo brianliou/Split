@@ -5,6 +5,7 @@ export const RECEIVE_FRIEND = "RECEIVE_FRIEND";
 export const RECEIVE_ALL_FRIENDS = "RECEIVE_ALL_FRIENDS";
 export const RECEIVE_ERRORS = "RECEIVE_ERRORS";
 export const RECEIVE_SEARCHED_FRIENDS = "RECEIVE_SEARCHED_FRIENDS";
+export const CLEAR_SEARCH = "CLEAR_SEARCH";
 
 
 export const receiveFriend = friend => {
@@ -33,6 +34,12 @@ export const receiveSearchedFriends = friends => {
   return {
     type: RECEIVE_SEARCHED_FRIENDS,
     friends: friends
+  };
+};
+
+export const clearSearch = () => {
+  return {
+    type: CLEAR_SEARCH
   };
 };
 
