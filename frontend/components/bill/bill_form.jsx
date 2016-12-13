@@ -16,21 +16,22 @@ class BillForm extends React.Component {
 
     this.handleSubmit = this.handleSubmit.bind(this);
     this.openModal = this.openModal.bind(this);
-    this.closeModal = this.closeModal.bind(this);
+    this.closeModalAction = this.closeModalAction.bind(this);
     this.chooseUser = this.chooseUser.bind(this);
   }
 
 
   componentWillMount() {
     Modal.setAppElement('body');
+    this.clearState();
   }
 
   openModal() {
     this.setState({open: true});
   }
 
-  closeModal () {
-    this.setState({open: false});
+  closeModalAction() {
+    this.props.closeModal();
     this.clearState();
   }
 
@@ -138,10 +139,9 @@ class BillForm extends React.Component {
     formContent = (
       <div>
         <h1>Bill Form Component</h1>
-        <button onClick={this.openModal}>Open Modal Create Bill</button>
 
-        <Modal isOpen={this.state.open} contentLabel="Modal" className="friend-modal group" overlayClassName="modal-overlay">
-          <h1>Create a bill <div onClick={this.closeModal}>x</div></h1>
+        <Modal isOpen={this.props.isModalOpen} contentLabel="Modal" className="friend-modal group" overlayClassName="modal-overlay">
+          <h1>Create a bill <div onClick={this.closeModalAction}>x</div></h1>
           <fieldset className="add-friend-form">
             <form onSubmit={this.handleSubmit}>
 
@@ -192,7 +192,7 @@ class BillForm extends React.Component {
           </ul>
 
 
-          <button onClick={this.closeModal}>close modal</button>
+          <button onClick={this.closeModalAction}>close modal</button>
 
         </Modal>
       </div>

@@ -13,7 +13,7 @@ class Friends extends React.Component {
 
     this.handleSubmit = this.handleSubmit.bind(this);
     this.openModal = this.openModal.bind(this);
-    this.closeModal = this.closeModal.bind(this);
+    this.closeModalAction = this.closeModalAction.bind(this);
     this.chooseUser = this.chooseUser.bind(this);
     // this.updateAndQuery = this.updateAndQuery.bind(this);
     // do not need to bind updateAndQuery because you immediately return and use a
@@ -32,8 +32,8 @@ class Friends extends React.Component {
     this.setState({open: true});
   }
 
-  closeModal () {
-    this.setState({open: false});
+  closeModalAction () {
+    this.props.closeModal();
     this.clearState();
   }
 
@@ -86,10 +86,9 @@ class Friends extends React.Component {
     formContent = (
       <div>
         <h1>Friends Component</h1>
-        <button onClick={this.openModal}>Open Modal Add Friend</button>
 
-        <Modal isOpen={this.state.open} contentLabel="Modal" className="friend-modal group" overlayClassName="modal-overlay">
-          <h1>Add a Friend <div onClick={this.closeModal}>x</div></h1>
+        <Modal isOpen={this.props.isModalOpen} contentLabel="Modal" className="friend-modal group" overlayClassName="modal-overlay">
+          <h1>Add a Friend <div onClick={this.closeModalAction}>x</div></h1>
           <fieldset className="add-friend-form">
             <form onSubmit={this.handleSubmit}>
               <input
@@ -112,7 +111,7 @@ class Friends extends React.Component {
 
 
 
-          <button onClick={this.closeModal}>close modal</button>
+          <button onClick={this.closeModalAction}>close modal</button>
 
         </Modal>
       </div>

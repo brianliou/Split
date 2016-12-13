@@ -6,8 +6,13 @@ class Dashboard extends React.Component {
 
   constructor(props) {
     super(props);
-
+    this.state = { friendModalOpen: false, billModalOpen: false };
     this.handleClick = this.handleClick.bind(this);
+
+    this.openFriendModal = this.openFriendModal.bind(this);
+    this.closeFriendModal = this.closeFriendModal.bind(this);
+    this.openBillModal = this.openBillModal.bind(this);
+    this.closeBillModal = this.closeBillModal.bind(this);
   }
 
   handleClick(e) {
@@ -15,13 +20,38 @@ class Dashboard extends React.Component {
     this.props.logout().then(() => this.props.router.push('/login'));
   }
 
+  openFriendModal() {
+    this.setState({friendModalOpen: true});
+  }
+
+  closeFriendModal() {
+    this.setState({friendModalOpen: false});
+  }
+  openBillModal() {
+    this.setState({billModalOpen: true});
+  }
+
+  closeBillModal() {
+    this.setState({billModalOpen: false});
+  }
+
   render() {
     return (
       <div>
-        <p>Dashboard page</p>
-        <button onClick={this.handleClick}>Log Out</button>
-        <FriendsContainer />
-        <BillFormContainer />
+        <header className="header group">
+          <h1 className="header-logo">SPLIT</h1>
+            <ul className="header-list">
+              <li className="nav-button" onClick={this.handleClick}>Log Out</li>
+              <li>{this.props.currentUser.username}</li>
+            </ul>
+        </header>
+
+        <button onClick={this.openFriendModal}>Open Modal Add Friend</button>
+        <button onClick={this.openBillModal}>Open Modall Create Bill</button>
+
+
+        <FriendsContainer closeModal={this.closeFriendModal} isModalOpen={this.state.friendModalOpen}/>
+        <BillFormContainer closeModal={this.closeBillModal} isModalOpen={this.state.billModalOpen} />
       </div>
     );
   }
