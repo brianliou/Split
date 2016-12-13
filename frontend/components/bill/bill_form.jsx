@@ -7,8 +7,7 @@ class BillForm extends React.Component {
 
     this.state = {
       open: false,
-      recipients: [], //array of recipient names
-      // recipient_ids: [],
+      recipients: [],
       description: "",
       amount: "",
       date:"",
@@ -55,7 +54,7 @@ class BillForm extends React.Component {
 
   clearState() {
     // need to add other parts of the state
-    this.setState({username:"", email:""});
+    this.setState({description:"", recipients: [], amount:"", date:"", splitAmount: 0});
   }
 
 
@@ -64,25 +63,30 @@ class BillForm extends React.Component {
     e.preventDefault();
     const recipientIds = this.findRecipientIds(this.state.recipients);
 
-    debugger
-    const bill = {recipients: recipientIds, description: this.state.description, amount: this.state.amount, date: this.state.date};
+    const bill = {recipients: recipientIds,
+                  description: this.state.description,
+                  amount: this.state.amount,
+                  bill_date: this.state.date};
     this.props.processBillForm(bill).then(
       () => {
         // Put like a friend added box or something?
         this.closeModal();
+        this.props.clearSearch();
+        this.clearState();
       }, err => {
         // this.closeModal();
+        this.props.clearSearch();
         this.clearState();
+
       }
     );
+
   }
 
   findRecipientIds(recipients) {
-    // ["brian", "brad", "brosef"]
     const friends = store.getState().friends.users;
     const idArray = [];
 
-    debugger
     recipients.forEach((username) => {
       for(var user_key in friends) {
         let user = friends[user_key];
@@ -93,37 +97,9 @@ class BillForm extends React.Component {
 
     });
 
-    debugger
     return idArray;
 
   }
-
-
-  // var testObj = {
-  //   test: 'testValue',
-  //   test1: 'testValue1',
-  //   test2: {
-  //       test2a: 'testValue',
-  //       test2b: 'testValue1'
-  //   }
-  // }
-
-// function searchObj (obj, query) {
-//
-//     for (var key in obj) {
-//         var value = obj[key];
-//
-//         if (typeof value === 'object') {
-//             searchObj(value, query);
-//         }
-//
-//         if (value === query) {
-//             console.log('property=' + key + ' value=' + value);
-//         }
-//
-//     }
-//
-// }
 
   chooseUser(e) {
 
