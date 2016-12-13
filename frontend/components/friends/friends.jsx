@@ -60,16 +60,25 @@ class Friends extends React.Component {
   }
 
   handleInput(e) {
+    debugger
     this.update('username');
     e.preventDefault();
     if (this.state.username === "") {
+      debugger
+      this.props.clearSearch();
       return;
     }
     this.props.searchFriends(this.state.username).then(users => { console.log("success");});
 
-
+    debugger
       //create a list of users
       // GO to the receiveFriends dispatcha ction that would then go through reducer and then mapstatetoprops
+
+
+      // SEARCH IS SCREWED UP START HERE FOR TOMORROW
+      // Why doesn't this.state.username update after one letter is inputed?
+      // clearSearch clears the list of users supposed to be done when you click on someone
+      // OR when the username is blank. But it also clears it at other times as well.
 
   }
 
