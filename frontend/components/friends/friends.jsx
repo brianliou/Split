@@ -14,8 +14,10 @@ class Friends extends React.Component {
     this.handleSubmit = this.handleSubmit.bind(this);
     this.openModal = this.openModal.bind(this);
     this.closeModal = this.closeModal.bind(this);
-    this.handleInput = this.handleInput.bind(this);
     this.chooseUser = this.chooseUser.bind(this);
+    // this.updateAndQuery = this.updateAndQuery.bind(this);
+    // do not need to bind updateAndQuery because you immediately return and use a
+    // fat arrow function which binds this to the context it was called in
   }
 
   componentWillMount() {
@@ -35,16 +37,22 @@ class Friends extends React.Component {
     this.clearState();
   }
 
-  update(input_type) {
+  updateAndQuery(input_type) {
     return (
-      event => this.setState({ [input_type]: event.target.value })
+      event => {
+        this.setState({ [input_type]: event.target.value });
+        this.props.searchFriends(event.target.value).then(users => { console.log("success");});
+      }
     );
+
   }
 
   clearState() {
     this.setState({username:"", email:""});
   }
 
+
+  // Adding a friend submit
   handleSubmit(e) {
     e.preventDefault();
     const user = {username: this.state.username, email: this.state.email};
@@ -57,29 +65,6 @@ class Friends extends React.Component {
         this.clearState();
       }
     );
-  }
-
-  handleInput(e) {
-    debugger
-    this.update('username');
-    e.preventDefault();
-    if (this.state.username === "") {
-      debugger
-      this.props.clearSearch();
-      return;
-    }
-    this.props.searchFriends(this.state.username).then(users => { console.log("success");});
-
-    debugger
-      //create a list of users
-      // GO to the receiveFriends dispatcha ction that would then go through reducer and then mapstatetoprops
-
-
-      // SEARCH IS SCREWED UP START HERE FOR TOMORROW
-      // Why doesn't this.state.username update after one letter is inputed?
-      // clearSearch clears the list of users supposed to be done when you click on someone
-      // OR when the username is blank. But it also clears it at other times as well.
-
   }
 
   chooseUser(e) {
@@ -111,8 +96,7 @@ class Friends extends React.Component {
                 type="text"
                 value={this.state.username}
                 placeholder="Username"
-                onChange = {this.update('username')}
-                onInput = {this.handleInput}
+                onChange = {this.updateAndQuery('username')}
               />
 
             <br/>
@@ -120,13 +104,6 @@ class Friends extends React.Component {
             <ul>
               {searchList}
             </ul>
-
-            <input
-              type="text"
-              value={this.state.email}
-              placeholder="Email"
-              onChange = {this.update('email')}
-            />
 
             <input type="submit" value="Add Friend"></input>
 

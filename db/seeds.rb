@@ -20,6 +20,9 @@ andrew = User.create(username:"Andrew", email: "andrew@andrew.com", password:"pa
 nick = User.create(username:"Nick", email: "nick@nick.com", password:"password")
 kyle = User.create(username:"Kyle", email: "kyle@kyle.com", password:"password")
 dega = User.create(username:"Dega", email: "dega@dega.com", password:"password")
+brad = User.create(username:"Brad", email: "brad@brad.com", password:"password")
+brady = User.create(username:"Brady", email: "brady@brady.com", password:"password")
+brosef = User.create(username:"Brosef", email: "brosef@brosef.com", password:"password")
 
 
 Friendship.destroy_all

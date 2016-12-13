@@ -34,13 +34,15 @@ const friendshipReducer = (state = initialState, action) => {
       return merge(newState, {[action.friend.id]:action.friend});
 
     case RECEIVE_ALL_FRIENDS:
+      let theState = {};
       let keys = Object.keys(action.friends);
-      keys.forEach((key) => {
-        newState[action.friends[key].id] = action.friends[key];
-      });
-      tempState = merge({}, { users: newState });
 
-      return tempState;
+      keys.forEach((key) => {
+        theState[action.friends[key].id] = action.friends[key];
+      });
+      newState.users = theState;
+
+      return newState;
 
     case RECEIVE_SEARCHED_FRIENDS:
       let keys1 = Object.keys(action.friends);
@@ -58,8 +60,6 @@ const friendshipReducer = (state = initialState, action) => {
         finalState = myState;
       }
 
-      debugger
-      
       return finalState;
 
     case CLEAR_SEARCH:

@@ -13,8 +13,8 @@ class Api::UsersController < ApplicationController
   end
 
   def addFriend
-    friend_email = user_params[:email]
-    @friend = User.find_by(email: friend_email)
+    friend_username = user_params[:username]
+    @friend = User.find_by(username: friend_username)
 
     if @friend.nil?
       render json: ['User does not exist!'], status: 401
@@ -35,13 +35,14 @@ class Api::UsersController < ApplicationController
   def showFriends
     user = User.find(current_user.id)
     @friends = user.friends
+
     render :friends
   end
 
   def searchFriends
 
     if params[:query].present?
-      @friends = User.where('username ~ ? OR username ~ ?', params[:query].upcase, params[:query].downcase)
+      @friends = User.where('username ~ ? OR username ~ ? OR username ~ ?', params[:query].upcase, params[:query].downcase, params[:query].capitalize)
     else
       @friends = User.none
     end
