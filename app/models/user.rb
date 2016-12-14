@@ -68,11 +68,9 @@ class User < ActiveRecord::Base
 
   def net_payments(current_user_id)
     payments = {"you_are_owed" => {}, "you_owe" => {}}
-    # {"Matt"=>15.0, "Sam"=>10.0, "Drew"=>10.0, "Tristan"=>22.22} you_owe
-    # {"Matt"=>11.11, "Kyle"=>25.22, "Dega"=>30.22, "Drew"=>30.22} you_are_owed
+    # {"Matt"=>15.0, "Sam"=>10.0, "Drew"=>10.0, "Tristan"=>22.22} you_are_owed
+    # {"Matt"=>11.11, "Kyle"=>25.22, "Dega"=>30.22, "Drew"=>30.22} you_owe
 
-    # I owe Matt 15 bucks and Matt owes me 11, so I owe matt 4 bucks
-    # I owe Drew 10 bucks and Drew owes me 30.22 so you_are_owed 20.22
     you_owe_hash = you_owe(current_user_id)
     you_are_owed_hash = you_are_owed(current_user_id)
 
@@ -83,24 +81,23 @@ class User < ActiveRecord::Base
     user_payments.each do |user|
       # user is in you_owe_hash and NOT you_are_owed_hash
       if you_owe_hash.has_key?(user) && !you_are_owed_hash.has_key?(user)
-        payments["you_are_owed"][user] = you_owe_hash[user]
+        payments["you_owe"][user] = you_owe_hash[user]
       # user is NOT in you_owe_hash and in you_are_owed_hash
       elsif !you_owe_hash.has_key?(user) && you_are_owed_hash.has_key?(user)
-        payments["you_owe"][user] = you_are_owed_hash[user]
+        payments["you_are_owed"][user] = you_are_owed_hash[user]
       # user is in both you_owe hash and you_are_owed hash
       else
         amount = (you_are_owed_hash[user] - you_owe_hash[user]).round(2)
         if amount > 0
           # Goes to you are owed
-          payments["you_owe"][user] = amount
+          payments["you_are_owed"][user] = amount
 
         elsif amount < 0
-          payments["you_are_owed"][user] = -amount
+          payments["you_owe"][user] = -amount
           # Goes to you owe
         end
       end
     end
-
     payments
   end
 

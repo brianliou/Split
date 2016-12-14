@@ -2,6 +2,7 @@ import Dashboard from './dashboard.jsx';
 import { connect } from 'react-redux';
 import { logout } from '../../actions/session_actions.js';
 import { getBills } from '../../actions/bill_actions.js';
+import { selectAllBills } from '../../reducers/selectors.js';
 
 
 const mapStateToProps = state => {

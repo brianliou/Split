@@ -2,8 +2,10 @@ import { RECEIVE_ERRORS, RECEIVE_BILL, RECEIVE_BILLS } from '../actions/bill_act
 import merge from 'lodash/merge';
 
 const initialState = {
-  billList: {},
+  billList: {"you_owe":{}, "you_are_owed":{}},
   errors: {}
+
+  // fill out the keys on the initialState
 };
 
 const billReducer = (state = initialState, action) => {

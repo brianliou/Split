@@ -1,18 +1,25 @@
 import React from 'react';
 import FriendsContainer from '../friends/friends_container.jsx';
 import BillFormContainer from '../bill/bill_form_container.jsx';
+import { isEmpty, values } from 'lodash';
 
 class Dashboard extends React.Component {
 
   constructor(props) {
     super(props);
-    this.state = { friendModalOpen: false, billModalOpen: false };
+    this.state = { friendModalOpen: false,
+                   billModalOpen: false,
+                   balance: 0,
+                   youOweAmount: 0,
+                   youAreOwedAmount: 0
+                 };
     this.handleClick = this.handleClick.bind(this);
 
     this.openFriendModal = this.openFriendModal.bind(this);
     this.closeFriendModal = this.closeFriendModal.bind(this);
     this.openBillModal = this.openBillModal.bind(this);
     this.closeBillModal = this.closeBillModal.bind(this);
+    this.updatePaymentState = this.updatePaymentState.bind(this);
   }
 
   handleClick(e) {
@@ -35,12 +42,60 @@ class Dashboard extends React.Component {
     this.setState({billModalOpen: false});
   }
 
-  componentDidMount() {
+  componentWillMount() {
     this.props.getBills();
   }
 
+  componentWillReceiveProps(nextProps) {
+    this.updatePaymentState(nextProps.bills);
+  }
+
+  updatePaymentState(info) {
+
+    let youAreOwedAmountState = 0;
+    Object.keys(info.you_are_owed).forEach((el) => {
+
+      youAreOwedAmountState += info.you_are_owed[el];
+    });
+
+    let youOweState = 0;
+    Object.keys(info.you_owe).forEach((el) => {
+
+      youOweState += info.you_owe[el];
+    });
+
+    this.setState({youOweAmount:youOweState});
+    this.setState({youAreOwedAmount:youAreOwedAmountState});
+    this.setState({balance:(youAreOwedAmountState - youOweState)});
+
+  }
+
   render() {
-    debugger
+
+    const youOweUsers = Object.keys(this.props.bills.you_owe).map((user, idx) => {
+      return (
+        <li key={idx}>
+          <div>{user}</div>
+          <div className="profile-pic"></div>
+          <div>you owe</div>
+          <div>${this.props.bills.you_owe[user]}</div>
+        </li>
+      );
+
+    });
+
+    const youAreOwedUsers = Object.keys(this.props.bills.you_are_owed).map((user, idx) => {
+      return (
+        <li key={idx}>
+          <div>{user}</div>
+          <div className="profile-pic"></div>
+          <div>owes you</div>
+          <div>${this.props.bills.you_are_owed[user]}</div>
+        </li>
+      );
+
+    });
+
     return (
       <div>
         <div className="header-background-dashboard group">
@@ -81,7 +136,7 @@ class Dashboard extends React.Component {
               <section className="dashboard-bottom">
                 <div className="dashboard-block">
                   <div className="title">Total Balance</div>
-                  <div className="amount">$0.00</div>
+                  <div className={"amount " + (this.state.balance > 0 ? "positive" : "negative")}>${this.state.balance.toFixed(2)}</div>
 
                 </div>
 
@@ -89,14 +144,14 @@ class Dashboard extends React.Component {
                   <div className="dashboard-block-border">
 
                     <div className="title">You Owe</div>
-                    <div className="amount">$0.00</div>
+                    <div className="amount">${this.state.youOweAmount.toFixed(2)}</div>
                   </div>
 
                 </div>
 
                 <div className="dashboard-block">
                   <div className="title">You Are Owed</div>
-                  <div className="amount">$0.00</div>
+                  <div className="amount">${this.state.youAreOwedAmount.toFixed(2)}</div>
 
                 </div>
               </section>
@@ -104,10 +159,35 @@ class Dashboard extends React.Component {
 
             <section className="payments-section">
               <div className="you-owe-half">
+                <div>You Owe</div>
+
+                {isEmpty(this.props.bills.you_owe) ? (
+
+                  <div>You do not owe anything</div>
+                ) : (
+                  <ul>
+                    {youOweUsers}
+
+                  </ul>
+                )}
 
               </div>
 
               <div className="you-are-owed-half">
+                <div>You are owed</div>
+
+                {isEmpty(this.props.bills.you_are_owed) ? (
+
+                  <div>You are not owed anything</div>
+                ) : (
+                  <ul>
+                    {youAreOwedUsers}
+
+                  </ul>
+                )}
+
+
+
 
               </div>
 

@@ -5,3 +5,9 @@ export const selectAllFriends = (friends) => {
     values(friends)
   );
 };
+
+export const selectAllBills = (bills) => {
+  return (
+    values(bills)
+  );
+};
