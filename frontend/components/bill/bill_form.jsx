@@ -116,7 +116,6 @@ class BillForm extends React.Component {
   }
 
   // keyPress(e) {
-  //   debugger
   // }
 
   // TO DO IF TIME: allow for selection of users from searchlist with keypress and enter

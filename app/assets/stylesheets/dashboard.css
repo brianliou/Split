@@ -55,10 +55,10 @@
   border-right: 1px solid #ccc;
   box-shadow: 0 0 12px rgba(0,0,0,0.2);
   width: 600px;
+  height:900px;
 }
 
 .friends-list {
-  border: 1px solid black;
   padding: 15px;
   list-style: none;
 
@@ -189,8 +189,12 @@
   overflow: hidden;
 }
 .owe-titles {
-  overflow:hidden;
-  width: 598px;
+  overflow: hidden;
+  width: 580px;
+  margin-bottom: 20px;
+  text-transform: uppercase;
+  font-size: 14px;
+  font-weight: 500;
 }
 .owe-titles div:nth-child(1) {
   float: left;
@@ -204,9 +208,47 @@
   width: 289px;
   float: left;
   border-right: 1px solid #ddd;
+  margin-left: 10px;
+  color: black;
 }
 
 .you-are-owed-half {
   float: left;
   padding-left: 15px;
+  color: black;
+}
+
+.profile-pic {
+  width: 30px;
+  height: 30px;
+  background-image: url(person-profile.png);
+  background-size: cover;
+  display:inline-block;
+
+}
+
+.you-owe-half li {
+  display:inline-block;
+}
+
+.user-transaction {
+  width: 250px;
+  margin-bottom: 15px;
+}
+
+.transaction-info-you-owe, .transaction-info-are-owed {
+  display: inline-block;
+  margin-left: 10px;
+}
+
+.transaction-info div:nth-child(1) {
+  color:black;
+}
+
+.transaction-info-you-owe div:nth-child(2) {
+  color: #ff652f;
+}
+
+.transaction-info-are-owed div:nth-child(2) {
+  color: #5bc5a7;
 }

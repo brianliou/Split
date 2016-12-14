@@ -74,11 +74,12 @@ class Dashboard extends React.Component {
 
     const youOweUsers = Object.keys(this.props.bills.you_owe).map((user, idx) => {
       return (
-        <li key={idx}>
-          <div>{user}</div>
+        <li key={idx} className="user-transaction">
           <div className="profile-pic"></div>
-          <div>you owe</div>
-          <div>${this.props.bills.you_owe[user]}</div>
+          <div className="transaction-info-you-owe">
+            <div>{user}</div>
+            <div>you owe <strong>${this.props.bills.you_owe[user].toFixed(2)}</strong></div>
+          </div>
         </li>
       );
 
@@ -86,11 +87,12 @@ class Dashboard extends React.Component {
 
     const youAreOwedUsers = Object.keys(this.props.bills.you_are_owed).map((user, idx) => {
       return (
-        <li key={idx}>
-          <div>{user}</div>
-          <div className="profile-pic"></div>
-          <div>owes you</div>
-          <div>${this.props.bills.you_are_owed[user]}</div>
+        <li key={idx} className="user-transaction">
+            <div className="profile-pic"></div>
+            <div className="transaction-info-are-owed">
+              <div>{user}</div>
+              <div>owes you <strong>${this.props.bills.you_are_owed[user].toFixed(2)}</strong></div>
+            </div>
         </li>
       );
 

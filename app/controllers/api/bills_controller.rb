@@ -55,7 +55,6 @@ class Api::BillsController < ApplicationController
     ############### NEED TO EDIT PARAMS SO THAT IT WORKS WITH CURRENT USER #######
     new_billsplit_info = current_user.settle_up(bill_params[:settleFrom].to_i, bill_params[:settleTo].to_i, bill_params[:amount].to_f)
 
-    debugger
     # Helper method to find all of the paid ones
     paid_and_other_list = find_paid_splits(new_billsplit_info)
 
@@ -71,7 +70,6 @@ class Api::BillsController < ApplicationController
 
     # Updating paid column for bills after billsplits have been updated
     bill_paid_info = current_user.bill_paid
-    debugger
 
     Bill.where(id: bill_paid_info).update_all(paid: true)
 
