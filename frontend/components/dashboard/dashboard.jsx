@@ -35,7 +35,12 @@ class Dashboard extends React.Component {
     this.setState({billModalOpen: false});
   }
 
+  componentDidMount() {
+    this.props.getBills();
+  }
+
   render() {
+    debugger
     return (
       <div>
         <div className="header-background-dashboard group">

@@ -32,15 +32,8 @@ class Api::BillsController < ApplicationController
 
   def getBills
 
-    # user = User.find(current_user.id)
-    # you_owe_list = user.you_owe(user.id)
-    # you_are_owed_list = user.you_are_owed(user.id)
-    #
-    # @bills = {"owe": you_owe_list, "owed": you_are_owed_list }
-
     @bills = current_user.net_payments(current_user.id)
 
-    debugger
     render json: @bills.to_json
 
   end

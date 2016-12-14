@@ -1,17 +1,21 @@
 import Dashboard from './dashboard.jsx';
 import { connect } from 'react-redux';
 import { logout } from '../../actions/session_actions.js';
+import { getBills } from '../../actions/bill_actions.js';
 
 
 const mapStateToProps = state => {
   return {
-    currentUser: state.session.currentUser
+    currentUser: state.session.currentUser,
+    bills: state.bills.billList
   };
 };
 
 const mapDispatchToProps = dispatch => {
   return {
-    logout: () => dispatch(logout())
+    logout: () => dispatch(logout()),
+    getBills: () => dispatch(getBills()),
+
   };
 
 };
