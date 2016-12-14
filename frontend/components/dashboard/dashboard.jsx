@@ -44,7 +44,7 @@ class Dashboard extends React.Component {
             <h1 className="header-logo-dashboard">SPLIT</h1>
               <ul className="header-list-dashboard">
                 <li className="nav-button-dashboard" onClick={this.handleClick}>Log Out</li>
-                <li>icon here</li>
+                <li><div className="person-icon"></div></li>
                 <li>{this.props.currentUser.username}</li>
               </ul>
           </header>
@@ -53,7 +53,7 @@ class Dashboard extends React.Component {
         <div className="dashboard-center-container">
 
           <div className="dashboard-left">
-            
+
             <FriendsContainer closeModal={this.closeFriendModal} isModalOpen={this.state.friendModalOpen}/>
 
           </div>
