@@ -60,32 +60,54 @@ class Dashboard extends React.Component {
 
           <div className="dashboard-center">
 
-            <section className="dashboard">
+            <section className="dashboard-top-section">
               <section className="dashboard-top">
 
                 <h1>Dashboard</h1>
 
-                <button onClick={this.openFriendModal}>Open Modal Add Friend</button>
-                <button onClick={this.openBillModal}>Open Modal Create Bill</button>
-                <button>Settle Up</button>
+                <ul className="dashboard-button-list">
+                  <li><button onClick={this.openFriendModal}>Add Friend</button></li>
+                  <li><button onClick={this.openBillModal}>Create Bill</button></li>
+                  <li><button>Settle Up</button></li>
+                </ul>
 
               </section>
-
-              <div className="dashboard-line"></div>
 
               <section className="dashboard-bottom">
-                <div className="dashboard-balance">
+                <div className="dashboard-block">
+                  <div class="title">Total Balance</div>
+                  <div class="amount">$0.00</div>
 
                 </div>
 
-                <div className="dashboard-you-owe">
+                <div className="dashboard-block">
+                  <div className="dashboard-block-border">
+
+                    <div class="title">You Owe</div>
+                    <div class="amount">$0.00</div>
+                  </div>
 
                 </div>
 
-                <div className="dashboard-you-are-owed">
+                <div className="dashboard-block">
+                  <div class="title">You Are Owed</div>
+                  <div class="amount">$0.00</div>
 
                 </div>
               </section>
+            </section>
+
+            <section className="payments-section">
+              <div className="you-owe-half">
+
+              </div>
+
+              <div className="you-are-owed-half">
+                
+              </div>
+
+
+
             </section>
 
           </div>
