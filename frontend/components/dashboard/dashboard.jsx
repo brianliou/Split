@@ -38,21 +38,27 @@ class Dashboard extends React.Component {
   render() {
     return (
       <div>
-        <header className="header group">
-          <h1 className="header-logo">SPLIT</h1>
-            <ul className="header-list">
-              <li className="nav-button" onClick={this.handleClick}>Log Out</li>
-              <li>{this.props.currentUser.username}</li>
-            </ul>
-        </header>
-        <div class="dashboard-center-container">
+        <div className="header-background-dashboard group">
 
-          <div class="dashboard-left">
+          <header className="header-dashboard">
+            <h1 className="header-logo-dashboard">SPLIT</h1>
+              <ul className="header-list-dashboard">
+                <li className="nav-button-dashboard" onClick={this.handleClick}>Log Out</li>
+                <li>icon here</li>
+                <li>{this.props.currentUser.username}</li>
+              </ul>
+          </header>
+
+        </div>
+        <div className="dashboard-center-container">
+
+          <div className="dashboard-left">
+            
             <FriendsContainer closeModal={this.closeFriendModal} isModalOpen={this.state.friendModalOpen}/>
 
           </div>
 
-          <div class="dashboard-center">
+          <div className="dashboard-center">
 
             <section className="dashboard">
               <section className="dashboard-top">
@@ -84,7 +90,7 @@ class Dashboard extends React.Component {
 
           </div>
 
-          <div class="dashboard-right">
+          <div className="dashboard-right">
 
           </div>
 

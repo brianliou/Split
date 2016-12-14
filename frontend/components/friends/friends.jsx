@@ -85,8 +85,6 @@ class Friends extends React.Component {
     let formContent;
     formContent = (
       <div>
-        <h1>Friends Component</h1>
-
         <Modal isOpen={this.props.isModalOpen} contentLabel="Modal" className="friend-modal group" overlayClassName="modal-overlay">
           <h1>Add a Friend <div onClick={this.closeModalAction}>x</div></h1>
           <fieldset className="add-friend-form">
@@ -118,15 +116,21 @@ class Friends extends React.Component {
     );
 
     const listContent = this.props.friends.map((user, idx) => {
-      return <li key={idx}>{user.username}</li>;
+      return <li key={idx}><div className="person-icon"></div>{user.username}</li>;
     });
 
     return (
       <div>
         {formContent}
-        <ul>
-          {listContent}
-        </ul>
+        <div className="friends-list">
+          <div className="friends-box">
+            <h1>Friends</h1>
+            <div onClick={this.openFriendModal}>+Add</div>
+          </div>
+          <ul>
+            {listContent}
+          </ul>
+        </div>
       </div>
     );
   }

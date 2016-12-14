@@ -1,0 +1,104 @@
+
+.header-background-dashboard {
+  background-color: #5bc5a7;
+  overflow:hidden;
+}
+
+.header-dashboard {
+  width:960px;
+  display:block;
+  color: white;
+  margin: 0 auto;
+}
+.header-logo-dashboard {
+  float:left;
+  letter-spacing: 15px;
+  font-size: 20px;
+}
+
+.header-list-dashboard {
+  float: right;
+}
+
+.header-list-dashboard li {
+  float:left;
+  list-style: none;
+}
+
+.nav-button-dashboard {
+
+}
+.dashboard-center-container {
+  width: 960px;
+  min-width: 980px;
+  overflow: hidden;
+  margin: 0 auto;
+}
+
+.dashboard-left {
+  width: 180px;
+  float: left;
+}
+
+.dashboard-center {
+  float: left;
+}
+
+.dashboard-right {
+  float: left;
+}
+
+.dashboard-center {
+  border-left: 1px solid #ccc;
+  border-right: 1px solid #ccc;
+  box-shadow: 0 0 12px rgba(0,0,0,0.2);
+  width: 600px;
+}
+
+.friends-list {
+  border: 1px solid black;
+  padding: 15px;
+  list-style: none;
+
+}
+
+.friends-box {
+  background: #f6f6f6;
+  color: #ccc;
+  font-size: 11px;
+  text-transform: uppercase;
+  border-top: 1px solid #f3f3f3;
+  border-bottom: 1px solid #eee;
+  width: 150px;
+  padding: 4px 0;
+  overflow: hidden;
+}
+
+.friends-box h1 {
+  float:left;
+}
+
+.friends-box div {
+  float:right;
+}
+
+.person-icon {
+  width:15px;
+  height:15px;
+  background-image: url('person-icon.png');
+  background-size: cover;
+  display:inline-block;
+  vertical-align: bottom;
+  margin-right: 3px;
+
+}
+
+.friends-list ul {
+  vertical-align: bottom;
+  margin-left: 5px;
+
+}
+
+.friends-list li {
+  padding-top: 5px;
+}
