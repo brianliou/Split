@@ -58,6 +58,17 @@ bill_five = Bill.create(author_id: brian.id, paid: true, split: 3, amount:21.00,
 # Matt and Brian and Sam PARTIAL-PAID
 bill_six = Bill.create(author_id: matt.id, paid: false, split: 3, amount:30.00, description: "Breakfast", bill_date: '2016-12-01')
 
+# Brian and Tristan
+bill_seven = Bill.create(author_id: brian.id, paid: false, split: 2, amount: 44.44, description: "Breakfast", bill_date: '2016-12-01')
+
+# Kyle and Brian
+bill_eight = Bill.create(author_id: kyle.id, paid: false, split: 2, amount: 50.44, description: "Breakfast", bill_date: '2016-12-01')
+
+# Dega and Brian
+bill_nine = Bill.create(author_id: dega.id, paid: false, split: 2, amount: 60.44, description: "Breakfast", bill_date: '2016-12-01')
+
+# Drew and Brian
+bill_ten = Bill.create(author_id: drew.id, paid: false, split: 2, amount: 60.44, description: "Breakfast", bill_date: '2016-12-01')
 
 
 Billsplit.destroy_all
@@ -84,4 +95,16 @@ bs_10 = Billsplit.create(bill_id: bill_five.id, recipient_paid: true, recipient_
 
 # Matt and Brian and Sam PARTIAL-PAID
 bs_11 = Billsplit.create(bill_id: bill_six.id, recipient_paid: true, recipient_id: matt.id, split_amount: 10)
-bs_11 = Billsplit.create(bill_id: bill_six.id, recipient_paid: false, recipient_id: sam.id, split_amount: 10)
+bs_12 = Billsplit.create(bill_id: bill_six.id, recipient_paid: false, recipient_id: sam.id, split_amount: 10)
+
+# Brian and Tristan
+bs_13 = Billsplit.create(bill_id: bill_seven.id, recipient_paid: false, recipient_id: tristan.id, split_amount: 22.22)
+
+# Kyle and Brian
+bs_14 = Billsplit.create(bill_id: bill_eight.id, recipient_paid: false, recipient_id: brian.id, split_amount: 25.22)
+
+# Dega and Brian
+bs_15 = Billsplit.create(bill_id: bill_nine.id, recipient_paid: false, recipient_id: brian.id, split_amount: 30.22)
+
+# Drew and Brian
+bs_16 = Billsplit.create(bill_id: bill_ten.id, recipient_paid: false, recipient_id: brian.id, split_amount: 30.22)

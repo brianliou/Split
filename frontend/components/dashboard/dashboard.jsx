@@ -75,23 +75,23 @@ class Dashboard extends React.Component {
 
               <section className="dashboard-bottom">
                 <div className="dashboard-block">
-                  <div class="title">Total Balance</div>
-                  <div class="amount">$0.00</div>
+                  <div className="title">Total Balance</div>
+                  <div className="amount">$0.00</div>
 
                 </div>
 
                 <div className="dashboard-block">
                   <div className="dashboard-block-border">
 
-                    <div class="title">You Owe</div>
-                    <div class="amount">$0.00</div>
+                    <div className="title">You Owe</div>
+                    <div className="amount">$0.00</div>
                   </div>
 
                 </div>
 
                 <div className="dashboard-block">
-                  <div class="title">You Are Owed</div>
-                  <div class="amount">$0.00</div>
+                  <div className="title">You Are Owed</div>
+                  <div className="amount">$0.00</div>
 
                 </div>
               </section>
@@ -103,7 +103,7 @@ class Dashboard extends React.Component {
               </div>
 
               <div className="you-are-owed-half">
-                
+
               </div>
 
 
