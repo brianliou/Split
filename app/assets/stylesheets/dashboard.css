@@ -181,3 +181,32 @@
   border-left: 1px solid #ddd;
   border-right: 1px solid #ddd;
 }
+
+.payments-section {
+  padding: 10px;
+  background-color: #fff;
+  color: #999;
+  overflow: hidden;
+}
+.owe-titles {
+  overflow:hidden;
+  width: 598px;
+}
+.owe-titles div:nth-child(1) {
+  float: left;
+}
+
+.owe-titles div:nth-child(2) {
+  float: right;
+}
+
+.you-owe-half {
+  width: 289px;
+  float: left;
+  border-right: 1px solid #ddd;
+}
+
+.you-are-owed-half {
+  float: left;
+  padding-left: 15px;
+}

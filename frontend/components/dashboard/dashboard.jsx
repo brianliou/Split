@@ -158,8 +158,11 @@ class Dashboard extends React.Component {
             </section>
 
             <section className="payments-section">
-              <div className="you-owe-half">
+              <div className="owe-titles">
                 <div>You Owe</div>
+                <div>You are owed</div>
+              </div>
+              <div className="you-owe-half">
 
                 {isEmpty(this.props.bills.you_owe) ? (
 
@@ -174,7 +177,6 @@ class Dashboard extends React.Component {
               </div>
 
               <div className="you-are-owed-half">
-                <div>You are owed</div>
 
                 {isEmpty(this.props.bills.you_are_owed) ? (
 
@@ -185,9 +187,6 @@ class Dashboard extends React.Component {
 
                   </ul>
                 )}
-
-
-
 
               </div>
 
