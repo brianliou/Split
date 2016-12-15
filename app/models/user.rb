@@ -161,12 +161,9 @@ class User < ActiveRecord::Base
   ###########
   def settle_up(settle_from, settle_to, amount)
 
-    billsplits = Billsplit.joins(:bill).where('author_id = ?', settle_to).where('recipient_id = ?', settle_from).where('recipient_paid = false')
+    # billsplits = Billsplit.joins(:bill).where('author_id = ?', settle_to).where('recipient_id = ?', settle_from).where('recipient_paid = false')
 
-    billsplits_two = Billsplit.joins(:bill).where('author_id = ?', settle_from).where('recipient_id = ?', settle_to).where('recipient_paid = false')
-
-
-    debugger
+    billsplits = Billsplit.joins(:bill).where('author_id = ?', settle_from).where('recipient_id = ?', settle_to).where('recipient_paid = false')
 
     bill_settle_list = []
 
