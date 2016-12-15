@@ -201,6 +201,8 @@ class User < ActiveRecord::Base
       bill_settle_list.push(temp_bill)
     end
 
+    debugger
+
     bill_settle_list
 
   end

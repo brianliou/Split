@@ -1,4 +1,4 @@
-import { RECEIVE_ERRORS, RECEIVE_BILL, RECEIVE_BILLS } from '../actions/bill_actions.js';
+import { RECEIVE_ERRORS, RECEIVE_BILL, RECEIVE_BILLS, RECEIVE_BILL_SETTLE } from '../actions/bill_actions.js';
 import merge from 'lodash/merge';
 
 const initialState = {
@@ -15,6 +15,8 @@ const billReducer = (state = initialState, action) => {
   switch(action.type) {
     case RECEIVE_BILL:
       newState.billList = action.bill;
+      return newState;
+    case RECEIVE_BILL_SETTLE:
       return newState;
     case RECEIVE_ERRORS:
       newState.errors = action.errors;

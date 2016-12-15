@@ -11,7 +11,8 @@ const mapStateToProps = state => {
   return {
     search: selectAllFriends(state.friends.userResult),
     errors: state.friends.errors,
-    currentUser: state.session.currentUser
+    currentUser: state.session.currentUser,
+    friends: state.friends.users
   };
 };
 

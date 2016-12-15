@@ -10,7 +10,8 @@ import { selectAllFriends } from '../../reducers/selectors.js';
 const mapStateToProps = state => {
   return {
     search: selectAllFriends(state.friends.userResult),
-    errors: state.friends.errors
+    errors: state.friends.errors,
+    friends: state.friends.users
   };
 };
 

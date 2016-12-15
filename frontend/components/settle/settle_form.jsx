@@ -53,7 +53,8 @@ class SettleForm extends React.Component {
   handleSubmit(e) {
     e.preventDefault();
     const settleUpData = {settleFrom: this.findId(this.state.settleFrom), settleTo: this.findId(this.state.settleTo), amount: this.state.amount};
-    this.props.settleBill(bill).then(
+
+    this.props.settleBill(settleUpData).then(
       () => {
         // Put like a friend added box or something?
         // this.closeModal();
@@ -71,7 +72,18 @@ class SettleForm extends React.Component {
 
   // return the id of the user
   findId(username) {
-
+    if(username ==="You") {
+      return this.props.currentUser.id
+    } else {
+      const friends = this.props.friends;
+      for(var user_key in friends) {
+        let user = friends[user_key];
+        if(user.username === username) {
+          return user.id;
+        }
+      }
+    }
+    debugger
   }
 
 
@@ -79,7 +91,13 @@ class SettleForm extends React.Component {
 
     e.preventDefault();
     const username = e.currentTarget.textContent.replace(/\s/g, '');
-    this.setState({settleFrom: username});
+
+    if(username === this.props.currentUser.username) {
+      this.setState({settleFrom: 'You'});
+    } else {
+
+      this.setState({settleFrom: username});
+    }
 
     this.props.clearSearch();
 
@@ -89,7 +107,12 @@ class SettleForm extends React.Component {
     e.preventDefault();
     const username = e.currentTarget.textContent.replace(/\s/g, '');
 
-    this.setState({settleTo: username});
+    if(username === this.props.currentUser.username) {
+      this.setState({settleTo: 'You'});
+    } else {
+
+      this.setState({settleTo: username});
+    }
 
     this.props.clearSearch();
 
@@ -120,13 +143,6 @@ class SettleForm extends React.Component {
       )
     }
 
-    if(this.state.whichSearch === 'settleFrom') {
-      settleToSearchList = [];
-    } else {
-      settleFromSearchList = [];
-    }
-
-    debugger
 
     let formContent;
     formContent = (
@@ -168,13 +184,18 @@ class SettleForm extends React.Component {
 
           <br/>
 
-          <ul>
-            {settleFromSearchList}
-          </ul>
+          {this.state.whichSearch === 'settleFrom' ? (
+            <ul>
+              {settleFromSearchList}
+            </ul>
 
-          <ul>
-            {settleToSearchList}
-          </ul>
+          ) : (
+            <ul>
+              {settleToSearchList}
+            </ul>
+          )}
+
+
 
 
 

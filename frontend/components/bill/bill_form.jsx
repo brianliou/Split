@@ -85,7 +85,7 @@ class BillForm extends React.Component {
   }
 
   findRecipientIds(recipients) {
-    const friends = store.getState().friends.users;
+    const friends = this.props.friends;
     const idArray = [];
 
     recipients.forEach((username) => {
