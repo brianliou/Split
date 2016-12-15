@@ -15,6 +15,9 @@ const billReducer = (state = initialState, action) => {
   Object.freeze(state);
   switch(action.type) {
     case RECEIVE_BILL:
+      // if you've created a bill you need to add it to your list of bills
+      //
+      // return a new state of bills with the new bill added
       newState.update = !newState.update;
       // newState.billList = action.bill;
       debugger
