@@ -161,11 +161,12 @@ class User < ActiveRecord::Base
   ###########
   def settle_up(settle_from, settle_to, amount)
 
-    # billsplits = Billsplit.joins(:bill).where('author_id = ?', settle_to).where('recipient_id = ?', settle_from).where('recipient_paid = false')
-
-    billsplits = Billsplit.joins(:bill).where('author_id = ?', settle_from).where('recipient_id = ?', settle_to).where('recipient_paid = false')
+    # You are looking for all of the billsplits where the recipient id is payer (settle_from) because those are the ones you want to now fulfill
+    billsplits = Billsplit.joins(:bill).where('author_id = ?', settle_to).where('recipient_id = ?', settle_from).where('recipient_paid = false')
 
     bill_settle_list = []
+
+    # need to add the case for
 
     billsplits.each do |split|
       temp_bill = []
@@ -202,8 +203,6 @@ class User < ActiveRecord::Base
       temp_bill.push(amount.round(2))
       bill_settle_list.push(temp_bill)
     end
-
-    debugger
 
     bill_settle_list
 

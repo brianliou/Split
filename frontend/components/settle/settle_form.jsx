@@ -83,7 +83,6 @@ class SettleForm extends React.Component {
         }
       }
     }
-    debugger
   }
 
 

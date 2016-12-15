@@ -57,8 +57,6 @@ class Api::BillsController < ApplicationController
 
     ############### NEED TO EDIT PARAMS SO THAT IT WORKS WITH CURRENT USER #######
     new_billsplit_info = current_user.settle_up(bill_params[:settleFrom].to_i, bill_params[:settleTo].to_i, bill_params[:amount].to_f)
-
-    debugger
     # Helper method to find all of the paid ones
     paid_and_other_list = find_paid_splits(new_billsplit_info)
 
@@ -68,20 +66,14 @@ class Api::BillsController < ApplicationController
       Billsplit.where(id: paid_billsplit_ids).update_all(recipient_paid: true, split_amount: 0)
     end
 
-    debugger
-
     if paid_and_other_list[1].length > 0
       uneven_payment(paid_and_other_list[1])
     end
-
-    debugger
 
     # Updating paid column for bills after billsplits have been updated
     bill_paid_info = current_user.bill_paid
 
     Bill.where(id: bill_paid_info).update_all(paid: true)
-
-    debugger
 
     render json: ["COMPLETE"]
 
@@ -132,10 +124,11 @@ class Api::BillsController < ApplicationController
       new_bill = Bill.create(amount: billsplit[2],
                             description:"Overpayment",
                             bill_date: Time.now.strftime("%Y/%m/%d").gsub(/\//,'-'),
-                            author_id: bill_params[:settleTo],
+                            author_id: bill_params[:settleFrom],
                             split: 2
                             )
-      Billsplit.create(bill_id: new_bill.id, recipient_id: bill_params[:settleFrom], split_amount: billsplit[2])
+      Billsplit.create(bill_id: new_bill.id, recipient_id: bill_params[:settleTo], split_amount: billsplit[2])
+
     end
 
   end
