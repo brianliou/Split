@@ -1,16 +1,16 @@
 import * as util from '../util/bill_form_api_util.js';
 
-export const RECEIVE_BILL = "RECEIVE_BILL";
+// export const RECEIVE_BILL = "RECEIVE_BILL";
 export const RECEIVE_ERRORS = "RECEIVE_ERRORS";
 export const RECEIVE_BILLS = "RECEIVE_BILLS";
-export const RECEIVE_BILL_SETTLE = "RECEIVE_BILL_SETTLE";
+// export const RECEIVE_BILL_SETTLE = "RECEIVE_BILL_SETTLE";
 
-export const receiveBill = bill => {
-  return {
-    type: RECEIVE_BILL,
-    bill: bill
-  };
-};
+// export const receiveBill = bill => {
+//   return {
+//     type: RECEIVE_BILL,
+//     bill: bill
+//   };
+// };
 
 export const receiveErrors = errors => {
   return {
@@ -26,17 +26,18 @@ export const receiveBills = bills => {
   };
 };
 
-export const receiveBillSettle = () => {
-  return {
-    type: RECEIVE_BILL_SETTLE
-  }
-}
+// export const receiveBillSettle = (bills) => {
+//   return {
+//     type: RECEIVE_BILL_SETTLE,
+//     bills: bills
+//   }
+// }
 
 
 export const createBill = (bill) => {
   return (dispatch) => {
     return util.createBill(bill).then(
-      (bill) => dispatch(receiveBill(bill)),
+      (bills) => dispatch(receiveBills(bills)),
       (err) => dispatch(receiveErrors(err.responseJSON))
     );
   };
@@ -54,7 +55,7 @@ export const getBills = () => {
 export const settleBill = (bill) => {
   return (dispatch) => {
     return util.settleBill(bill).then(
-      () => dispatch(receiveBillSettle()),
+      (bills) => dispatch(receiveBills(bills)),
       (err) => dispatch(receiveErrors(err.responseJSON))
     );
   };

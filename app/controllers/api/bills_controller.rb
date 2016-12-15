@@ -22,7 +22,8 @@ class Api::BillsController < ApplicationController
       bill_params[:recipients].each do |id|
         Billsplit.create(bill_id: @bill.id, recipient_id: id.to_i, split_amount: split.round(2) )
       end
-      render json: [true].to_json
+      @bills = current_user.net_payments(current_user.id)
+      render json: @bills.to_json
     else
       render json: @bill.errors.full_messages, status: 422
     end
@@ -58,13 +59,26 @@ class Api::BillsController < ApplicationController
     ############### NEED TO EDIT PARAMS SO THAT IT WORKS WITH CURRENT USER #######
     new_billsplit_info = current_user.settle_up(bill_params[:settleFrom].to_i, bill_params[:settleTo].to_i, bill_params[:amount].to_f)
     # Helper method to find all of the paid ones
+
+    debugger
     paid_and_other_list = find_paid_splits(new_billsplit_info)
 
-    paid_billsplit_ids = paid_and_other_list[0].collect { |idx| idx[0] }
+    debugger
+
+    # paid_other_list[0] will either be a single array or and array of arrays
+    if paid_and_other_list[0][0].kind_of?(Array)
+      paid_billsplit_ids = paid_and_other_list[0].collect { |idx| idx[0] }
+    else
+      paid_billsplit_ids = [paid_and_other_list[0].first]
+    end
+
+    debugger
 
     if paid_billsplit_ids.length > 0
       Billsplit.where(id: paid_billsplit_ids).update_all(recipient_paid: true, split_amount: 0)
     end
+
+
 
     if paid_and_other_list[1].length > 0
       uneven_payment(paid_and_other_list[1])
@@ -75,7 +89,8 @@ class Api::BillsController < ApplicationController
 
     Bill.where(id: bill_paid_info).update_all(paid: true)
 
-    render json: ["COMPLETE"]
+    @bills = current_user.net_payments(current_user.id)
+    render json: @bills.to_json
 
   end
 
@@ -89,21 +104,64 @@ class Api::BillsController < ApplicationController
   #     returns [[[5, true, 0], [8, true, 0]], ["new", false, 27.78]]
   ###########
   def find_paid_splits(array)
-    # [[5, true, 0], [8, true, 0], ["new", false, 27.78]]
-    paid_splits = []
-    new_array = []
-    dup_array = array.dup
-    array.each_with_index do |split, idx|
+    # [[5, true, 0], [8, true, 0], ["new", false, 27.78]]  =>
+    # [[5, true, 0]] => [ [5, true, 0], []]
+    # [[5, true, 0], [8, true, 0]]
+    # [[5, true, 0], [8, true, 0], [8, true, 0], ["new", false, 27.78]]
+    # [["new", false, 27.78]] => [ [], ["new", false, 27.78]]
+
+    # paid_splits = []
+    # special_array = []
+
+    counter = 0
+    array.each do |split|
       if split[2] == 0
-        paid_splits.push(split)
-        dup_array.shift
+        counter += 1
       end
     end
 
-    new_array.push(paid_splits)
-    new_array.push(dup_array.shift)
+    debugger
 
-    new_array
+    paid_splits = array.slice(0, counter)
+    array_length = array.length
+
+    debugger
+
+    if array_length > counter
+      paid_splits.push(array[array_length - 1])
+    else
+      paid_splits.push([])
+    end
+
+
+
+    # debugger
+    #
+    # if counter == 0
+    #   new_array.push(paid_splits)
+    #   new_array.push(array[array_length - 1])
+    # elsif counter == 1
+    #   if counter == array_length
+    #     new_array.push(paid_splits)
+    #     new_array.push([])
+    #   end
+    # elsif counter > 1
+    #   last = array[array_length - 1]
+    #   if last.kind_of?(Array)
+    #     special_array = last
+    #   else
+    #     special_array = []
+    #   end
+    #   new_array.push(paid_splits)
+    #   new_array.push(special_array)
+    # end
+      # check the kind_of? for the last element in the array,
+      # if its a number set special_array to []
+      # if its an array, set special array to it
+
+    debugger
+
+    paid_splits
 
   end
 

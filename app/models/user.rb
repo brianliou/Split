@@ -158,6 +158,11 @@ class User < ActiveRecord::Base
   # 2: amount (will be 0 if paid is true)
   #
   # Ex) For Drew paying Matt 50 [[5, true, 0], [8, true, 0], ["new", false, 27.78]]
+
+  # You settle the exact amount
+  # You settle less than the exact amount
+  # You settle more than the exact amount
+  # You settle when there is no money owed
   ###########
   def settle_up(settle_from, settle_to, amount)
 
