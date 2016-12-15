@@ -43,3 +43,11 @@ export const getBills = () => {
     );
   };
 };
+
+export const settleBill = (bill) => {
+  return (dispatch) => {
+    return util.settleBill(bill).then(
+      (err) => dispatch(receiveErrors(err.responseJSON))
+    );
+  };
+};

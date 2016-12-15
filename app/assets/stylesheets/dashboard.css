@@ -65,6 +65,7 @@
   list-style: none;
   color: #999;
   font-family: 'Helvetica Neue';
+  font-size: 14px;
 
 }
 
@@ -240,6 +241,14 @@
 .profile-pic {
   width: 30px;
   height: 30px;
+  background-image: url(person-profile.png);
+  background-size: cover;
+  display:inline-block;
+
+}
+.profile-pic-header {
+  width: 20px;
+  height: 20px;
   background-image: url(person-profile.png);
   background-size: cover;
   display:inline-block;

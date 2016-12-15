@@ -14,3 +14,12 @@ export const fetchBills = bills => {
     method: 'GET'
   });
 };
+
+
+export const settleBill = bills => {
+  return $.ajax({
+    url:'/api/bills',
+    method: 'PUT',
+    data: {bills}
+  });
+};

@@ -50,10 +50,6 @@ class Api::UsersController < ApplicationController
 
   def searchFriends
 
-    # Need to change this to be 2 cases:
-    # One for bills, where the query can only return friends
-    # One for add friend, where the query can return all users
-
     if params[:query].present?
       @friends = current_user.friends.where('username ~ ? OR username ~ ? OR username ~ ?', params[:query].upcase, params[:query].downcase, params[:query].capitalize)
     else
