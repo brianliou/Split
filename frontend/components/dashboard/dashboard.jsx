@@ -19,10 +19,13 @@ class Dashboard extends React.Component {
 
     this.openFriendModal = this.openFriendModal.bind(this);
     this.closeFriendModal = this.closeFriendModal.bind(this);
+
     this.openBillModal = this.openBillModal.bind(this);
     this.closeBillModal = this.closeBillModal.bind(this);
+
     this.openSettleModal = this.openSettleModal.bind(this);
     this.closeSettleModal = this.closeSettleModal.bind(this);
+
     this.updatePaymentState = this.updatePaymentState.bind(this);
   }
 
@@ -59,7 +62,7 @@ class Dashboard extends React.Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    this.updatePaymentState(nextProps.bills);
+    this.updatePaymentState(this.props.bills);
   }
 
   updatePaymentState(info) {

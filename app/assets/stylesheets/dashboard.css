@@ -183,7 +183,10 @@
 
 .negative {
   color: red;
+}
 
+.positive {
+  color: #5bc5a7;
 }
 
 .dashboard-block {

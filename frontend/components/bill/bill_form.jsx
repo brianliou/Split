@@ -54,7 +54,6 @@ class BillForm extends React.Component {
   }
 
   clearState() {
-    // need to add other parts of the state
     this.setState({description:"", recipients: [], amount:"", date:"", splitAmount: 0});
   }
 
@@ -71,7 +70,7 @@ class BillForm extends React.Component {
     this.props.processBillForm(bill).then(
       () => {
         // Put like a friend added box or something?
-        this.closeModal();
+        this.closeModalAction();
         this.props.clearSearch();
         this.clearState();
       }, err => {

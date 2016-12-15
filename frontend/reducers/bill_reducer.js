@@ -3,7 +3,8 @@ import merge from 'lodash/merge';
 
 const initialState = {
   billList: {"you_owe":{}, "you_are_owed":{}},
-  errors: {}
+  errors: {},
+  update: true
 
   // fill out the keys on the initialState
 };
@@ -14,7 +15,9 @@ const billReducer = (state = initialState, action) => {
   Object.freeze(state);
   switch(action.type) {
     case RECEIVE_BILL:
-      newState.billList = action.bill;
+      newState.update = !newState.update;
+      // newState.billList = action.bill;
+      debugger
       return newState;
     case RECEIVE_BILL_SETTLE:
       return newState;

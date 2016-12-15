@@ -9,20 +9,20 @@ class Api::BillsController < ApplicationController
     #     description: "Dinner",
     #     bill_date: "2016-12-01"
     #   }}})
-    split = bill_params[:amount].to_f / bill_params[:recipients].length
+    split = bill_params[:amount].to_f / (bill_params[:recipients].length + 1)
 
     @bill = Bill.new(amount: bill_params[:amount].to_i,
                      description: bill_params[:description],
                      bill_date: bill_params[:bill_date],
                      author_id: current_user.id,
-                     split: bill_params[:recipients].length,
+                     split: bill_params[:recipients].length + 1,
                     )
     if @bill.save
       # Create billsplits for each recipient_id
       bill_params[:recipients].each do |id|
         Billsplit.create(bill_id: @bill.id, recipient_id: id.to_i, split_amount: split.round(2) )
       end
-      render json: ["Bill and bill splits created"]
+      render json: [true].to_json
     else
       render json: @bill.errors.full_messages, status: 422
     end

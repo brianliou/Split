@@ -58,6 +58,7 @@ class SettleForm extends React.Component {
       () => {
         // Put like a friend added box or something?
         // this.closeModal();
+        this.closeModalAction();
         this.props.clearSearch();
         this.clearState();
       }, err => {
