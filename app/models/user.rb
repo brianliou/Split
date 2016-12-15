@@ -163,6 +163,11 @@ class User < ActiveRecord::Base
 
     billsplits = Billsplit.joins(:bill).where('author_id = ?', settle_to).where('recipient_id = ?', settle_from).where('recipient_paid = false')
 
+    billsplits_two = Billsplit.joins(:bill).where('author_id = ?', settle_from).where('recipient_id = ?', settle_to).where('recipient_paid = false')
+
+
+    debugger
+
     bill_settle_list = []
 
     billsplits.each do |split|

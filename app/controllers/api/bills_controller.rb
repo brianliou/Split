@@ -52,6 +52,9 @@ class Api::BillsController < ApplicationController
     # AJAX example returns this array for new_billsplit_info - [[5, true, 0], [8, true, 0], ["new", false, 27.78]]
 
 
+    # Settling a bill with no billsplits is the same as creating a new bill for yourself with that person you are settling with
+
+
     ############### NEED TO EDIT PARAMS SO THAT IT WORKS WITH CURRENT USER #######
     new_billsplit_info = current_user.settle_up(bill_params[:settleFrom].to_i, bill_params[:settleTo].to_i, bill_params[:amount].to_f)
 
@@ -77,6 +80,8 @@ class Api::BillsController < ApplicationController
     bill_paid_info = current_user.bill_paid
 
     Bill.where(id: bill_paid_info).update_all(paid: true)
+
+    debugger
 
     render json: ["COMPLETE"]
 
@@ -127,10 +132,10 @@ class Api::BillsController < ApplicationController
       new_bill = Bill.create(amount: billsplit[2],
                             description:"Overpayment",
                             bill_date: Time.now.strftime("%Y/%m/%d").gsub(/\//,'-'),
-                            author_id: bill_params[:settleFrom],
+                            author_id: bill_params[:settleTo],
                             split: 2
                             )
-      Billsplit.create(bill_id: new_bill.id, recipient_id: bill_params[:settleTo], split_amount: billsplit[2])
+      Billsplit.create(bill_id: new_bill.id, recipient_id: bill_params[:settleFrom], split_amount: billsplit[2])
     end
 
   end
