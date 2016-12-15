@@ -1,6 +1,7 @@
 import React from 'react';
 import FriendsContainer from '../friends/friends_container.jsx';
 import BillFormContainer from '../bill/bill_form_container.jsx';
+import SettleFormContainer from '../settle/settle_form_container.jsx';
 import { isEmpty, values } from 'lodash';
 
 class Dashboard extends React.Component {
@@ -9,6 +10,7 @@ class Dashboard extends React.Component {
     super(props);
     this.state = { friendModalOpen: false,
                    billModalOpen: false,
+                   settleModalOpen: false,
                    balance: 0,
                    youOweAmount: 0,
                    youAreOwedAmount: 0
@@ -19,6 +21,8 @@ class Dashboard extends React.Component {
     this.closeFriendModal = this.closeFriendModal.bind(this);
     this.openBillModal = this.openBillModal.bind(this);
     this.closeBillModal = this.closeBillModal.bind(this);
+    this.openSettleModal = this.openSettleModal.bind(this);
+    this.closeSettleModal = this.closeSettleModal.bind(this);
     this.updatePaymentState = this.updatePaymentState.bind(this);
   }
 
@@ -40,6 +44,14 @@ class Dashboard extends React.Component {
 
   closeBillModal() {
     this.setState({billModalOpen: false});
+  }
+
+  openSettleModal() {
+    this.setState({settleModalOpen: true});
+  }
+
+  closeSettleModal() {
+    this.setState({settleModalOpen: false});
   }
 
   componentWillMount() {
@@ -122,6 +134,8 @@ class Dashboard extends React.Component {
 
           <div className="dashboard-center">
 
+            <SettleFormContainer closeModal={this.closeSettleModal} isModalOpen={this.state.settleModalOpen}/>
+
             <section className="dashboard-top-section">
               <section className="dashboard-top">
 
@@ -130,7 +144,7 @@ class Dashboard extends React.Component {
                 <ul className="dashboard-button-list">
                   <li><button onClick={this.openFriendModal}>Add Friend</button></li>
                   <li><button onClick={this.openBillModal}>Create Bill</button></li>
-                  <li><button>Settle Up</button></li>
+                  <li><button onClick={this.openSettleModal}>Settle Up</button></li>
                 </ul>
 
               </section>
