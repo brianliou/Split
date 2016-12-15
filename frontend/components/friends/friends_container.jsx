@@ -1,5 +1,5 @@
 import Friends from './friends.jsx';
-import { addFriend, getFriends, searchFriends, clearSearch } from '../../actions/friendship_actions.js';
+import { addFriend, getFriends, searchFriends, clearSearch, searchUsers } from '../../actions/friendship_actions.js';
 import { connect } from 'react-redux';
 import { selectAllFriends } from '../../reducers/selectors.js';
 
@@ -16,7 +16,8 @@ const mapDispatchToProps = dispatch => {
     processFriendForm: (user) => dispatch(addFriend(user)),
     fetchFriends: () => dispatch(getFriends()),
     searchFriends: (query) => dispatch(searchFriends(query)),
-    clearSearch: () => dispatch(clearSearch())
+    clearSearch: () => dispatch(clearSearch()),
+    searchUsers: (query) => dispatch(searchUsers(query))
   };
 };
 

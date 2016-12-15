@@ -38,6 +38,16 @@ class Api::UsersController < ApplicationController
     render :friends
   end
 
+  def searchUsers
+    if params[:query].present?
+      @friends = User.where('username ~ ? OR username ~ ? OR username ~ ?', params[:query].upcase, params[:query].downcase, params[:query].capitalize)
+    else
+      @friends = User.none
+    end
+
+    render :friends
+  end
+
   def searchFriends
 
     # Need to change this to be 2 cases:

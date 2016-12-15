@@ -137,7 +137,6 @@ class BillForm extends React.Component {
     let formContent;
     formContent = (
       <div>
-        <h1>Bill Form Component</h1>
 
         <Modal isOpen={this.props.isModalOpen} contentLabel="Modal" className="friend-modal group" overlayClassName="modal-overlay">
           <h1>Create a bill <div onClick={this.closeModalAction}>x</div></h1>
@@ -199,7 +198,6 @@ class BillForm extends React.Component {
 
     return (
       <div>
-        <h1>Bill Form here</h1>
         {formContent}
       </div>
     );

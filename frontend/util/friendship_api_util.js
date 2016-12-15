@@ -30,3 +30,11 @@ export const searchFriends = (query) => {
     data: { query }
   });
 };
+
+export const searchUsers = (query) => {
+  return $.ajax({
+    url: 'api/users/searchUsers',
+    method: 'GET',
+    data: {query}
+  });
+};

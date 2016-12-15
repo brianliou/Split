@@ -8,6 +8,7 @@ Rails.application.routes.draw do
         post 'addFriend'
         get 'showFriends'
         get 'searchFriends'
+        get 'searchUsers'
       end
     end
     resource :session, only: [:create, :destroy]

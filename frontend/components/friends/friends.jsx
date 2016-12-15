@@ -41,7 +41,7 @@ class Friends extends React.Component {
     return (
       event => {
         this.setState({ [input_type]: event.target.value });
-        this.props.searchFriends(event.target.value).then(users => { console.log("success");});
+        this.props.searchUsers(event.target.value).then(users => { console.log("success");});
       }
     );
 

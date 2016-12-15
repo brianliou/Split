@@ -2,6 +2,8 @@
 .header-background-dashboard {
   background-color: #5bc5a7;
   overflow:hidden;
+  padding-top: 5px;
+  padding-bottom: 5px;
 }
 
 .header-dashboard {
@@ -61,6 +63,8 @@
 .friends-list {
   padding: 15px;
   list-style: none;
+  color: #999;
+  font-family: 'Helvetica Neue';
 
 }
 
@@ -165,6 +169,20 @@
   border-bottom: 1px solid #ddd;
   color: #999;
   text-align: center;
+}
+
+.amount-owe {
+  color: #ff652f;
+}
+
+.amount-owed {
+  color: #5bc5a7;
+
+}
+
+.negative {
+  color: red;
+
 }
 
 .dashboard-block {

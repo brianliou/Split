@@ -1,4 +1,4 @@
-import { RECEIVE_FRIEND, RECEIVE_ALL_FRIENDS, RECEIVE_ERRORS, RECEIVE_SEARCHED_FRIENDS, CLEAR_SEARCH } from '../actions/friendship_actions.js';
+import { RECEIVE_FRIEND, RECEIVE_SEARCHED_USERS, RECEIVE_ALL_FRIENDS, RECEIVE_ERRORS, RECEIVE_SEARCHED_FRIENDS, CLEAR_SEARCH } from '../actions/friendship_actions.js';
 import merge from 'lodash/merge';
 
 
@@ -44,6 +44,24 @@ const friendshipReducer = (state = initialState, action) => {
       }
 
       return finalState;
+    case RECEIVE_SEARCHED_USERS:
+      let keysTwo = Object.keys(action.users);
+      let tempStateThree = {};
+      let finalStateTwo;
+      keysTwo.forEach((key) => {
+        tempStateThree[action.users[key].id] = action.users[key];
+      });
+
+      if ('userResult' in newState) {
+        newState.userResult = tempStateThree;
+        finalStateTwo = newState;
+      } else {
+        const myState = merge({}, { userResult: tempStateThree }, newState);
+        finalStateTwo = myState;
+      }
+
+      return finalStateTwo;
+
 
     case CLEAR_SEARCH:
       newState.userResult = [];

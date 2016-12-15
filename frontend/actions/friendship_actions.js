@@ -6,6 +6,7 @@ export const RECEIVE_ALL_FRIENDS = "RECEIVE_ALL_FRIENDS";
 export const RECEIVE_ERRORS = "RECEIVE_ERRORS";
 export const RECEIVE_SEARCHED_FRIENDS = "RECEIVE_SEARCHED_FRIENDS";
 export const CLEAR_SEARCH = "CLEAR_SEARCH";
+export const RECEIVE_SEARCHED_USERS = "RECEIVE_SEARCHED_USERS";
 
 
 export const receiveFriend = friend => {
@@ -37,6 +38,15 @@ export const receiveSearchedFriends = friends => {
   };
 };
 
+export const receiveSearchedUsers = users => {
+  return {
+    type: RECEIVE_SEARCHED_USERS,
+    users: users
+  };
+};
+
+
+
 export const clearSearch = () => {
   return {
     type: CLEAR_SEARCH
@@ -66,6 +76,14 @@ export const searchFriends = (query) => {
   return (dispatch) => {
     return util.searchFriends(query).then(
       (friends) => dispatch(receiveSearchedFriends(friends))
+    );
+  };
+};
+
+export const searchUsers = (query) => {
+  return (dispatch) => {
+    return util.searchUsers(query).then(
+      (users) => dispatch(receiveSearchedUsers(users))
     );
   };
 };

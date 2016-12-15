@@ -146,14 +146,14 @@ class Dashboard extends React.Component {
                   <div className="dashboard-block-border">
 
                     <div className="title">You Owe</div>
-                    <div className="amount">${this.state.youOweAmount.toFixed(2)}</div>
+                    <div className="amount-owe">${this.state.youOweAmount.toFixed(2)}</div>
                   </div>
 
                 </div>
 
                 <div className="dashboard-block">
                   <div className="title">You Are Owed</div>
-                  <div className="amount">${this.state.youAreOwedAmount.toFixed(2)}</div>
+                  <div className="amount-owed">${this.state.youAreOwedAmount.toFixed(2)}</div>
 
                 </div>
               </section>
