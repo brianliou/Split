@@ -9,6 +9,7 @@ class SettleForm extends React.Component {
       settleFrom:"",
       settleTo:"",
       amount: 0,
+      whichSearch:""
     };
 
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -30,6 +31,7 @@ class SettleForm extends React.Component {
     return (
       event => {
         this.setState({ [input_type]: event.target.value });
+        this.setState({ whichSearch: input_type});
         this.props.searchFriends(event.target.value).then(users => { console.log("success");});
       }
     );
@@ -66,7 +68,7 @@ class SettleForm extends React.Component {
     );
 
   }
-  
+
   // return the id of the user
   findId(username) {
 
@@ -86,6 +88,7 @@ class SettleForm extends React.Component {
   chooseSettleTo(e) {
     e.preventDefault();
     const username = e.currentTarget.textContent.replace(/\s/g, '');
+
     this.setState({settleTo: username});
 
     this.props.clearSearch();
@@ -94,11 +97,11 @@ class SettleForm extends React.Component {
 
   render() {
 
-    const settleFromSearchList = this.props.search.map((el, idx) => {
+
+    let settleFromSearchList = this.props.search.map((el, idx) => {
         return <li key={idx} onClick={this.chooseSettleFrom}> {el.username} </li>;
       });
 
-    // debugger
 
     if(settleFromSearchList.length > 0) {
       settleFromSearchList.unshift(
@@ -107,9 +110,7 @@ class SettleForm extends React.Component {
     }
 
 
-    // debugger
-
-    const settleToSearchList = this.props.search.map((el, idx) => {
+    let settleToSearchList = this.props.search.map((el, idx) => {
         return <li key={idx} onClick={this.chooseSettleTo}> {el.username} </li>;
       });
 
@@ -119,7 +120,13 @@ class SettleForm extends React.Component {
       )
     }
 
+    if(this.state.whichSearch === 'settleFrom') {
+      settleToSearchList = [];
+    } else {
+      settleFromSearchList = [];
+    }
 
+    debugger
 
     let formContent;
     formContent = (
