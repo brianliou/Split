@@ -62,12 +62,11 @@ class Api::BillsController < ApplicationController
 
     paid_and_other_list = find_paid_splits(new_billsplit_info)
 
-    debugger
-
     # paid_other_list[0] will either be a single array or and array of arrays
     if paid_and_other_list[0][0].kind_of?(Array)
       paid_billsplit_ids = paid_and_other_list[0].collect { |idx| idx[0] }
     else
+      # In the case of paid_and_other_list[0] being an empty array
       if paid_and_other_list[0].first == nil
         paid_billsplit_ids = []
       else
@@ -126,15 +125,11 @@ class Api::BillsController < ApplicationController
 
       paid_splits = array.slice(0, counter)
 
-      debugger
-
       if array.length > counter
         paid_splits.push(array[array.length - 1])
       else
         paid_splits.push([])
       end
-
-      debugger
 
       paid_splits
     end

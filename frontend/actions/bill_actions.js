@@ -1,16 +1,8 @@
 import * as util from '../util/bill_form_api_util.js';
 
-// export const RECEIVE_BILL = "RECEIVE_BILL";
 export const RECEIVE_ERRORS = "RECEIVE_ERRORS";
 export const RECEIVE_BILLS = "RECEIVE_BILLS";
-// export const RECEIVE_BILL_SETTLE = "RECEIVE_BILL_SETTLE";
 
-// export const receiveBill = bill => {
-//   return {
-//     type: RECEIVE_BILL,
-//     bill: bill
-//   };
-// };
 
 export const receiveErrors = errors => {
   return {
@@ -25,13 +17,6 @@ export const receiveBills = bills => {
     bills: bills
   };
 };
-
-// export const receiveBillSettle = (bills) => {
-//   return {
-//     type: RECEIVE_BILL_SETTLE,
-//     bills: bills
-//   }
-// }
 
 
 export const createBill = (bill) => {

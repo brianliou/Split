@@ -137,7 +137,7 @@ class BillForm extends React.Component {
     formContent = (
       <div>
 
-        <Modal isOpen={this.props.isModalOpen} contentLabel="Modal" className="friend-modal group" overlayClassName="modal-overlay">
+        <Modal isOpen={this.props.isModalOpen} contentLabel="Modal" className="bill-modal group" overlayClassName="modal-overlay">
           <h1>Create a bill <div onClick={this.closeModalAction}>x</div></h1>
           <fieldset className="add-friend-form">
             <form onSubmit={this.handleSubmit}>

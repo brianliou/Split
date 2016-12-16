@@ -89,27 +89,31 @@ class Friends extends React.Component {
           <h1>Add a Friend <div onClick={this.closeModalAction}>x</div></h1>
           <fieldset className="add-friend-form">
             <form onSubmit={this.handleSubmit}>
-              <input
-                type="text"
-                value={this.state.username}
-                placeholder="Username"
-                onChange = {this.updateAndQuery('username')}
-              />
+              <div className="friend-input">
 
-            <br/>
+                <input
+                  type="text"
+                  value={this.state.username}
+                  placeholder="Type a username"
+                  onChange = {this.updateAndQuery('username')}
+                />
 
-            <ul>
-              {searchList}
-            </ul>
+                <br/>
 
-            <input type="submit" value="Add Friend"></input>
+                <ul className="add-friend-search">
+                  {searchList}
+                </ul>
+              </div>
+
+              <div className="add-friend-button-group">
+                <div className="add-friend-button">
+                  <input type="submit" value="Add Friend"></input>
+                </div>
+                <button className="close-modal-button" onClick={this.closeModalAction}>Close</button>
+              </div>
 
             </form>
           </fieldset>
-
-
-
-          <button onClick={this.closeModalAction}>close modal</button>
 
         </Modal>
       </div>
