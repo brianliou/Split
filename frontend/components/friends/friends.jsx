@@ -12,10 +12,9 @@ class Friends extends React.Component {
     };
 
     this.handleSubmit = this.handleSubmit.bind(this);
-    this.openModal = this.openModal.bind(this);
     this.closeModalAction = this.closeModalAction.bind(this);
+    this.openModalAction = this.openModalAction.bind(this);
     this.chooseUser = this.chooseUser.bind(this);
-    this.openFriendModal = this.openFriendModal.bind(this);
     // this.updateAndQuery = this.updateAndQuery.bind(this);
     // do not need to bind updateAndQuery because you immediately return and use a
     // fat arrow function which binds this to the context it was called in
@@ -29,12 +28,13 @@ class Friends extends React.Component {
    this.props.fetchFriends();
   }
 
-  openModal() {
-    this.setState({open: true});
-  }
+  // openModal() {
+  //   this.setState({open: true});
+  // }
 
-  openFriendModal() {
-    this.setState({friendModalOpen: true});
+
+  openModalAction() {
+    this.props.openModal();
   }
 
   closeModalAction () {
@@ -134,7 +134,7 @@ class Friends extends React.Component {
         <div className="friends-list">
           <div className="friends-box">
             <h1>Friends</h1>
-            <div onClick={this.openFriendModal}>+Add</div>
+            <div onClick={this.openModalAction}>+Add</div>
           </div>
           <ul>
             {listContent}

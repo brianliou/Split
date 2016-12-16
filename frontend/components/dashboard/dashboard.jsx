@@ -133,7 +133,7 @@ class Dashboard extends React.Component {
 
           <div className="dashboard-left">
 
-            <FriendsContainer closeModal={this.closeFriendModal} isModalOpen={this.state.friendModalOpen}/>
+            <FriendsContainer closeModal={this.closeFriendModal} isModalOpen={this.state.friendModalOpen} openModal ={this.openFriendModal}/>
 
           </div>
 
