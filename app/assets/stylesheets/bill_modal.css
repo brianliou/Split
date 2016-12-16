@@ -30,20 +30,36 @@
 }
 
 .bill-input {
-  border-bottom: 1px solid #eee;
   position: relative;
+  padding-top: 15px;
+  padding-bottom: 30px;
 }
 
 .bill-friend-search {
+  border-top: 1px solid #eee;
   position: absolute;
   z-index: 10;
   background: white;
   width: 100%;
-  top: 25px;
+  top: 44px;
 }
 
 .bill-user-input li {
   float: left;
+  font-size: 14px;
+}
+
+.bill-user-input > div {
+  float:left;
+  padding-left: 10px;
+  font-size: 14px;
+  padding-right:5px;
+}
+
+.bill-input li input {
+  float: left;
+  padding-left: 5px;
+  width:15px;
 }
 
 .bill-friend-search li {
@@ -54,4 +70,31 @@
 
 .bill-friend-search li:hover {
    background-color: rgb(237,237,237);
+}
+
+.selected {
+  border: 1px solid #bbb;
+  -webkit-border-radius: 15px;
+  background-color: #f6f6f6;
+  padding: 0px 8px;
+  margin-right: 3px;
+}
+
+.bill-info {
+  text-align: center;
+  margin-top: 15px;
+}
+
+.bill-info input {
+  display: block;
+  margin: 0 auto;
+  border-bottom: 1px solid #eee;
+  padding-top: 20px;
+  text-align: center;
+
+}
+
+.bill-button-group {
+  margin:0 auto;
+  text-align: center;
 }

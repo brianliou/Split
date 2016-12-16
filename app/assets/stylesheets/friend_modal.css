@@ -119,6 +119,7 @@
   border: 1px solid #ccc;
   width: 90px;
   margin-left: 35px;
+  text-align: center;
 }
 
 .close-modal-button:hover {

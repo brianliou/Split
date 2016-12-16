@@ -18,6 +18,7 @@ class BillForm extends React.Component {
     this.openModal = this.openModal.bind(this);
     this.closeModalAction = this.closeModalAction.bind(this);
     this.chooseUser = this.chooseUser.bind(this);
+    this.removeRecipient = this.removeRecipient.bind(this);
   }
 
 
@@ -114,6 +115,21 @@ class BillForm extends React.Component {
 
   }
 
+  removeRecipient(e) {
+    e.preventDefault();
+
+    const recipients = this.state.recipients.slice();
+
+    const user = e.currentTarget.textContent.replace(/\s/g, '');
+
+    const index = recipients.indexOf(user);
+
+    recipients.splice(index, 1);
+
+    this.setState({recipients: recipients});
+
+  }
+
   // keyPress(e) {
   // }
 
@@ -130,7 +146,7 @@ class BillForm extends React.Component {
       });
 
     const selectedUsers = this.state.recipients.map((el, idx) => {
-      return <li key={idx}>{el}</li>;
+      return <li key={idx} className="selected" onClick={this.removeRecipient}>{el}</li>;
     });
 
     let formContent;
@@ -144,12 +160,13 @@ class BillForm extends React.Component {
               <div className="bill-input">
 
                 <ul className="bill-user-input">
+                  <div>With you and:</div>
                   {selectedUsers}
                   <li>
                     <input
                       type="text"
                       value={this.state.username}
-                      placeholder="Enter People"
+                      placeholder=""
                       onChange = {this.updateAndQuery('username')}
                       />
                   </li>
@@ -188,7 +205,7 @@ class BillForm extends React.Component {
               <div className="add-friend-button">
                 <input type="submit" value="Save"></input>
               </div>
-              <button onClick={this.closeModalAction}>Close</button>
+              <button className="close-modal-button" onClick={this.closeModalAction}>Close</button>
             </div>
 
 
