@@ -45,7 +45,7 @@ export const login = (user) => {
 export const logout = () => {
   return (dispatch) => {
     return util.logout().then(
-      () => dispatch(receiveCurrentUser(null)),
+      () => dispatch(receiveCurrentUser("")),
       (err) => dispatch(receiveErrors(err.responseJSON))
     );
   };
