@@ -62,6 +62,7 @@
 }
 .nav-button-signup:hover {
   background-color: rgb(255, 79, 35);
+  cursor:pointer;
 }
 
 .header-list li {

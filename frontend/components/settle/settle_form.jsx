@@ -120,13 +120,12 @@ class SettleForm extends React.Component {
 
   render() {
 
-
     let settleFromSearchList = this.props.search.map((el, idx) => {
         return <li key={idx} onClick={this.chooseSettleFrom}> {el.username} </li>;
       });
 
 
-    if(settleFromSearchList.length >= 0) {
+    if(settleFromSearchList.length > 0) {
       settleFromSearchList.unshift(
         <li key={Object.keys(this.props.search).length} onClick={this.chooseSettleFrom}>{this.props.currentUser.username}</li>
       )
@@ -137,7 +136,7 @@ class SettleForm extends React.Component {
         return <li key={idx} onClick={this.chooseSettleTo}> {el.username} </li>;
       });
 
-    if(settleToSearchList.length >= 0) {
+    if(settleToSearchList.length > 0) {
       settleToSearchList.unshift(
         <li key={Object.keys(this.props.search).length} onClick={this.chooseSettleTo}>{this.props.currentUser.username}</li>
       )
