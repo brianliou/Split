@@ -6,7 +6,7 @@ class Friends extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      open: false,
+      friendModalOpen: false,
       username:"",
       email:""
     };
@@ -15,6 +15,7 @@ class Friends extends React.Component {
     this.openModal = this.openModal.bind(this);
     this.closeModalAction = this.closeModalAction.bind(this);
     this.chooseUser = this.chooseUser.bind(this);
+    this.openFriendModal = this.openFriendModal.bind(this);
     // this.updateAndQuery = this.updateAndQuery.bind(this);
     // do not need to bind updateAndQuery because you immediately return and use a
     // fat arrow function which binds this to the context it was called in
@@ -30,6 +31,10 @@ class Friends extends React.Component {
 
   openModal() {
     this.setState({open: true});
+  }
+
+  openFriendModal() {
+    this.setState({friendModalOpen: true});
   }
 
   closeModalAction () {
@@ -59,7 +64,7 @@ class Friends extends React.Component {
     this.props.processFriendForm(user).then(
       () => {
         // Put like a friend added box or something?
-        this.closeModal();
+        this.closeModalAction();
       }, err => {
         // this.closeModal();
         this.clearState();

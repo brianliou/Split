@@ -22,10 +22,6 @@
   float: right;
 }
 
-.header-list-center {
-  vertical-align:middle;
-}
-
 .header-list-dashboard li {
   float:left;
   list-style: none;
@@ -45,6 +41,11 @@
   margin-right: 10px;
   font-family: 'Helvetica Neue';
 }
+
+.nav-button-logout:hover {
+  cursor: pointer;
+}
+
 .dashboard-center-container {
   width: 960px;
   min-width: 980px;
