@@ -141,55 +141,62 @@ class BillForm extends React.Component {
           <h1>Create a bill <div onClick={this.closeModalAction}>x</div></h1>
           <fieldset className="add-friend-form">
             <form onSubmit={this.handleSubmit}>
+              <div className="bill-input">
 
-              <ul>
-                {searchList}
-                {selectedUsers}
-                <li>
-                  <input
-                    type="text"
-                    value={this.state.username}
-                    placeholder="Enter People"
-                    onChange = {this.updateAndQuery('username')}
-                    />
-                </li>
-              </ul>
+                <ul className="bill-user-input">
+                  {selectedUsers}
+                  <li>
+                    <input
+                      type="text"
+                      value={this.state.username}
+                      placeholder="Enter People"
+                      onChange = {this.updateAndQuery('username')}
+                      />
+                  </li>
+                </ul>
 
-              <input
-                type="text"
-                value={this.state.description}
-                placeholder="Enter Description"
-                onChange = {this.update('description')}
-              />
+                <ul className="bill-friend-search">
+                  {searchList}
+                </ul>
+              </div>
 
-              <input
-                type="number"
-                value={this.state.amount}
-                placeholder="Enter Amount"
-                onChange = {this.update('amount')}
-              />
+              <div className="bill-info">
+                <input
+                  type="text"
+                  value={this.state.description}
+                  placeholder="Enter Description"
+                  onChange = {this.update('description')}
+                />
 
-              <input
-                type="date"
-                value={this.state.date}
-                onChange = {this.update('date')}
-              />
+                <input
+                  type="number"
+                  value={this.state.amount}
+                  placeholder="Enter Amount"
+                  onChange = {this.update('amount')}
+                />
+
+                <input
+                  type="date"
+                  value={this.state.date}
+                  onChange = {this.update('date')}
+                />
+              </div>
 
             <br/>
 
-            <input type="submit" value="Save"></input>
+            <div className="bill-button-group">
+              <div className="add-friend-button">
+                <input type="submit" value="Save"></input>
+              </div>
+              <button onClick={this.closeModalAction}>Close</button>
+            </div>
+
 
             </form>
           </fieldset>
 
           <br/>
 
-          <ul>
-            {searchList}
-          </ul>
-
-
-          <button onClick={this.closeModalAction}>close modal</button>
 
         </Modal>
       </div>
