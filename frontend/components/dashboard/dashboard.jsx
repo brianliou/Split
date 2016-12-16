@@ -119,11 +119,13 @@ class Dashboard extends React.Component {
 
           <header className="header-dashboard">
             <h1 className="header-logo-dashboard">SPLIT</h1>
-              <ul className="header-list-dashboard">
-                <li className="nav-button-dashboard" onClick={this.handleClick}>Log Out</li>
-                <li><div className="profile-pic-header"></div></li>
-                <li>{this.props.currentUser.username}</li>
-              </ul>
+              <div className="header-list-center">
+                <ul className="header-list-dashboard">
+                  <li className="nav-button-logout" onClick={this.handleClick}>Log Out</li>
+                  <li><div className="profile-pic-header"></div></li>
+                  <li>{this.props.currentUser.username}</li>
+                </ul>
+              </div>
           </header>
 
         </div>
