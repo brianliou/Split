@@ -74,7 +74,6 @@ class Api::BillsController < ApplicationController
       end
     end
 
-
     if paid_billsplit_ids.length > 0
       Billsplit.where(id: paid_billsplit_ids).update_all(recipient_paid: true, split_amount: 0)
     end
