@@ -60,7 +60,6 @@ class Api::BillsController < ApplicationController
     new_billsplit_info = current_user.settle_up(bill_params[:settleFrom].to_i, bill_params[:settleTo].to_i, bill_params[:amount].to_f)
     # Helper method to find all of the paid ones
 
-    debugger
     paid_and_other_list = find_paid_splits(new_billsplit_info)
 
     debugger
@@ -69,10 +68,13 @@ class Api::BillsController < ApplicationController
     if paid_and_other_list[0][0].kind_of?(Array)
       paid_billsplit_ids = paid_and_other_list[0].collect { |idx| idx[0] }
     else
-      paid_billsplit_ids = [paid_and_other_list[0].first]
+      if paid_and_other_list[0].first == nil
+        paid_billsplit_ids = []
+      else
+        paid_billsplit_ids = [paid_and_other_list[0].first]
+      end
     end
 
-    debugger
 
     if paid_billsplit_ids.length > 0
       Billsplit.where(id: paid_billsplit_ids).update_all(recipient_paid: true, split_amount: 0)
@@ -109,9 +111,7 @@ class Api::BillsController < ApplicationController
     # [[5, true, 0], [8, true, 0]]
     # [[5, true, 0], [8, true, 0], [8, true, 0], ["new", false, 27.78]]
     # [["new", false, 27.78]] => [ [], ["new", false, 27.78]]
-
-    # paid_splits = []
-    # special_array = []
+    # [[16, false, 20.22]]
 
     counter = 0
     array.each do |split|
@@ -120,48 +120,25 @@ class Api::BillsController < ApplicationController
       end
     end
 
-    debugger
-
-    paid_splits = array.slice(0, counter)
-    array_length = array.length
-
-    debugger
-
-    if array_length > counter
-      paid_splits.push(array[array_length - 1])
+    if counter == 0
+      return array.unshift([])
     else
-      paid_splits.push([])
+
+      paid_splits = array.slice(0, counter)
+
+      debugger
+
+      if array.length > counter
+        paid_splits.push(array[array.length - 1])
+      else
+        paid_splits.push([])
+      end
+
+      debugger
+
+      paid_splits
     end
 
-
-
-    # debugger
-    #
-    # if counter == 0
-    #   new_array.push(paid_splits)
-    #   new_array.push(array[array_length - 1])
-    # elsif counter == 1
-    #   if counter == array_length
-    #     new_array.push(paid_splits)
-    #     new_array.push([])
-    #   end
-    # elsif counter > 1
-    #   last = array[array_length - 1]
-    #   if last.kind_of?(Array)
-    #     special_array = last
-    #   else
-    #     special_array = []
-    #   end
-    #   new_array.push(paid_splits)
-    #   new_array.push(special_array)
-    # end
-      # check the kind_of? for the last element in the array,
-      # if its a number set special_array to []
-      # if its an array, set special array to it
-
-    debugger
-
-    paid_splits
 
   end
 

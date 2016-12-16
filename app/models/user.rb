@@ -74,6 +74,7 @@ class User < ActiveRecord::Base
     you_owe_hash = you_owe(current_user_id)
     you_are_owed_hash = you_are_owed(current_user_id)
 
+
     # Find all the uniq keys of the two hashes, then sum the you_are_owed - you_owe, if value is positive, you are owed that amount, if value is negative you owe that amount
     user_payments = you_owe_hash.keys + you_are_owed_hash.keys
     user_payments = user_payments.uniq
@@ -98,7 +99,9 @@ class User < ActiveRecord::Base
         end
       end
     end
+
     payments
+
   end
 
   ###########
@@ -119,7 +122,11 @@ class User < ActiveRecord::Base
       end
     end
 
+
     you_owe_list
+
+
+
   end
 
 
@@ -169,9 +176,10 @@ class User < ActiveRecord::Base
     # You are looking for all of the billsplits where the recipient id is payer (settle_from) because those are the ones you want to now fulfill
     billsplits = Billsplit.joins(:bill).where('author_id = ?', settle_to).where('recipient_id = ?', settle_from).where('recipient_paid = false')
 
+
+    # this actually needs to be calculated from net payments
     bill_settle_list = []
 
-    # need to add the case for
 
     billsplits.each do |split|
       temp_bill = []
@@ -208,6 +216,9 @@ class User < ActiveRecord::Base
       temp_bill.push(amount.round(2))
       bill_settle_list.push(temp_bill)
     end
+
+
+    debugger
 
     bill_settle_list
 
