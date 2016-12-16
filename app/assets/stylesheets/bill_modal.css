@@ -28,6 +28,10 @@
   margin-right: 10px;
 
 }
+.bill-modal h1 > div:hover {
+  cursor:pointer;
+
+}
 
 .bill-input {
   position: relative;

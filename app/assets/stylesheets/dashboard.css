@@ -139,6 +139,14 @@
   margin-left:5px;
 }
 
+.dashboard-button-list li:hover {
+  cursor:pointer;
+}
+
+button:hover {
+  cursor: pointer;
+}
+
 .dashboard-button-list li:nth-child(2) {
   background: #ff652f;
   color: #fff;
@@ -151,6 +159,15 @@
   border: 1px solid #ccc;
 }
 
+.dashboard-button-list li:nth-child(2):hover {
+  background: #ff5216;
+
+}
+
+.dashboard-button-list li:nth-child(2n+1):hover {
+  background: #48be9d;
+
+}
 
 
 .dashboard-button-list li:nth-child(2n+1) {
