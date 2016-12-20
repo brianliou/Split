@@ -1,0 +1,58 @@
+.settle-modal {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 350px;
+  background: #fff;
+  border: 1px solid #999;
+  overflow: auto;
+  border-radius: 5px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+  font-family:'Helvetica Neue';
+  height: 300px;
+
+}
+
+.settle-modal h1 {
+  display: block;
+  background-color: rgb(87, 198, 168);
+  color: white;
+  font-size: 20px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  padding-left: 10px;
+}
+
+.settle-modal h1 > div {
+  float:right;
+  margin-right: 10px;
+}
+
+.settle-modal h1 > div:hover {
+  cursor: pointer;
+
+}
+
+
+.settle-info {
+  text-align: center;
+  margin-top: 15px;
+}
+
+.settle-info input {
+  display: block;
+  margin: 0 auto;
+  border-bottom: 1px solid #eee;
+  padding-top: 20px;
+  text-align: center;
+
+}
+
+.main-settle-modal {
+
+}
+
+.side-modal {
+
+}

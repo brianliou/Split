@@ -8,7 +8,7 @@ class SettleForm extends React.Component {
     this.state = {
       settleFrom:"",
       settleTo:"",
-      amount: 0,
+      amount: "",
       whichSearch:""
     };
 
@@ -147,58 +147,63 @@ class SettleForm extends React.Component {
     formContent = (
       <div>
 
-        <Modal isOpen={this.props.isModalOpen} contentLabel="Modal" className="friend-modal group" overlayClassName="modal-overlay">
-          <h1>Settle Up <div onClick={this.closeModalAction}>x</div></h1>
-          <fieldset className="settle-up-form">
-            <form onSubmit={this.handleSubmit}>
+        <Modal isOpen={this.props.isModalOpen} contentLabel="Modal" className="settle-modal group" overlayClassName="modal-overlay">
 
-              <input
-                type="text"
-                value={this.state.settleFrom}
-                placeholder="Enter Payer"
-                onChange = {this.updateAndQuery('settleFrom')}
-              />
+          <div className="main-settle-modal">
+            <h1>Settle Up <div onClick={this.closeModalAction}>x</div></h1>
+            <fieldset className="settle-up-form">
+              <form onSubmit={this.handleSubmit}>
+
+                <div className="settle-info">
+                  <input
+                    type="text"
+                    value={this.state.settleFrom}
+                    placeholder="Enter Payer"
+                    onChange = {this.updateAndQuery('settleFrom')}
+                  />
 
 
-              <input
-                type="text"
-                value={this.state.settleTo}
-                placeholder="Enter Recipient"
-                onChange = {this.updateAndQuery('settleTo')}
-              />
+                  <input
+                    type="text"
+                    value={this.state.settleTo}
+                    placeholder="Enter Recipient"
+                    onChange = {this.updateAndQuery('settleTo')}
+                  />
 
-              <input
-                type="number"
-                value={this.state.amount}
-                placeholder="Enter Amount"
-                onChange = {this.update('amount')}
-              />
+                  <input
+                    type="number"
+                    value={this.state.amount}
+                    placeholder="Enter Amount"
+                    onChange = {this.update('amount')}
+                  />
+                </div>
 
-            <br/>
+              <br/>
 
-            <input type="submit" value="Save"></input>
+                <div className="bill-button-group">
+                  <div className="add-friend-button">
+                    <input type="submit" value="Save"></input>
+                  </div>
+                  <button className="close-modal-button" onClick={this.closeModalAction}>Close</button>
+                </div>
 
-            </form>
-          </fieldset>
-
+              </form>
+            </fieldset>
+          </div>
           <br/>
 
-          {this.state.whichSearch === 'settleFrom' ? (
-            <ul>
-              {settleFromSearchList}
-            </ul>
+          <div className="side-modal">
+            {this.state.whichSearch === 'settleFrom' ? (
+              <ul className="settle-user-list">
+                {settleFromSearchList}
+              </ul>
 
-          ) : (
-            <ul>
-              {settleToSearchList}
-            </ul>
-          )}
-
-
-
-
-
-          <button onClick={this.closeModalAction}>close modal</button>
+            ) : (
+              <ul className="settle-user-list">
+                {settleToSearchList}
+              </ul>
+            )}
+          </div>
 
         </Modal>
       </div>
