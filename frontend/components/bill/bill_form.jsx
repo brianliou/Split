@@ -146,7 +146,7 @@ class BillForm extends React.Component {
       });
 
     const selectedUsers = this.state.recipients.map((el, idx) => {
-      return <li key={idx} className="selected" onClick={this.removeRecipient}>{el}</li>;
+      return <li key={idx} className="selected" onClick={this.removeRecipient}>{el}<div id="close">x</div></li>;
     });
 
     let formContent;
@@ -160,19 +160,23 @@ class BillForm extends React.Component {
               <div className="bill-input">
 
                 <ul className="bill-user-input">
-                  <div>With you and:</div>
-                  {selectedUsers}
-                  <li>
-                    <input
-                      type="text"
-                      value={this.state.username}
-                      placeholder=""
-                      onChange = {this.updateAndQuery('username')}
-                      />
-                  </li>
+                  <div className="bill-search-results">
+                    <div>With you and:</div>
+                      {selectedUsers}
+                      <li>
+                        <input
+                          type="text"
+                          value={this.state.username}
+                          placeholder="Enter People Here"
+                          onChange = {this.updateAndQuery('username')}
+                          />
+                      </li>
+                  </div>
                 </ul>
+              </div>
 
-                <ul className="bill-friend-search">
+              <div className="bill-friend-search">
+                <ul>
                   {searchList}
                 </ul>
               </div>

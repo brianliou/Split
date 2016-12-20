@@ -6,11 +6,9 @@
   width: 350px;
   background: #fff;
   border: 1px solid #999;
-  overflow: auto;
   border-radius: 5px;
   box-shadow: 0 2px 8px rgba(0,0,0,0.3);
   font-family:'Helvetica Neue';
-  height: 300px;
 }
 
 .bill-modal h1 {
@@ -34,23 +32,23 @@
 }
 
 .bill-input {
-  position: relative;
   padding-top: 15px;
-  padding-bottom: 30px;
+  padding-bottom: 15px;
+  overflow: hidden;
 }
 
 .bill-friend-search {
   border-top: 1px solid #eee;
-  position: absolute;
   z-index: 10;
   background: white;
   width: 100%;
-  top: 44px;
+  position:absolute;
 }
 
 .bill-user-input li {
   float: left;
   font-size: 14px;
+  margin-top: 5px;
 }
 
 .bill-user-input > div {
@@ -60,10 +58,30 @@
   padding-right:5px;
 }
 
+.bill-search-results {
+  overflow: hidden;
+  width: 95%;
+  display: block;
+}
+
+
+#close {
+  display: inline-block;
+  padding-left: 5px;
+  vertical-align: text-top;
+  font-size: 14px;
+  color: #aaa;
+  cursor: pointer;
+}
+
+.bill-search-results > div {
+  float:left;
+  margin-top:5px;
+}
+
 .bill-input li input {
   float: left;
   padding-left: 5px;
-  width:15px;
 }
 
 .bill-friend-search li {
@@ -82,7 +100,9 @@
   background-color: #f6f6f6;
   padding: 0px 8px;
   margin-right: 3px;
+  margin-left: 3px;
 }
+
 
 .bill-info {
   text-align: center;
