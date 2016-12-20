@@ -92,6 +92,7 @@
 
 .bill-friend-search li:hover {
    background-color: rgb(237,237,237);
+   cursor:pointer;
 }
 
 .selected {

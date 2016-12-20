@@ -6,7 +6,6 @@
   width: 350px;
   background: #fff;
   border: 1px solid #999;
-  overflow: auto;
   border-radius: 5px;
   box-shadow: 0 2px 8px rgba(0,0,0,0.3);
   font-family:'Helvetica Neue';
@@ -40,8 +39,19 @@
   margin-top: 15px;
 }
 
+
+.settle-payment input:nth-child(-n+3) {
+  display: inline-block;
+  width: 120px;
+}
+.settle-payment > div {
+  display:inline-block;
+  margin-left:10px;
+  margin-right:10px;
+  color: #555;
+}
+
 .settle-info input {
-  display: block;
   margin: 0 auto;
   border-bottom: 1px solid #eee;
   padding-top: 20px;
@@ -49,10 +59,35 @@
 
 }
 
-.main-settle-modal {
+.side-modal {
+  position: absolute;
+  left: 375px;
+  top: 0px;
+  background: #fff;
+  width: 75%;
+  border: 1px solid #999;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+  border-radius: 5px;
+  transition: all .3s ease;
 
 }
 
-.side-modal {
+.settle-button-group {
+  margin: 0 auto;
+  text-align: center;
+  padding-top: 50px;
+}
 
+.settle-user-list li {
+  padding-top:5px;
+  padding-left:5px;
+}
+
+.settle-user-list li:last-child {
+  padding-bottom: 5px;
+}
+
+.settle-user-list li:hover {
+   background-color: rgb(237,237,237);
+   cursor:pointer;
 }

@@ -1,5 +1,6 @@
 import React from 'react';
 import Modal from 'react-modal';
+import { values } from 'lodash';
 
 class SettleForm extends React.Component {
   constructor(props) {
@@ -16,6 +17,7 @@ class SettleForm extends React.Component {
     this.closeModalAction = this.closeModalAction.bind(this);
     this.chooseSettleFrom = this.chooseSettleFrom.bind(this);
     this.chooseSettleTo = this.chooseSettleTo.bind(this);
+    this.handleClick = this.handleClick.bind(this);
   }
 
   componentWillMount() {
@@ -42,12 +44,13 @@ class SettleForm extends React.Component {
     return (
       event => {
         this.setState( {[input_type]: event.target.value });
+        this.setState({whichSearch:""});
       }
     );
   }
 
   clearState() {
-    this.setState({settleFrom:"", settleTo: "", amount:""});
+    this.setState({settleFrom:"", settleTo: "", amount:"", whichSearch:""});
   }
 
   handleSubmit(e) {
@@ -68,6 +71,22 @@ class SettleForm extends React.Component {
 
       }
     );
+
+  }
+
+  // Settle from Click
+
+  handleClick(arg) {
+    event.preventDefault();
+
+    if (arg === "settleFrom") {
+      this.setState({whichSearch: "settleFrom"});
+
+    } else if(arg === "settleTo") {
+      this.setState({whichSearch:"settleTo"});
+    } else {
+      this.setState({whichSearch: ""});
+    }
 
   }
 
@@ -99,7 +118,7 @@ class SettleForm extends React.Component {
       this.setState({settleFrom: username});
     }
 
-    this.props.clearSearch();
+    this.setState({whichSearch:""});
 
   }
 
@@ -114,34 +133,28 @@ class SettleForm extends React.Component {
       this.setState({settleTo: username});
     }
 
-    this.props.clearSearch();
+    this.setState({whichSearch:""});
 
   }
 
   render() {
+    const friendArray = values(this.props.friends);
 
-    let settleFromSearchList = this.props.search.map((el, idx) => {
-        return <li key={idx} onClick={this.chooseSettleFrom}> {el.username} </li>;
-      });
+    const settleFromList = friendArray.map((user, idx) => {
+      return <li key={idx} onClick={this.chooseSettleFrom}>{user.username}</li>;
+    });
 
+    settleFromList.unshift(
+      <li key={Object.keys(this.props.friends).length} onClick={this.chooseSettleFrom}>{this.props.currentUser.username}</li>
+    )
 
-    if(settleFromSearchList.length > 0) {
-      settleFromSearchList.unshift(
-        <li key={Object.keys(this.props.search).length} onClick={this.chooseSettleFrom}>{this.props.currentUser.username}</li>
-      )
-    }
+    const settleToList = friendArray.map((user, idx) => {
+      return <li key={idx} onClick={this.chooseSettleTo}>{user.username}</li>;
+    });
 
-
-    let settleToSearchList = this.props.search.map((el, idx) => {
-        return <li key={idx} onClick={this.chooseSettleTo}> {el.username} </li>;
-      });
-
-    if(settleToSearchList.length > 0) {
-      settleToSearchList.unshift(
-        <li key={Object.keys(this.props.search).length} onClick={this.chooseSettleTo}>{this.props.currentUser.username}</li>
-      )
-    }
-
+    settleToList.unshift(
+      <li key={Object.keys(this.props.friends).length} onClick={this.chooseSettleTo}>{this.props.currentUser.username}</li>
+    )
 
     let formContent;
     formContent = (
@@ -155,32 +168,37 @@ class SettleForm extends React.Component {
               <form onSubmit={this.handleSubmit}>
 
                 <div className="settle-info">
-                  <input
-                    type="text"
-                    value={this.state.settleFrom}
-                    placeholder="Enter Payer"
-                    onChange = {this.updateAndQuery('settleFrom')}
-                  />
+
+                  <div className="settle-payment">
+                    <input
+                      type="text"
+                      value={this.state.settleFrom}
+                      placeholder="Enter Payer"
+                      onClick ={() => this.handleClick("settleFrom")}
+                    />
+
+                    <div>Paid</div>
 
 
-                  <input
-                    type="text"
-                    value={this.state.settleTo}
-                    placeholder="Enter Recipient"
-                    onChange = {this.updateAndQuery('settleTo')}
-                  />
+                    <input
+                      type="text"
+                      value={this.state.settleTo}
+                      placeholder="Enter Recipient"
+                      onClick = {() => this.handleClick("settleTo")}
+                    />
+                </div>
 
                   <input
                     type="number"
                     value={this.state.amount}
-                    placeholder="Enter Amount"
+                    placeholder="$0.00"
                     onChange = {this.update('amount')}
                   />
                 </div>
 
               <br/>
 
-                <div className="bill-button-group">
+                <div className="settle-button-group">
                   <div className="add-friend-button">
                     <input type="submit" value="Save"></input>
                   </div>
@@ -192,18 +210,33 @@ class SettleForm extends React.Component {
           </div>
           <br/>
 
-          <div className="side-modal">
-            {this.state.whichSearch === 'settleFrom' ? (
-              <ul className="settle-user-list">
-                {settleFromSearchList}
-              </ul>
 
-            ) : (
+          {this.state.whichSearch === 'settleFrom' ? (
+            <div className="side-modal">
+              <h1>Choose a Payer</h1>
               <ul className="settle-user-list">
-                {settleToSearchList}
+                {settleFromList}
               </ul>
-            )}
-          </div>
+            </div>
+
+          ) : (
+            <div></div>
+          )}
+
+          {this.state.whichSearch === 'settleTo' ? (
+            <div className="side-modal">
+              <h1>Choose a Recipient</h1>
+              <ul className="settle-user-list">
+                {settleToList}
+              </ul>
+            </div>
+          ) : (
+            <div></div>
+          )}
+
+
+
+
 
         </Modal>
       </div>
