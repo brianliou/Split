@@ -94,8 +94,8 @@ class User < ActiveRecord::Base
           payments["you_are_owed"][user] = amount
 
         elsif amount < 0
-          payments["you_owe"][user] = -amount
           # Goes to you owe
+          payments["you_owe"][user] = -amount
         end
       end
     end
@@ -179,7 +179,21 @@ class User < ActiveRecord::Base
 
     # this actually needs to be calculated from net payments
     bill_settle_list = []
+    new_bill_settle_list = {"paid" => [], "unpaid" => {}, "new" => 0}
+    
+    # paid is an array of billsplit Ids that are paid
+    # unpaid is a hash where key = bs ID, value = amount
+    # new is just a k,v pair where v is the amount of the new bill in the opposite direction
 
+
+    billsplits.each do |split|
+      amount -= split.split_amount
+      if amount >= 0
+
+
+      # Hash with an array of hashes
+
+    debugger
 
     billsplits.each do |split|
       temp_bill = []

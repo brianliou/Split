@@ -8,6 +8,7 @@
 #  recipient_paid :boolean          default(FALSE)
 #  created_at     :datetime
 #  updated_at     :datetime
+#  split_amount   :float            not null
 #
 
 class Billsplit < ActiveRecord::Base

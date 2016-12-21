@@ -83,11 +83,11 @@ bs_2 = Billsplit.create(bill_id: bill_two.id, recipient_id: sam.id, split_amount
 bs_3 = Billsplit.create(bill_id: bill_two.id, recipient_id: drew.id, split_amount: 10)
 
 # Matt and Sam and Drew
-bs_4 = Billsplit.create(bill_id: bill_three.id, recipient_id: sam.id, split_amount: 11.11)
+bs_4 = Billsplit.create(bill_id: bill_three.id, recipient_id: sam.id, split_amount: 11.11) # HERE
 bs_5 = Billsplit.create(bill_id: bill_three.id, recipient_id: drew.id, split_amount: 11.11)
 
 # Matt and Brian and Sam and Drew
-bs_6 = Billsplit.create(bill_id: bill_four.id, recipient_id: brian.id, split_amount: 11.11)
+bs_6 = Billsplit.create(bill_id: bill_four.id, recipient_id: brian.id, split_amount: 11.11) #HERE
 bs_7 = Billsplit.create(bill_id: bill_four.id, recipient_id: sam.id, split_amount: 11.11)
 bs_8 = Billsplit.create(bill_id: bill_four.id, recipient_id: drew.id, split_amount: 11.11)
 
@@ -96,8 +96,8 @@ bs_9 = Billsplit.create(bill_id: bill_five.id, recipient_paid: true, recipient_i
 bs_10 = Billsplit.create(bill_id: bill_five.id, recipient_paid: true, recipient_id: sam.id, split_amount: 7)
 
 # Matt and Brian and Sam PARTIAL-PAID
-bs_11 = Billsplit.create(bill_id: bill_six.id, recipient_paid: true, recipient_id: matt.id, split_amount: 10)
-bs_12 = Billsplit.create(bill_id: bill_six.id, recipient_paid: false, recipient_id: sam.id, split_amount: 10)
+bs_11 = Billsplit.create(bill_id: bill_six.id, recipient_paid: true, recipient_id: brian.id, split_amount: 10)
+bs_12 = Billsplit.create(bill_id: bill_six.id, recipient_paid: false, recipient_id: sam.id, split_amount: 10) #Here
 
 # Brian and Tristan
 bs_13 = Billsplit.create(bill_id: bill_seven.id, recipient_paid: false, recipient_id: tristan.id, split_amount: 22.22)
