@@ -1,10 +1,10 @@
 # Split
 
-Split is a clone of Splitwise, a bill splitting application. Split was made with Ruby on Rails and React.js.
+Split is a clone of Splitwise, a bill splitting application. Split was made with Ruby on Rails, React.js, and a Postgres database.
 
-[Split Deployed on Heroku](https://brian-split-app.herokuapp.com/)
+* [Split Deployed on Heroku](https://brian-split-app.herokuapp.com/)
 
-[Original App](https://splitwise.com)
+* [Splitwise](https://splitwise.com)
 
 ## Screenshots
 
