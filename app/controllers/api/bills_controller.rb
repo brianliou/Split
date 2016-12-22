@@ -52,10 +52,6 @@ class Api::BillsController < ApplicationController
 
     # AJAX example returns this array for new_billsplit_info - [[5, true, 0], [8, true, 0], ["new", false, 27.78]]
 
-
-    # Settling a bill with no billsplits is the same as creating a new bill for yourself with that person you are settling with
-
-
     ############### NEED TO EDIT PARAMS SO THAT IT WORKS WITH CURRENT USER #######
     new_billsplit_info = current_user.settle_up(bill_params[:settleFrom].to_i, bill_params[:settleTo].to_i, bill_params[:amount].to_f)
     # Helper method to find all of the paid ones
