@@ -158,35 +158,18 @@ class User < ActiveRecord::Base
 
   ###########
   # Settle_up method finds all billsplits between settle_from user and settle_to user
-  # then the method creates a 2D array where the inner arrays have length 3
-  # inner array indices correspond to the following:
-  # 0: billsplit_id OR "new" which corresponds to an overpayment
-  # 1: recipient_paid
-  # 2: amount (will be 0 if paid is true)
+  # then the method creates a hash with the keys:
+  # paid: array of billsplit IDs that need to be updated to paid
+  # unpaid: hash where key is the billsplit ID and value is the amount
+  # new: a k,v pair where v is the amount of the new bill in the opposite direction
   #
-  # Ex) For Drew paying Matt 50 [[5, true, 0], [8, true, 0], ["new", false, 27.78]]
-
-  # You settle the exact amount
-  # You settle less than the exact amount
-  # You settle more than the exact amount
-  # You settle when there is no money owed
   ###########
   def settle_up(settle_from, settle_to, amount)
 
     # You are looking for all of the billsplits where the recipient id is payer (settle_from) because those are the ones you want to now fulfill
     billsplits = Billsplit.joins(:bill).where('author_id = ?', settle_to).where('recipient_id = ?', settle_from).where('recipient_paid = false')
 
-
-    # this actually needs to be calculated from net payments
-    # bill_settle_list = []
     new_bill_settle_list = {"paid" => [], "unpaid" => {}, "new" => 0}
-
-    # settle_up(3,2,50)
-
-    # paid is an array of billsplit Ids that are paid
-    # unpaid is a hash where key = bs ID, value = amount
-    # new is just a k,v pair where v is the amount of the new bill in the opposite direction
-
 
     billsplits.each do |split|
       amount -= split.split_amount
@@ -204,46 +187,8 @@ class User < ActiveRecord::Base
       # No billsplits owed so a new billsplit, bill must be created in the opposite direction
       new_bill_settle_list["new"] = amount.round(2)
     end
-
+    
     new_bill_settle_list
-
-    # billsplits.each do |split|
-    #   temp_bill = []
-    #   amount -= split.split_amount
-    #   if amount > 0
-    #     temp_bill.push(split.id)
-    #     temp_bill.push(true)
-    #     temp_bill.push(0)
-    #     bill_settle_list.push(temp_bill)
-    #
-    #   elsif amount < 0  # if settle up amount is less than a single billsplit amount
-    #     temp_bill.push(split.id)
-    #     temp_bill.push(false)
-    #     temp_bill.push(-amount.round(2)) # settle_from user now still owes settle_to user by negative amount
-    #     bill_settle_list.push(temp_bill)
-    #     break # Do not continue going through billsplits
-    #
-    #   else
-    #     temp_bill.push(split.id)
-    #     temp_bill.push(true)
-    #     temp_bill.push(0)
-    #     bill_settle_list.push(temp_bill)
-    #     break # Do not continue going through billsplits
-    #
-    #   end
-    # end
-    #
-    # # If after going through all of the billsplits amount > 0, then an overpayment has been made
-    # # and a new bill/billsplit needs to be created in the opposite direction.
-    # if amount > 0
-    #   temp_bill = []
-    #   temp_bill.push("new")
-    #   temp_bill.push(false)
-    #   temp_bill.push(amount.round(2))
-    #   bill_settle_list.push(temp_bill)
-    # end
-    #
-    # bill_settle_list
 
   end
 

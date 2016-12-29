@@ -56,28 +56,26 @@ class Api::BillsController < ApplicationController
     new_billsplit_info = current_user.settle_up(bill_params[:settleFrom].to_i, bill_params[:settleTo].to_i, bill_params[:amount].to_f)
     # Helper method to find all of the paid ones
 
-    paid_and_other_list = find_paid_splits(new_billsplit_info)
-
-    # paid_other_list[0] will either be a single array or and array of arrays
-    if paid_and_other_list[0][0].kind_of?(Array)
-      paid_billsplit_ids = paid_and_other_list[0].collect { |idx| idx[0] }
-    else
-      # In the case of paid_and_other_list[0] being an empty array
-      if paid_and_other_list[0].first == nil
-        paid_billsplit_ids = []
-      else
-        paid_billsplit_ids = [paid_and_other_list[0].first]
-      end
+    # Update paid billsplits
+    if new_billsplit_info["paid"].length > 0
+      ids = new_billsplit_info["paid"]
+      Billsplit.where(id: ids).update_all(recipient_paid: true, split_amount: 0)
     end
 
-    if paid_billsplit_ids.length > 0
-      Billsplit.where(id: paid_billsplit_ids).update_all(recipient_paid: true, split_amount: 0)
+    # Update unpaid billsplits
+    unless new_billsplit_info["unpaid"].empty?
+      Billsplit.find(new_billsplit_info["unpaid"].keys[0]).update(recipient_paid: false, split_amount: new_billsplit_info["unpaid"].values[0])
     end
 
-
-
-    if paid_and_other_list[1].length > 0
-      uneven_payment(paid_and_other_list[1])
+    # Update new billsplit if overpayment
+    if new_billsplit_info["new"] > 0
+      new_bill = Bill.create(amount: new_billsplit_info["new"],
+                            description:"Overpayment",
+                            bill_date: Time.now.strftime("%Y/%m/%d").gsub(/\//,'-'),
+                            author_id: bill_params[:settleFrom],
+                            split: 2
+                            )
+      Billsplit.create(bill_id: new_bill.id, recipient_id: bill_params[:settleTo], split_amount: new_billsplit_info["new"])
     end
 
     # Updating paid column for bills after billsplits have been updated
@@ -87,78 +85,6 @@ class Api::BillsController < ApplicationController
 
     @bills = current_user.net_payments(current_user.id)
     render json: @bills.to_json
-
-  end
-
-  ###########
-  # Find_paid_splits is a helper method in my controller to split the billsplit array
-  # into two separate groups
-  # 1) Billsplits where the update needs to be setting paid to true and amount to 0
-  # 2) Billsplits where the update needs to be an overpayment OR underpayment (paid stays false and amount decreases)
-  #
-  # Ex) For a billsplit array like this: [[5, true, 0], [8, true, 0], ["new", false, 27.78]]
-  #     returns [[[5, true, 0], [8, true, 0]], ["new", false, 27.78]]
-  ###########
-  def find_paid_splits(array)
-    # [[5, true, 0], [8, true, 0], ["new", false, 27.78]]  =>
-    # [[5, true, 0]] => [ [5, true, 0], []]
-    # [[5, true, 0], [8, true, 0]]
-    # [[5, true, 0], [8, true, 0], [8, true, 0], ["new", false, 27.78]]
-    # [["new", false, 27.78]] => [ [], ["new", false, 27.78]]
-    # [[16, false, 20.22]]
-
-    counter = 0
-    array.each do |split|
-      if split[2] == 0
-        counter += 1
-      end
-    end
-
-    if counter == 0
-      return array.unshift([])
-    else
-
-      paid_splits = array.slice(0, counter)
-
-      if array.length > counter
-        paid_splits.push(array[array.length - 1])
-      else
-        paid_splits.push([])
-      end
-
-      paid_splits
-    end
-
-
-  end
-
-  ###########
-  # Uneven_payment is a helper method for when the billsplit is an overpayment or underpayment
-  # the billsplit either needs to be edited as
-  # 1) Overpayment - Create new bill in the opposite direciton and new billsplit
-  # 2) Underpayment - Edit billsplit to be a lowered split_amount
-  # AMOUNT IN BILL DOES NOT MATTER, is technically double the billsplit amount
-  ###########
-  def uneven_payment(billsplit)
-
-    if billsplit[0].is_a? Integer
-
-      Billsplit.find(billsplit[0]).update(recipient_paid: billsplit[1], split_amount: billsplit[2])
-    elsif billsplit[0].is_a? String
-
-      new_bill = Bill.create(amount: billsplit[2],
-                            description:"Overpayment",
-                            bill_date: Time.now.strftime("%Y/%m/%d").gsub(/\//,'-'),
-                            author_id: bill_params[:settleFrom],
-                            split: 2
-                            )
-      Billsplit.create(bill_id: new_bill.id, recipient_id: bill_params[:settleTo], split_amount: billsplit[2])
-
-    end
-
-  end
-
-  def destroy
 
   end
 
