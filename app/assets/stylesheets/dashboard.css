@@ -187,14 +187,6 @@ button:hover {
 
 .button li:nth-child(2) {
   background: #ff652f;
-  /*color: #fff;
-  text-shadow: 0 -1px 0 #c83400;
-  border-color: rgba(0,0,0,0.1) rgba(0,0,0,0.1) rgba(0,0,0,0.25);
-  border-radius: 5px;
-  font-size: 14px;
-  padding: 9px 14px;
-  box-shadow: inset 0 1px 0 rgba(255,255,255,.2),0 1px 2px rgba(0,0,0,.05);
-  border: 1px solid #ccc;*/
 }
 
 .button li:nth-child(2):hover {
@@ -204,20 +196,11 @@ button:hover {
 
 .button li:nth-child(2n+1):hover {
   background: #48be9d;
-
 }
 
 
 .button li:nth-child(2n+1) {
   background: #5bc5a7;
-  /*color: #fff;
-  text-shadow: 0 -1px 0 #318970;
-  border-color: rgba(0,0,0,0.1) rgba(0,0,0,0.1) rgba(0,0,0,0.25);
-  padding: 9px 14px;
-  font-size: 14px;
-  border-radius: 5px;
-  box-shadow: inset 0 1px 0 rgba(255,255,255,.2),0 1px 2px rgba(0,0,0,.05);
-  border: 1px solid #ccc;*/
 }
 
 .dashboard-bottom {
