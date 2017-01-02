@@ -90,7 +90,7 @@ class Friends extends React.Component {
     let formContent;
     formContent = (
       <div>
-        <Modal isOpen={this.props.isModalOpen} contentLabel="Modal" className="friend-modal group" overlayClassName="modal-overlay">
+        <Modal isOpen={this.props.isModalOpen} contentLabel="Modal" className="modal friend group" overlayClassName="modal-overlay">
           <h1>Add a Friend <div onClick={this.closeModalAction}>x</div></h1>
           <fieldset className="add-friend-form">
             <form onSubmit={this.handleSubmit}>
@@ -111,10 +111,10 @@ class Friends extends React.Component {
               </div>
 
               <div className="add-friend-button-group">
-                <div className="add-friend-button">
+                <div className="orange-button">
                   <input type="submit" value="Add Friend"></input>
                 </div>
-                <button className="close-modal-button" onClick={this.closeModalAction}>Close</button>
+                <button className="green-button" onClick={this.closeModalAction}>Close</button>
               </div>
 
             </form>

@@ -153,7 +153,7 @@ class BillForm extends React.Component {
     formContent = (
       <div>
 
-        <Modal isOpen={this.props.isModalOpen} contentLabel="Modal" className="bill-modal group" overlayClassName="modal-overlay">
+        <Modal isOpen={this.props.isModalOpen} contentLabel="Modal" className="modal group" overlayClassName="modal-overlay">
           <h1>Create a bill <div onClick={this.closeModalAction}>x</div></h1>
           <fieldset className="add-friend-form">
             <form onSubmit={this.handleSubmit}>
@@ -206,10 +206,10 @@ class BillForm extends React.Component {
             <br/>
 
             <div className="bill-button-group">
-              <div className="add-friend-button">
+              <div className="orange-button">
                 <input type="submit" value="Save"></input>
               </div>
-              <button className="close-modal-button" onClick={this.closeModalAction}>Close</button>
+              <button className="green-button" onClick={this.closeModalAction}>Close</button>
             </div>
 
 

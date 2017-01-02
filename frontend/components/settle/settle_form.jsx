@@ -160,7 +160,7 @@ class SettleForm extends React.Component {
     formContent = (
       <div>
 
-        <Modal isOpen={this.props.isModalOpen} contentLabel="Modal" className="settle-modal group" overlayClassName="modal-overlay">
+        <Modal isOpen={this.props.isModalOpen} contentLabel="Modal" className="modal settle group" overlayClassName="modal-overlay">
 
           <div className="main-settle-modal">
             <h1>Settle Up <div onClick={this.closeModalAction}>x</div></h1>
@@ -199,10 +199,10 @@ class SettleForm extends React.Component {
               <br/>
 
                 <div className="settle-button-group">
-                  <div className="add-friend-button">
+                  <div className="orange-button">
                     <input type="submit" value="Save"></input>
                   </div>
-                  <button className="close-modal-button" onClick={this.closeModalAction}>Close</button>
+                  <button className="green-button" onClick={this.closeModalAction}>Close</button>
                 </div>
 
               </form>

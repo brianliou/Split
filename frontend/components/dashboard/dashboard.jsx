@@ -146,7 +146,7 @@ class Dashboard extends React.Component {
 
                 <h1>Dashboard</h1>
 
-                <ul className="dashboard-button-list">
+                <ul className="button">
                   <li><button onClick={this.openFriendModal}>Add Friend</button></li>
                   <li><button onClick={this.openBillModal}>Create Bill</button></li>
                   <li><button onClick={this.openSettleModal}>Settle Up</button></li>
