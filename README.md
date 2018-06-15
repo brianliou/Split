@@ -1,6 +1,6 @@
 # Split
 
-Split is a clone of Splitwise, a bill splitting application. Split was made with Ruby on Rails, React.js, and a Postgres database.
+Split is a clone of Splitwise, a bill splitting application. Used Ruby on Rails, React.js, and a Postgres database. This was me messing around and exploring software development.
 
 * [Split Deployed on Heroku](https://brian-split-app.herokuapp.com/)
 
@@ -19,11 +19,6 @@ Split is a clone of Splitwise, a bill splitting application. Split was made with
 
 ### Create Bills with Friends
 ![Create Bill](https://github.com/brianliou/Split/blob/master/docs/Screenshots/Bill.png)
-
-
-## Technical Details
-
-Talk about creating the billsplit data structure to deal with settle up edge cases.
 
 ## Features
 * User authentication & account creation
